@@ -9,7 +9,7 @@
         </div>
         <LeaveRoom />
       </div>
-      <WebrtcDebug />
+      <WebrtcDebug class="m-50"/>
     </div>
   </div>
 </template>

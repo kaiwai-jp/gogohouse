@@ -3,7 +3,10 @@
     <header>
       <img src="/peace.png" class="gogo-icon" />
       <a class="top-link" href="/">GoGoHouse</a>
-      <img :src="twitter_icon" v-show="twitter_icon" class="twitter-icon" />
+      <div class="profile">
+        <img :src="twitter_icon" v-show="twitter_icon" class="twitter-icon" />
+        <span class="display-name">{{ name }}</span>
+      </div>
     </header>
   </div>
 </template>
@@ -17,6 +20,9 @@ export default Vue.extend({
     ...userMapper.mapGetters(['me']),
     twitter_icon() {
       return this.me.icon
+    },
+    name() {
+      return this.me.name
     },
   },
 })
@@ -40,9 +46,16 @@ header {
   height: 18px;
 }
 
-.twitter-icon {
+.profile {
   display: inline-block;
   float: right;
+}
+
+.display-name {
+  vertical-align: top;
+}
+
+.twitter-icon {
   border-radius: 50%;
   width: 20px;
   height: 20px;

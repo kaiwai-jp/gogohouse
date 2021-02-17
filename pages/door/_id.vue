@@ -3,7 +3,8 @@
     <div v-if="room">
       <h1 class="title">{{ room.name }}</h1>
       <p class="description">{{ roomDescription }}</p>
-      <NamePlate :uid="room.owner_id" class="m-50" />
+      <h2 class="subtitle owner">オーナー</h2>
+      <NamePlate :uid="room.owner_id" class="mb-50" />
       <div v-if="!isSignin">
         <p></p>
         <button class="button--grey" @click="twitterSignin">
@@ -13,9 +14,14 @@
       </div>
       <div v-if="isSignin">
         <p></p>
-        <button class="button--grey" @click="enterRoom" v-if="ifPermit">
-          部屋に入る
-        </button>
+        <div v-if="!waiting">
+          <button class="button--grey" @click="enterRoom" v-if="ifPermit">
+            部屋に入る
+          </button>
+        </div>
+        <div v-if="waiting">
+          <button class="button--grey" diabled>処理中...</button>
+        </div>
         <button class="button--grey mt-5" @click="home">ホームへ</button>
         <h2 class="subtitle mt-50" v-show="roomOnlineUsers.length">
           オンラインユーザー
@@ -40,7 +46,16 @@ import userMapper from '@/store/user'
 import webrtcMapper from '@/store/webrtc'
 import { enterOpenRoom, enterClosedRoom } from '@/service/roomAPI'
 
+export type DataType = {
+  waiting: boolean
+}
+
 export default Vue.extend({
+  data(): DataType {
+    return {
+      waiting: false,
+    }
+  },
   components: {
     NamePlate,
     OnlineUsers,
@@ -91,17 +106,25 @@ export default Vue.extend({
     },
     enterRoom() {
       if (this.room.room_type === 'open') {
+        this.waiting = true
         enterOpenRoom(this.roomId)
           .then(() => {
             this.$router.push(`/room/${this.roomId}`)
           })
           .catch((err) => alert(err))
+          .finally(() => {
+            this.waiting = false
+          })
       } else if (this.room.room_type === 'closed') {
+        this.waiting = true
         enterClosedRoom(this.roomId)
           .then(() => {
             this.$router.push(`/room/${this.roomId}`)
           })
           .catch((err) => alert(err))
+          .finally(() => {
+            this.waiting = false
+          })
       }
     },
     home() {
@@ -115,6 +138,9 @@ export default Vue.extend({
 .description {
   color: #526488;
   margin-bottom: 20px;
+}
+.owner {
+  text-align: left;
 }
 
 .mt-5 {

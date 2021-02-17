@@ -1,9 +1,21 @@
 <template>
   <div>
-    <div v-for="user in roomRemoteUsers" :key="user.uid">
-      {{ user.uid }}
-      {{ userInboundState(user.uid) }}
-      {{ userOutboundState(user.uid) }}
+    <button @click="modal = true">Debug</button>
+    <div v-if="modal" class="debug-modal">
+      information
+      <table>
+        <tr>
+          <td>twitter</td>
+          <td>inbound</td>
+          <td>outbound</td>
+        </tr>
+        <tr v-for="user in roomRemoteUsers" :key="user.uid">
+          <td>{{ user.twitter }}</td>
+          <td>{{ userInboundState(user.uid) }}</td>
+          <td>{{ userOutboundState(user.uid) }}</td>
+        </tr>
+      </table>
+      <button @click="modal = false">閉じる</button>
     </div>
   </div>
 </template>
@@ -13,7 +25,16 @@ import Vue from 'vue'
 import userMapper from '@/store/user'
 import webrtcMapper from '@/store/webrtc'
 
+export type DataType = {
+  modal: boolean
+}
+
 export default Vue.extend({
+  data(): DataType {
+    return {
+      modal: false,
+    }
+  },
   computed: {
     ...userMapper.mapGetters(['me', 'roomRemoteUsers']),
     ...webrtcMapper.mapGetters(['userPeerConnectionState']),
@@ -52,4 +73,17 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.debug-modal {
+  position: absolute;
+  justify-content: center;
+  z-index: 100;
+  width: 80vw;
+  height: 80vh;
+  left: 10vw;
+  top: 10vh;
+  background-color: #ffffff;
+  border: solid 1px #35495e;
+  padding: 10px;
+}
+</style>

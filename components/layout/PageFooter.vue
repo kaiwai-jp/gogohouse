@@ -4,7 +4,6 @@
       <ul>
         <li>利用規約</li>
         <li>プライバシーポリシー</li>
-        <li>GoGoHouseとは</li>
       </ul>
       <span class="copyright">copyright @saikou_kunisaki</span>
     </footer>

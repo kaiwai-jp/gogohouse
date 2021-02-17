@@ -41,6 +41,9 @@ html {
   background-color: #35495e;
 }
 
+.entire {
+  position: relative;
+}
 .container {
   margin: 0 auto;
   min-height: calc(100vh - 103px);
@@ -83,6 +86,10 @@ a {
 
 .mt-50 {
   margin-top: 50px;
+}
+
+.mb-50 {
+  margin-bottom: 50px;
 }
 
 .bt-1 {
