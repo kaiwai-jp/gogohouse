@@ -15,12 +15,12 @@
         マイクを閉じる
       </button>
     </div>
-    <audio
-      v-for="(stream, uid) in remoteStreamObj"
-      :key="uid"
-      :srcObject.prop="stream"
-      autoplay
-    />
+    <iframe
+      src="/500-milliseconds-of-silence.mp3"
+      allow="autoplay"
+      id="audio"
+      style="display: none"
+    ></iframe>
   </div>
 </template>
 
@@ -60,7 +60,7 @@ export default Vue.extend({
         this.CONNECTION_FINISH_WITH_UID(state.uid)
       }
     })
-    this.$nextTick(this.start)
+    //this.$nextTick(this.start)
   },
   beforeDestroy() {
     this.END_CONNECTION_OFFERED_LISTENER()

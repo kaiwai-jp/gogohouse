@@ -3,15 +3,17 @@
     <PageHeader />
     <Nuxt class="main" />
     <PageFooter />
+    <AudioPlay />
   </div>
 </template>
 <script lang="ts">
 import Vue from 'vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
 import PageFooter from '@/components/layout/PageFooter.vue'
+import AudioPlay from '@/components/layout/AudioPlay.vue'
 
 export default Vue.extend({
-  components: { PageHeader, PageFooter },
+  components: { PageHeader, PageFooter, AudioPlay },
 })
 </script>
 

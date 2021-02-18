@@ -10,7 +10,6 @@
         <button class="button--grey" @click="twitterSignin">
           twitter連携してログイン
         </button>
-        <button class="button--grey mt-5" @click="home">ホームへ</button>
       </div>
       <div v-if="isSignin">
         <p></p>
@@ -22,7 +21,6 @@
         <div v-if="waiting">
           <button class="button--grey" diabled>処理中...</button>
         </div>
-        <button class="button--grey mt-5" @click="home">ホームへ</button>
         <h2 class="subtitle mt-50" v-show="roomOnlineUsers.length">
           オンラインユーザー
         </h2>

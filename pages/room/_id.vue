@@ -3,13 +3,13 @@
     <div>
       <h1 class="title">{{ room.name }}</h1>
       <div class="links">
-        <AudioWebrtc />
+        <MicWebrtc />
         <div class="m-50">
           <OnlineUsers />
         </div>
         <LeaveRoom />
       </div>
-      <WebrtcDebug class="m-50"/>
+      <WebrtcDebug class="m-50" />
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@ import roomMapper from '@/store/room'
 import userMapper from '@/store/user'
 import webrtcMapper from '@/store/webrtc'
 
-import AudioWebrtc from '@/components/AudioWebrtc.vue'
+import MicWebrtc from '@/components/MicWebrtc.vue'
 import OnlineUsers from '@/components/OnlineUsers.vue'
 import LeaveRoom from '@/components/LeaveRoom.vue'
 import WebrtcDebug from '@/components/WebrtcDebug.vue'
@@ -35,7 +35,7 @@ interface User {
 
 export default Vue.extend({
   components: {
-    AudioWebrtc,
+    MicWebrtc,
     OnlineUsers,
     LeaveRoom,
     WebrtcDebug,

@@ -2,10 +2,10 @@
   <div>
     <header>
       <img src="/peace.png" class="gogo-icon" />
-      <a class="top-link" href="/">GoGoHouse</a>
+      <nuxt-link to="/" class="top-link">GoGoHouse</nuxt-link>
       <div class="profile">
         <img :src="twitter_icon" v-show="twitter_icon" class="twitter-icon" />
-        <span class="display-name">{{ name }}</span>
+        <nuxt-link to="/home" class="display-name">{{ name }}</nuxt-link>
       </div>
     </header>
   </div>
@@ -53,6 +53,7 @@ header {
 
 .display-name {
   vertical-align: top;
+  text-decoration: none;
 }
 
 .twitter-icon {
