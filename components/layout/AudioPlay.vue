@@ -6,6 +6,7 @@
       :srcObject.prop="stream"
       autoplay
     />
+    <audio ref="audioEl" src="/500-milliseconds-of-silence.mp3"></audio>
   </div>
 </template>
 
@@ -16,6 +17,14 @@ import webrtcMapper from '@/store/webrtc'
 export default Vue.extend({
   computed: {
     ...webrtcMapper.mapGetters(['remoteStreamObj']),
+  },
+  mounted() {
+    this.$store.subscribeAction((action, state) => {
+      if (action.type == 'warp/PLAY_SILENT_MUSIC') {
+        // @ts-ignore
+        this.$refs.audioEl.play()
+      }
+    })
   },
 })
 </script>

@@ -15,12 +15,6 @@
         マイクを閉じる
       </button>
     </div>
-    <iframe
-      src="/500-milliseconds-of-silence.mp3"
-      allow="autoplay"
-      id="audio"
-      style="display: none"
-    ></iframe>
   </div>
 </template>
 

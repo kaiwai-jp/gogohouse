@@ -13,12 +13,12 @@
       </div>
       <div v-if="isSignin">
         <p></p>
-        <div v-if="!waiting">
+        <div v-if="!waiting" class="mb-50">
           <button class="button--grey" @click="enterRoom" v-if="ifPermit">
             部屋に入る
           </button>
         </div>
-        <div v-if="waiting">
+        <div v-if="waiting" class="mb-50">
           <button class="button--grey" diabled>処理中...</button>
         </div>
         <h2 class="subtitle mt-50" v-show="roomOnlineUsers.length">
@@ -42,6 +42,8 @@ import OnlineUsers from '@/components/OnlineUsers.vue'
 import roomMapper from '@/store/room'
 import userMapper from '@/store/user'
 import webrtcMapper from '@/store/webrtc'
+import warpMapper from '@/store/warp'
+
 import { enterOpenRoom, enterClosedRoom } from '@/service/roomAPI'
 
 export type DataType = {
@@ -93,7 +95,7 @@ export default Vue.extend({
     ...roomMapper.mapActions(['GET_ROOM']),
     ...userMapper.mapActions(['GET_USER', 'SIGN_IN_TWITTER', 'SIGN_OUT']),
     ...webrtcMapper.mapActions(['CLEAR_OFFERED_DB']),
-
+    ...warpMapper.mapActions(['PLAY_SILENT_MUSIC']),
     twitterSignin() {
       // @ts-ignore
       this.SIGN_IN_TWITTER()
@@ -103,6 +105,7 @@ export default Vue.extend({
       return true
     },
     enterRoom() {
+      this.PLAY_SILENT_MUSIC()
       if (this.room.room_type === 'open') {
         this.waiting = true
         enterOpenRoom(this.roomId)

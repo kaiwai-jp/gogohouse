@@ -11,7 +11,10 @@
         <div class="m-50">
           <nuxt-link to="/home">ホームへ</nuxt-link>
         </div>
-        <button class="button--grey" @click="signout">ログアウト</button>
+        <div class="mb-50">
+          <button class="button--grey" @click="signout">ログアウト</button>
+          <button class="button--grey" @click="reload">リロード</button>
+        </div>
       </div>
     </div>
   </div>
@@ -36,13 +39,16 @@ export default Vue.extend({
   methods: {
     ...roomMapper.mapActions(['GET_ROOM']),
     ...userMapper.mapActions(['GET_USER', 'SIGN_IN_TWITTER', 'SIGN_OUT']),
-    twitterSignin(): void {
+    twitterSignin() {
       this.SIGN_IN_TWITTER()
         .then(() => this.$router.push(`/home`))
         .catch((err) => alert(err))
     },
-    signout(): void {
+    signout() {
       this.SIGN_OUT()
+    },
+    reload() {
+      location.reload(true)
     },
   },
 })
