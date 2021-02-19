@@ -2,7 +2,7 @@
   <div class="bt-1">
     <h2 class="subtitle">マイルーム一覧</h2>
     <div class="main">
-      <div v-for="room in myRoomList" :key="room.id">
+      <div v-for="room in myRoomList" :key="room.id" class="list">
         <nuxt-link :to="{ name: 'door-id', params: { id: room.id } }">{{
           room.name
         }}</nuxt-link>
@@ -37,6 +37,10 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .main {
   text-align: left;
+}
+
+.list {
+  margin-top: 10px;
 }
 
 </style>

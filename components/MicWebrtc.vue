@@ -6,7 +6,7 @@
         <button class="button--grey" @click="start" v-if="existOwner">
           マイクを開く
         </button>
-        <button class="button--grey" v-if="!existOwner" disabled>
+        <button class="button--grey" v-if="!existOwner" @click="notOwnerExist">
           オーナー不在
         </button>
       </div>
@@ -124,7 +124,7 @@ export default Vue.extend({
         }
       })
     },
-    hangup(): void {
+    hangup() {
       if (this.localStream) {
         const tracks = this.localStream.getTracks()
         tracks.forEach((track: MediaStreamTrack) => {
@@ -133,6 +133,9 @@ export default Vue.extend({
         this.localStream = undefined
       }
       this.CONNECTION_END_FROM_ME()
+    },
+    notOwnerExist() {
+      alert('オーナーが在室でないときはマイクは開けません')
     },
   },
 })
