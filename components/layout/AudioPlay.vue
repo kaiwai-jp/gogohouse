@@ -1,5 +1,5 @@
 <template>
-  <div class="description">
+  <div>
     <audio
       v-for="(stream, uid) in remoteStreamObj"
       :key="uid"

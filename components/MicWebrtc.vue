@@ -2,8 +2,12 @@
   <div class="description">
     <div v-if="!localStream">
       <div v-if="!permissionDialog">
-        マイクOFF<button class="button--grey" @click="start">
+        マイクOFF
+        <button class="button--grey" @click="start" v-if="existOwner">
           マイクを開く
+        </button>
+        <button class="button--grey" v-if="!existOwner" disabled>
+          オーナー不在
         </button>
       </div>
       <div v-if="permissionDialog">
@@ -11,9 +15,8 @@
       </div>
     </div>
     <div v-else>
-      マイクON<button class="button--grey" @click="hangup">
-        マイクを閉じる
-      </button>
+      マイクON
+      <button class="button--grey" @click="hangup">マイクを閉じる</button>
     </div>
   </div>
 </template>
@@ -21,6 +24,7 @@
 <script lang="ts">
 import Vue from 'vue'
 
+import roomMapper from '@/store/room'
 import userMapper from '@/store/user'
 import webrtcMapper from '@/store/webrtc'
 
@@ -28,6 +32,10 @@ interface Data {
   localStream: MediaStream | undefined
   permissionDialog: boolean
   localAudioEnable: boolean
+}
+
+interface User {
+  uid: string | undefined
 }
 
 interface User {
@@ -62,10 +70,21 @@ export default Vue.extend({
     this.hangup()
   },
   computed: {
-    ...userMapper.mapGetters(['me', 'roomRemoteUsers']),
+    ...roomMapper.mapGetters(['room']),
+    ...userMapper.mapGetters(['me', 'roomRemoteUsers', 'roomOnlineUsers']),
     ...webrtcMapper.mapGetters(['remoteStreamObj']),
     roomId(): string {
       return this.$route.params.id
+    },
+    existOwner(): boolean {
+      const owner_id = this.room.owner_id
+      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
+        //@ts-ignore
+        if (owner_id === this.roomOnlineUsers[i].uid) {
+          return true
+        }
+      }
+      return false
     },
   },
   methods: {

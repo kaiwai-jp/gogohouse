@@ -2,8 +2,8 @@
   <div class="entire">
     <PageHeader />
     <Nuxt class="main" />
-    <PageFooter />
     <AudioPlay />
+    <PageFooter />
   </div>
 </template>
 <script lang="ts">
