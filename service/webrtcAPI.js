@@ -247,3 +247,9 @@ export const clearOfferedDB = (myUid) => {
     })
   })
 }
+
+export const clearConnectionsDB = () => {
+  const functions = firebase.app().functions('asia-northeast1')
+  const func = functions.httpsCallable('clearConnectionsDBAll')
+  return func()
+}

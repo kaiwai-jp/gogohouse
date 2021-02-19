@@ -60,10 +60,10 @@ export default Vue.extend({
   height: 20px;
   display: inline-block;
   position: absolute;
-  right: 20px;
+  right: 15px;
   background-color: #fff;
-  box-shadow: inset 1px 2px 3px 0px #000;
-  border-radius: 6px 6px 6px 6px;
+  box-shadow: inset 1px 2px 2px 0px #000;
+  border-radius: 4px 4px 4px 4px;
 }
 .agree-checkbox input[type='checkbox'] {
   display: none;

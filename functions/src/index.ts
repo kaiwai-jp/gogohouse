@@ -130,3 +130,47 @@ exports.enterClosedRoom = functions
       current_room: data.roomId,
     })
   })
+
+/* 一定時間経過したconnectionsドキュメントを削除しまし */
+exports.clearConnectionsDBAll = functions
+  .region('asia-northeast1')
+  .https.onCall((data, context) => {
+    const connectionsRef = firestore.collection('connections')
+    connectionsRef
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          const timestamp = doc.data().created_at
+          const dt = timestamp.toDate().getTime()
+          const systemTime = Date.now()
+          console.log(doc.id, '=>', (systemTime - dt) / 1000 + '秒前')
+
+          if ((systemTime - dt) / 1000 <= 3600) return
+          const connectionsCandidateOfferRef = connectionsRef
+            .doc(doc.id)
+            .collection('candidate_offer')
+          connectionsCandidateOfferRef
+            .get()
+            .then((snapshot1) => {
+              snapshot1.forEach((doc1) => {
+                doc1.ref.delete().catch()
+              })
+            })
+            .catch()
+
+          const connectionsCandidateAnswerRef = connectionsRef
+            .doc(doc.id)
+            .collection('candidate_answer')
+          connectionsCandidateAnswerRef
+            .get()
+            .then((snapshot2) => {
+              snapshot2.forEach((doc2) => {
+                doc2.ref.delete().catch()
+              })
+            })
+            .catch()
+          doc.ref.delete().catch()
+        })
+      })
+      .catch()
+  })
