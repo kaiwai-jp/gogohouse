@@ -1,9 +1,9 @@
 <template>
   <div class="plate">
     <img :src="userData.icon" v-if="userData.icon" class="icon" />
-    <nuxt-link to="/home" class="display-name" v-if="userData.name">{{
+    <span class="display-name" v-if="userData.name">{{
       userData.name
-    }}</nuxt-link>
+    }}</span>
   </div>
 </template>
 

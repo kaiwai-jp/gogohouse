@@ -28,7 +28,7 @@ import roomMapper from '@/store/room'
 import userMapper from '@/store/user'
 import webrtcMapper from '@/store/webrtc'
 
-interface Data {
+interface DataType {
   localStream: MediaStream | undefined
   permissionDialog: boolean
   localAudioEnable: boolean
@@ -43,7 +43,7 @@ interface User {
 }
 
 export default Vue.extend({
-  data(): Data {
+  data(): DataType {
     return {
       localStream: undefined,
       permissionDialog: false,

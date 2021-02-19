@@ -2,10 +2,8 @@
   <div class="container">
     <div>
       <h1 class="title">Welcome to<br />GoGoHouse</h1>
-      <div class="links" v-if="!isSignin">
-        <button class="button--grey" @click="twitterSignin">
-          twitter連携してログイン
-        </button>
+      <div class="m-50" v-if="!isSignin">
+        <TwitterLogin jump="/home" />
       </div>
       <div v-if="isSignin">
         <div class="m-50">
@@ -25,7 +23,10 @@ import Vue from 'vue'
 import roomMapper from '@/store/room'
 import userMapper from '@/store/user'
 
+import TwitterLogin from '@/components/TwitterLogin.vue'
+
 export default Vue.extend({
+  components: { TwitterLogin },
   computed: {
     ...roomMapper.mapGetters(['room']),
     ...userMapper.mapGetters(['me', 'isSignin']),

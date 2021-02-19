@@ -3,7 +3,9 @@
     <header>
       <img src="/peace.png" class="gogo-icon" />
       <nuxt-link to="/" class="top-link">GoGoHouse</nuxt-link>
-      <NamePlateMini :uid="me.uid" class="twitter_identity" />
+      <nuxt-link to="/home">
+        <NamePlateMini :uid="me.uid" class="twitter_identity" />
+      </nuxt-link>
     </header>
   </div>
 </template>

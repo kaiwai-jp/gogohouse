@@ -8,19 +8,16 @@
       </h2>
       <NamePlate :uid="room.owner_id" class="mb-50" />
       <div v-if="!isSignin">
-        <p></p>
-        <button class="button--grey" @click="twitterSignin">
-          twitter連携してログイン
-        </button>
+        <TwitterLogin class="mb-50" />
       </div>
       <div v-if="isSignin">
-        <p></p>
         <EnterRoom />
         <h2 class="subtitle mt-50" v-show="roomOnlineUsers.length">
           オンラインユーザー
         </h2>
         <OnlineUsers />
       </div>
+      <DoorGuide class="m-50" />
     </div>
     <div v-if="!room">
       ルームが見つかりませんでした<br />
@@ -34,6 +31,8 @@ import Vue from 'vue'
 import NamePlate from '@/components/NamePlate.vue'
 import OnlineUsers from '@/components/OnlineUsers.vue'
 import EnterRoom from '@/components/EnterRoom.vue'
+import TwitterLogin from '@/components/TwitterLogin.vue'
+import DoorGuide from '@/components/DoorGuide.vue'
 
 import roomMapper from '@/store/room'
 import userMapper from '@/store/user'
@@ -44,6 +43,8 @@ export default Vue.extend({
     NamePlate,
     OnlineUsers,
     EnterRoom,
+    TwitterLogin,
+    DoorGuide,
   },
   computed: {
     ...roomMapper.mapGetters(['room']),
