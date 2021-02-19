@@ -3,10 +3,7 @@
     <header>
       <img src="/peace.png" class="gogo-icon" />
       <nuxt-link to="/" class="top-link">GoGoHouse</nuxt-link>
-      <div class="profile">
-        <img :src="twitter_icon" v-show="twitter_icon" class="twitter-icon" />
-        <nuxt-link to="/home" class="display-name">{{ name }}</nuxt-link>
-      </div>
+      <NamePlateMini :uid="me.uid" class="twitter_identity" />
     </header>
   </div>
 </template>
@@ -15,15 +12,12 @@
 import Vue from 'vue'
 import userMapper from '@/store/user'
 
+import NamePlateMini from '@/components/NamePlateMini.vue'
+
 export default Vue.extend({
+  components: { NamePlateMini },
   computed: {
     ...userMapper.mapGetters(['me']),
-    twitter_icon() {
-      return this.me.icon
-    },
-    name() {
-      return this.me.name
-    },
   },
 })
 </script>
@@ -46,19 +40,7 @@ header {
   height: 18px;
 }
 
-.profile {
-  display: inline-block;
+.twitter_identity {
   float: right;
-}
-
-.display-name {
-  vertical-align: top;
-  text-decoration: none;
-}
-
-.twitter-icon {
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
 }
 </style>
