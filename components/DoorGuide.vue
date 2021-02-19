@@ -2,10 +2,10 @@
   <div class="main">
     <ul class="notice">
       <li>
-        ChromeかSafariをご利用ください。<br />Twitterアプリ内からはマイクが開けません
+        ChromeかSafariをご利用ください。Twitterアプリ内からはマイクが開けません。
       </li>
       <li>
-        iPhoneのブラウザでは、<br />マイクを開かないと相手の音が聞こえません
+        iPhoneのブラウザでは、マイクを開かないと相手の音が聞こえません。
       </li>
     </ul>
   </div>
@@ -20,7 +20,9 @@ export default Vue.extend({})
 <style lang="scss" scoped>
 .main {
   padding: 20px;
-  border: 3px solid #848484;
+  color: #526488;
+  border: 3px solid #526488;
+  border-radius: 5px;
 }
 
 .notice {

@@ -13,10 +13,16 @@
       <div v-if="isSignin">
         <div v-if="roomOnlineUsers.length <= 10"><EnterRoom /></div>
         <div v-else>満員です！</div>
-        <h2 class="subtitle mt-50" v-show="roomOnlineUsers.length">
-          オンラインユーザー
-        </h2>
+        <div class="members">
+          <h2 class="subtitle mt-50" v-show="roomOnlineUsers.length">
+            オンラインユーザー
+          </h2>
+        </div>
         <OnlineUsers :link="true" />
+        <div class="members" v-if="ifRoomMembersShow">
+          <h2 class="subtitle mt-50">メンバー</h2>
+          <RoomMembers :link="true" :members="room.members" />
+        </div>
       </div>
       <DoorGuide class="m-50" />
     </div>
@@ -61,6 +67,10 @@ export default Vue.extend({
       }
       return 'loading...'
     },
+    ifRoomMembersShow(): Boolean {
+      if (this.room.members && this.room.members.length > 1) return true
+      return false
+    },
   },
   async created() {
     this.GET_ROOM(this.roomId)
@@ -90,7 +100,12 @@ export default Vue.extend({
   color: #526488;
   margin-bottom: 20px;
 }
+
 .owner {
+  text-align: left;
+}
+
+.members {
   text-align: left;
 }
 
