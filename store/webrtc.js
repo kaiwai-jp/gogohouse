@@ -91,6 +91,9 @@ export default {
     set_peerconnection_state(state, { connectionId, stateString }) {
       Vue.set(state.peerConnectionState, connectionId, stateString)
     },
+    remove_peerconnection_state(state, connectionId) {
+      Vue.delete(state.peerConnectionState, connectionId)
+    },
     set_err_report(state, err) {
       const now = new Date()
       const month = now.getMonth() + 1
@@ -161,6 +164,7 @@ export default {
         }
         state.peerConnectionObj[connectionId].close()
         commit('remove_peerconnection_obj', connectionId)
+        commit('remove_peerconnection_state', connectionId)
         /* ローカルストリームの時はオブジェクトを削除 */
       } else {
         for (let userId of Object.keys(state.localUserToConnId)) {
@@ -170,6 +174,7 @@ export default {
         }
         state.peerConnectionObj[connectionId].close()
         commit('remove_peerconnection_obj', connectionId)
+        commit('remove_peerconnection_state', connectionId)
       }
     },
     CONNECTION_FINISH_WITH_PEERCONNECTION({ dispatch, state }, peerConnection) {

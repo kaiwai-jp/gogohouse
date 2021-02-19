@@ -59,8 +59,8 @@ export default Vue.extend({
           .then(() => {
             this.$router.push(`/room/${this.roomId}`)
           })
-          .catch((err) => alert(err))
-          .finally(() => {
+          .catch((err) => {
+            alert(err)
             this.waiting = false
           })
       } else if (this.room.room_type === 'closed') {
@@ -69,8 +69,8 @@ export default Vue.extend({
           .then(() => {
             this.$router.push(`/room/${this.roomId}`)
           })
-          .catch((err) => alert(err))
-          .finally(() => {
+          .catch((err) => {
+            alert(err)
             this.waiting = false
           })
       }

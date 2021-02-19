@@ -14,7 +14,7 @@
 import Vue from 'vue'
 import userMapper from '@/store/user'
 import NamePlate from '@/components/NamePlate.vue'
-import MyRoomList from '@/components/MyRoom.vue'
+import MyRoomList from '@/components/MyRoomList.vue'
 import MemberRoomList from '@/components/MemberRoom.vue'
 import CreateRoom from '@/components/CreateRoom.vue'
 

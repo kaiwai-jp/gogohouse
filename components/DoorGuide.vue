@@ -20,7 +20,7 @@ export default Vue.extend({})
 <style lang="scss" scoped>
 .main {
   padding: 20px;
-  border: 3px solid #636363;
+  border: 3px solid #848484;
 }
 
 .notice {
