@@ -93,6 +93,11 @@ export default Vue.extend({
 
 .connect-info {
   border: solid 1px #35495e;
+  border-collapse: collapse;
+}
+
+.connect-info td {
+  border: solid 1px #35495e;
 }
 
 .err-info {

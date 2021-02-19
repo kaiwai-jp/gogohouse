@@ -11,7 +11,8 @@
         <TwitterLogin class="mb-50" />
       </div>
       <div v-if="isSignin">
-        <EnterRoom />
+        <div v-if="roomOnlineUsers.length <= 10"><EnterRoom /></div>
+        <div v-else>満員です！</div>
         <h2 class="subtitle mt-50" v-show="roomOnlineUsers.length">
           オンラインユーザー
         </h2>

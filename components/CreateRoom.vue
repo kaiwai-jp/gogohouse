@@ -27,6 +27,9 @@ export default Vue.extend({
       roomType: 'open',
     }
   },
+  computed: {
+    ...roomMapper.mapGetters(['myRoomList']),
+  },
   methods: {
     ...roomMapper.mapActions(['CREATE_ROOM']),
     clickCreateRoom() {
@@ -36,6 +39,11 @@ export default Vue.extend({
       }
       if (this.newRoomName.length > 50) {
         alert('ルーム名が長すぎます')
+        return
+      }
+
+      if (this.myRoomList.length >= 5) {
+        alert('無料ユーザーは5ルームまでしか作れません')
         return
       }
 
