@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="user in roomOnlineUsers" :key="user.uid" class="list">
-      <NamePlate :uid="user.uid" />
+      <NamePlate :uid="user.uid" :link="link" />
     </div>
   </div>
 </template>
@@ -14,6 +14,9 @@ import NamePlate from '@/components/NamePlate.vue'
 export default Vue.extend({
   components: {
     NamePlate,
+  },
+  props: {
+    link: { default: false, type: Boolean },
   },
   async created() {
     this.ROOM_ONLINE_USERS_LISTENER(this.roomId)

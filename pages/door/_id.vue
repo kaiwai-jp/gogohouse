@@ -6,7 +6,7 @@
       <h2 class="subtitle owner" v-show="roomDescription != 'loading...'">
         オーナー
       </h2>
-      <NamePlate :uid="room.owner_id" class="mb-50" />
+      <NamePlate :uid="room.owner_id" :link="true" class="mb-50" />
       <div v-if="!isSignin">
         <TwitterLogin class="mb-50" />
       </div>
@@ -15,7 +15,7 @@
         <h2 class="subtitle mt-50" v-show="roomOnlineUsers.length">
           オンラインユーザー
         </h2>
-        <OnlineUsers />
+        <OnlineUsers :link="true" />
       </div>
       <DoorGuide class="m-50" />
     </div>
