@@ -199,9 +199,15 @@ export default {
         }
       }
     },
-    CONNECTION_FINISH_ALL({ dispatch, state }) {
+    CONNECTION_FINISH_ALL({ dispatch, commit, state }) {
       for (let connectionId of Object.keys(state.peerConnectionObj)) {
         dispatch('CONNECTION_FINISH', connectionId)
+      }
+      for (let connectionId of Object.keys(state.iceUnsubscribe)) {
+        if (typeof state.iceUnsubscribe[connectionId] === 'function') {
+          state.iceUnsubscribe[connectionId]()
+          commit('remove_ice_unsubscribe', connectionId)
+        }
       }
     },
     CONNECTION_END_FROM_ME({ dispatch, state }) {

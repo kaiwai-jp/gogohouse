@@ -2,7 +2,7 @@
   <div class="main">
     <ul class="notice">
       <li>
-        ChromeかSafariをご利用ください。<br />Twitter内からはマイクが開けません
+        ChromeかSafariをご利用ください。<br />Twitterアプリ内からはマイクが開けません
       </li>
       <li>
         iPhoneのブラウザでは、<br />マイクを開かないと相手の音が聞こえません
