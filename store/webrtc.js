@@ -18,6 +18,7 @@ export default {
       remoteUserToConnId: {}, //  remoteStreamの対応表 userId:connectionsId
       iceUnsubscribe: {}, // ice Candidateリスナーの解除用 connectionsId:unsubscribe
       unsubscribe: [], // offeredを終了するときに解除すべきunsubscribeの配列
+      errReport: [], //  catchしたerr
     }
   },
 
@@ -42,6 +43,7 @@ export default {
       }
       return retObject
     },
+    errReport: (state) => state.errReport,
   },
 
   mutations: {
@@ -88,6 +90,20 @@ export default {
     },
     set_peerconnection_state(state, { connectionId, stateString }) {
       Vue.set(state.peerConnectionState, connectionId, stateString)
+    },
+    set_err_report(state, err) {
+      const now = new Date()
+      const month = now.getMonth() + 1
+      const date = now.getDate()
+      const hour = now.getHours()
+      const min = now.getMinutes()
+      const sec = now.getSeconds()
+      const nowString = month + '/' + date + ' ' + hour + ':' + min + ':' + sec
+      console.log('????')
+      state.errReport.push(nowString + ' ' + err.toString())
+    },
+    reset_err_report(state) {
+      state.errReport.splice(-state.errReport)
     },
   },
 

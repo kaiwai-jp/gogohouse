@@ -3,7 +3,7 @@
     <button @click="modal = true">Debug</button>
     <div v-if="modal" class="debug-modal">
       information
-      <table>
+      <table class="connect-info">
         <tr>
           <td>twitter</td>
           <td>inbound</td>
@@ -15,6 +15,9 @@
           <td>{{ userOutboundState(user.uid) }}</td>
         </tr>
       </table>
+      <div class="err-info">
+        <div v-for="report in errReport" :key="report">{{ report }}</div>
+      </div>
       <button @click="modal = false">閉じる</button>
     </div>
   </div>
@@ -37,7 +40,7 @@ export default Vue.extend({
   },
   computed: {
     ...userMapper.mapGetters(['me', 'roomRemoteUsers']),
-    ...webrtcMapper.mapGetters(['userPeerConnectionState']),
+    ...webrtcMapper.mapGetters(['userPeerConnectionState', 'errReport']),
     userInboundState(): (arg0: String) => String {
       return function (uid: String) {
         if (
@@ -76,6 +79,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .debug-modal {
   position: absolute;
+  text-align: left;
   justify-content: center;
   z-index: 100;
   width: 80vw;
@@ -85,5 +89,13 @@ export default Vue.extend({
   background-color: #ffffff;
   border: solid 1px #35495e;
   padding: 10px;
+}
+
+.connect-info {
+  border: solid 1px #35495e;
+}
+
+.err-info {
+  overflow-y: scroll;
 }
 </style>

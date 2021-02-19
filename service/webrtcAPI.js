@@ -74,7 +74,7 @@ export const offer = async (
         const candidate = new RTCIceCandidate(change.doc.data())
         peerConnection
           .addIceCandidate(candidate)
-          .catch((err) => console.log(err))
+          .catch((err) => commit('set_err_report', err))
       }
     })
   })
@@ -90,7 +90,7 @@ export const offer = async (
         try {
           await peerConnection.setRemoteDescription(answer)
         } catch (err) {
-          console.log(err)
+          commit('set_err_report', err)
         }
       }
       unsubscribe()
@@ -179,7 +179,7 @@ export const offered = async (dispatch, commit, connectionId) => {
             const candidate = new RTCIceCandidate(change.doc.data())
             peerConnection
               .addIceCandidate(candidate)
-              .catch((err) => console.log(err))
+              .catch((err) => commit('set_err_report', err))
           }
         })
       })
@@ -198,7 +198,7 @@ export const offered = async (dispatch, commit, connectionId) => {
       try {
         await peerConnection.setRemoteDescription(offer)
       } catch (err) {
-        console.log(err)
+        commit('set_err_report', err)
         unsubscribe()
         return
       }
