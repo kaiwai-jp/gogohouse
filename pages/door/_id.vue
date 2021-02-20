@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div v-if="room">
+    <div v-if="roomExists">
       <h1 class="title">{{ room.name }}</h1>
       <p class="description">{{ roomDescription }}</p>
       <h2 class="subtitle owner" v-show="roomDescription != 'loading...'">
@@ -27,7 +27,7 @@
       <button v-if="isOwner" @click="modal = true">管理</button>
       <DoorGuide class="m-50" />
     </div>
-    <div v-if="!room">
+    <div v-if="!roomExists">
       ルームが見つかりませんでした<br />
       <button class="button--grey mt-5" @click="goHome">ホームへ</button>
     </div>
@@ -74,6 +74,9 @@ export default Vue.extend({
     },
     isOwner(): Boolean {
       return this.me.uid === this.room.owner_id
+    },
+    roomExists(): Boolean {
+      return Object.keys(this.room).length !== 0
     },
     roomDescription(): String {
       if (this.room.room_type === 'open') {
