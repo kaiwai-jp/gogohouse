@@ -49,6 +49,7 @@ export default Vue.extend({
     clickDeleteRoom() {
       if (window.confirm('本当に' + this.room.name + 'を削除しますか？')) {
         deleteRoom(this.roomId)
+        this.$emit('close')
       }
     },
     clickKick(uid: String, move: String) {
