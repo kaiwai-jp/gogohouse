@@ -28,7 +28,9 @@ li {
   display: inline-block;
   padding-right: 10px;
   padding-left: 10px;
-  border-right: solid 1px #efefef;
+  &:first-child {
+    border-right: solid 1px #efefef;
+  }
 }
 
 .copyright {

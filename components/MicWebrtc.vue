@@ -1,6 +1,6 @@
 <template>
   <div class="description">
-    <div v-if="!localStream">
+    <div v-if="!localStream" class="mic_area">
       <div v-if="!permissionDialog">
         マイクOFF
         <button class="button--grey" @click="start" v-if="existOwner">
@@ -14,7 +14,7 @@
         ブラウザからマイクを利用する許可をしてください
       </div>
     </div>
-    <div v-else>
+    <div v-else class="mic_area">
       <MicIcon />
       <button class="button--grey" @click="hangup">マイクを閉じる</button>
     </div>
@@ -149,5 +149,9 @@ export default Vue.extend({
 .description {
   color: #526488;
   margin-bottom: 20px;
+}
+
+.mic_area {
+  display: inline-block;
 }
 </style>

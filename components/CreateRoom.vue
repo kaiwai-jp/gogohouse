@@ -4,6 +4,7 @@
     <input v-model="newRoomName" class="room-name" />
     <select v-model="roomType" class="room-type">
       <option value="open">オープン</option>
+      <option value="social">ソーシャル</option>
       <option value="closed">クローズド</option>
     </select>
 
