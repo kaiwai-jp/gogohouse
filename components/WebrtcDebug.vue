@@ -1,24 +1,26 @@
 <template>
   <div>
     <button @click="modal = true">Debug</button>
-    <div v-if="modal" class="debug-modal">
-      information
-      <table class="connect-info">
-        <tr>
-          <td>twitter</td>
-          <td>inbound</td>
-          <td>outbound</td>
-        </tr>
-        <tr v-for="user in roomRemoteUsers" :key="user.uid">
-          <td>{{ user.twitter }}</td>
-          <td>{{ userInboundState(user.uid) }}</td>
-          <td>{{ userOutboundState(user.uid) }}</td>
-        </tr>
-      </table>
-      <div class="err-info">
-        <div v-for="report in errReport" :key="report">{{ report }}</div>
+    <div class="modal-base" v-if="modal">
+      <div class="debug-modal">
+        information
+        <table class="connect-info">
+          <tr>
+            <td>twitter</td>
+            <td>inbound</td>
+            <td>outbound</td>
+          </tr>
+          <tr v-for="user in roomRemoteUsers" :key="user.uid">
+            <td>{{ user.twitter }}</td>
+            <td>{{ userInboundState(user.uid) }}</td>
+            <td>{{ userOutboundState(user.uid) }}</td>
+          </tr>
+        </table>
+        <div class="err-info">
+          <div v-for="report in errReport" :key="report">{{ report }}</div>
+        </div>
+        <button @click="modal = false">閉じる</button>
       </div>
-      <button @click="modal = false">閉じる</button>
     </div>
   </div>
 </template>
@@ -77,18 +79,28 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.debug-modal {
-  position: absolute;
-  text-align: left;
+.modal-base {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
   justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 100;
-  width: 80vw;
-  height: 80vh;
+}
+
+.debug-modal {
+  padding: 10px;
+  text-align: left;
+  width: 90vw;
   left: 10vw;
   top: 10vh;
   background-color: #ffffff;
-  border: solid 1px #35495e;
-  padding: 10px;
+  overflow-y: scroll;
+  word-wrap: break-word;
 }
 
 .connect-info {
