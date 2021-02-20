@@ -61,10 +61,6 @@ export default Vue.extend({
       modal: false,
     }
   },
-  async created() {
-    this.GET_ROOM(this.roomId)
-  },
-  beforeDestroy() {},
   computed: {
     ...roomMapper.mapGetters(['room']),
     ...userMapper.mapGetters(['me', 'roomOnlineUsers']),
@@ -79,7 +75,6 @@ export default Vue.extend({
     },
   },
   methods: {
-    ...roomMapper.mapActions(['GET_ROOM']),
     ...webrtcMapper.mapActions([
       'OFFER',
       'CONNECTION_END_FROM_ME',

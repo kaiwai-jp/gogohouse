@@ -24,12 +24,14 @@
           <RoomMembers :link="true" :members="room.members" />
         </div>
       </div>
+      <button v-if="isOwner" @click="modal = true">管理</button>
       <DoorGuide class="m-50" />
     </div>
     <div v-if="!room">
       ルームが見つかりませんでした<br />
       <button class="button--grey mt-5" @click="goHome">ホームへ</button>
     </div>
+    <ManageRoom @close="modal = false" :roomId="room.id" v-if="modal" />
   </div>
 </template>
 
@@ -40,10 +42,15 @@ import OnlineUsers from '@/components/OnlineUsers.vue'
 import EnterRoom from '@/components/EnterRoom.vue'
 import TwitterLogin from '@/components/TwitterLogin.vue'
 import DoorGuide from '@/components/DoorGuide.vue'
+import ManageRoom from '@/components/ManageRoom.vue'
 
 import roomMapper from '@/store/room'
 import userMapper from '@/store/user'
 import webrtcMapper from '@/store/webrtc'
+
+interface DataType {
+  modal: Boolean
+}
 
 export default Vue.extend({
   components: {
@@ -52,12 +59,21 @@ export default Vue.extend({
     EnterRoom,
     TwitterLogin,
     DoorGuide,
+    ManageRoom,
+  },
+  data(): DataType {
+    return {
+      modal: false,
+    }
   },
   computed: {
     ...roomMapper.mapGetters(['room']),
-    ...userMapper.mapGetters(['isSignin', 'roomOnlineUsers']),
+    ...userMapper.mapGetters(['me', 'isSignin', 'roomOnlineUsers']),
     roomId(): String {
       return this.$route.params.id
+    },
+    isOwner(): Boolean {
+      return this.me.uid === this.room.owner_id
     },
     roomDescription(): String {
       if (this.room.room_type === 'open') {
@@ -77,12 +93,15 @@ export default Vue.extend({
     },
   },
   async created() {
-    this.GET_ROOM(this.roomId)
+    this.ROOM_LISTENER(this.roomId)
     await this.GET_USER()
     this.CLEAR_OFFERED_DB()
   },
+  beforeDestroy() {
+    this.END_ROOM_LISTENER()
+  },
   methods: {
-    ...roomMapper.mapActions(['GET_ROOM']),
+    ...roomMapper.mapActions(['ROOM_LISTENER', 'END_ROOM_LISTENER']),
     ...userMapper.mapActions(['GET_USER', 'SIGN_IN_TWITTER', 'SIGN_OUT']),
     ...webrtcMapper.mapActions(['CLEAR_OFFERED_DB']),
     twitterSignin() {
