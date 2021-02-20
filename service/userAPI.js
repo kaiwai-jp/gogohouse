@@ -172,3 +172,9 @@ export const offline = async (myUid) => {
   }
   userStatusDatabaseRef.set(isOfflineForDatabase).then(() => {})
 }
+
+export const kickUser = async (payload) => {
+  const functions = firebase.app().functions('asia-northeast1')
+  const func = functions.httpsCallable('kickUser')
+  return func(payload)
+}

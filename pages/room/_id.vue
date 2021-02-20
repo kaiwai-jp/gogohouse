@@ -3,6 +3,8 @@
     <div>
       <h1 class="title">{{ room.name }}</h1>
       オーナー：<NamePlateMini :uid="room.owner_id" class="owner_identity" />
+      <button @click="modal = true">管理</button>
+      <ManageRoom @close="modal = false" :roomId="room.id" v-if="modal" />
       <div class="links">
         <MicWebrtc />
         <div class="m-50">
@@ -26,9 +28,11 @@ import OnlineUsers from '@/components/OnlineUsers.vue'
 import LeaveRoom from '@/components/LeaveRoom.vue'
 import WebrtcDebug from '@/components/WebrtcDebug.vue'
 import NamePlateMini from '@/components/NamePlateMini.vue'
+import ManageRoom from '@/components/ManageRoom.vue'
 
-interface Data {
+interface DataType {
   localStream: MediaStream | undefined
+  modal: Boolean
 }
 
 interface User {
@@ -42,6 +46,7 @@ export default Vue.extend({
     LeaveRoom,
     WebrtcDebug,
     NamePlateMini,
+    ManageRoom,
   },
   beforeRouteLeave(to, from, next) {
     if (window.confirm('本当にルームから離れますか？')) {
@@ -50,9 +55,10 @@ export default Vue.extend({
       next(false)
     }
   },
-  data(): Data {
+  data(): DataType {
     return {
       localStream: undefined,
+      modal: false,
     }
   },
   async created() {

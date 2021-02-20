@@ -50,33 +50,27 @@ exports.onUserStatusChanged = functions
 exports.enterOpenRoom = functions
   .region('asia-northeast1')
   .https.onCall(async (data, context) => {
+    const uid = context.auth!.uid
+
     const roomsRef = firestore.collection('rooms').doc(data.roomId)
     await roomsRef.get().then((doc) => {
       if (!doc.exists) {
-        throw new functions.https.HttpsError('not-found', 'floor no found')
+        throw new functions.https.HttpsError('not-found', 'room not found')
       }
 
-      if (doc.data()!.room_type !== 'open') {
+      const room = doc.data()!
+      if (room.room_type !== 'open') {
         throw new functions.https.HttpsError(
           'unauthenticated',
           'this room is not open'
         )
       }
-    })
-    /*
-    const roomsBansRef = firestore
-      .collection('room_privates')
-      .doc(data.roomId)
-    await roomsBansRef.get().then((doc) => {
-      if (doc.exists) {
-        // TODO
-        throw new functions.https.HttpsError(
-          'unauthenticated',
-          `${context.auth!.uid} is banned`
-        )
+
+      if (room.ban && room.ban.indexOf(uid) >= 0) {
+        throw new functions.https.HttpsError('unauthenticated', 'banned')
       }
     })
-*/
+
     // 入室処理
     return await firestore.collection('users').doc(context.auth!.uid).update({
       current_room: data.roomId,
@@ -91,40 +85,33 @@ exports.enterClosedRoom = functions
   .region('asia-northeast1')
   .https.onCall(async (data, context) => {
     const uid = context.auth!.uid
+
     const roomsRef = firestore.collection('rooms').doc(data.roomId)
     await roomsRef.get().then((doc) => {
       if (!doc.exists) {
-        throw new functions.https.HttpsError('not-found', 'floor no found')
+        throw new functions.https.HttpsError('not-found', 'room not found')
       }
 
-      if (doc.data()!.room_type !== 'closed') {
+      const room = doc.data()!
+      if (room.room_type !== 'closed') {
         throw new functions.https.HttpsError(
           'unauthenticated',
           'this room is not closed'
         )
       }
 
-      if (!doc.data()!.members.includes(uid)) {
+      if (room.members && !room.members.includes(uid)) {
         throw new functions.https.HttpsError(
           'unauthenticated',
           'you are not member'
         )
       }
-    })
-    /*
-    const roomsBansRef = firestore
-      .collection('room_privates')
-      .doc(data.roomId)
-    await roomsBansRef.get().then((doc) => {
-      if (doc.exists) {
-        // TODO
-        throw new functions.https.HttpsError(
-          'unauthenticated',
-          `${context.auth!.uid} is banned`
-        )
+
+      if (room.ban && room.ban.indexOf(uid) >= 0) {
+        throw new functions.https.HttpsError('unauthenticated', 'banned')
       }
     })
-*/
+
     // 入室処理
     return await firestore.collection('users').doc(context.auth!.uid).update({
       current_room: data.roomId,
@@ -173,4 +160,48 @@ exports.clearConnectionsDBAll = functions
         })
       })
       .catch()
+  })
+
+/**
+ * ユーザーをルームからキックします。usersが対象フロアに居る場合のcurrent_roomをnullにします.
+ * @params roomId, userId
+ */
+exports.kickUser = functions
+  .region('asia-northeast1')
+  .https.onCall(async (data, context) => {
+    const roomId = data.roomId
+    const targetUid = data.userId
+    const uid = context.auth!.uid
+
+    const roomsRef = firestore.collection('rooms').doc(roomId)
+    await roomsRef.get().then(async (doc) => {
+      if (!doc.exists) {
+        throw new functions.https.HttpsError('not-found', 'room not found')
+      }
+      const room = doc.data()!
+      // オーナー以外のリクエストの時はエラー
+      const roomOwnerId = room.owner_id
+
+      if (uid !== roomOwnerId) {
+        throw new functions.https.HttpsError(
+          'unauthenticated',
+          'not requested by room_owner'
+        )
+      }
+      return
+    })
+    const usersRef = firestore.collection('users').doc(targetUid)
+    await usersRef.get().then((doc) => {
+      const user = doc.data()!
+      // 今のフロアに居ないときはエラー
+      if (user.current_room !== roomId) {
+        throw new functions.https.HttpsError('not-found', 'not in room')
+      }
+      return
+    })
+
+    return firestore.collection('users').doc(targetUid).update({
+      // 退室処理
+      current_room: null,
+    })
   })

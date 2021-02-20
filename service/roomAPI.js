@@ -4,7 +4,8 @@ export const createRoom = (payload) => {
   return new Promise((resolve) => {
     const roomRef = db.collection('rooms')
     const roomId = roomRef.doc().id
-    roomRef.doc(roomId)
+    roomRef
+      .doc(roomId)
       .set({
         ...payload,
         id: roomId,
@@ -71,5 +72,30 @@ export const listenMemberRoomList = (commit, uid) => {
         }
       })
     })
+  return unsubscribe
+}
+
+export const ban = async (roomId, uid) => {
+  const roomRef = db.collection('rooms').doc(roomId)
+  roomRef.update({ ban: firebase.firestore.FieldValue.arrayUnion(uid) })
+}
+
+export const deleteRoom = async (roomId) => {
+  const roomRef = db.collection('rooms').doc(roomId)
+  roomRef.delete()
+}
+
+export const listenRoom = (commit, roomId) => {
+  const unsubscribe = db
+    .collection('rooms')
+    .doc(roomId)
+    .onSnapshot(async (doc) => {
+      const room = {}
+      if (doc.exists) {
+        room = doc.data()
+      }
+      commit('set_room', room)
+    })
+
   return unsubscribe
 }

@@ -4,12 +4,14 @@ import {
   getRoom,
   listenMyRoomList,
   listenMemberRoomList,
+  listenRoom,
 } from '@/service/roomAPI'
 
 export default {
   ...createNamespacedHelpers('room'),
-  myRoomUnsubscribe: null,
+  myRoomListUnsubscribe: null,
   memberRoomUnsubscribe: null,
+  roomUnsubscribe: null,
   state() {
     return {
       room: {},
@@ -26,6 +28,9 @@ export default {
   mutations: {
     set_room(state, payload) {
       state.room = payload
+    },
+    reset_room(state) {
+      state.room = {}
     },
     add_my_room_list(state, room) {
       state.myRoomList.push(room)
@@ -82,15 +87,15 @@ export default {
     MY_ROOM_LIST_LISTENER({ commit, rootState }) {
       const { user } = rootState
 
-      if (!this.myRoomUnsubscribe) {
+      if (!this.myRoomListUnsubscribe) {
         commit('reset_my_room_list')
-        this.myRoomUnsubscribe = listenMyRoomList(commit, user.me.uid)
+        this.myRoomListUnsubscribe = listenMyRoomList(commit, user.me.uid)
       }
     },
     END_MY_ROOM_LIST_LISTENER({ commit, state }) {
-      if (this.myRoomUnsubscribe) {
-        this.myRoomUnsubscribe()
-        this.myRoomUnsubscribe = null
+      if (this.myRoomListUnsubscribe) {
+        this.myRoomListUnsubscribe()
+        this.myRoomListUnsubscribe = null
         commit('reset_my_room_list')
       }
     },
@@ -107,6 +112,19 @@ export default {
         this.memberRoomUnsubscribe()
         this.memberRoomUnsubscribe = null
         commit('reset_member_room_list')
+      }
+    },
+    ROOM_LISTENER({ commit }, roomId) {
+      if (!this.roomUnsubscribe) {
+        commit('reset_room')
+        this.roomUnsubscribe = listenRoom(commit, roomId)
+      }
+    },
+    END_ROOM_LISTENER({ commit }) {
+      if (this.roomUnsubscribe) {
+        this.roomUnsubscribe()
+        this.roomUnsubscribe = null
+        commit('reset_room')
       }
     },
   },
