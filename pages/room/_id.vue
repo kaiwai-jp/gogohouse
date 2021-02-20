@@ -3,7 +3,7 @@
     <div>
       <h1 class="title">{{ room.name }}</h1>
       オーナー：<NamePlateMini :uid="room.owner_id" class="owner_identity" />
-      <button @click="modal = true">管理</button>
+      <button @click="modal = true" v-if="ifOwner">管理</button>
       <ManageRoom @close="modal = false" :roomId="room.id" v-if="modal" />
       <div class="links">
         <MicWebrtc />
@@ -70,6 +70,12 @@ export default Vue.extend({
     ...userMapper.mapGetters(['me', 'roomOnlineUsers']),
     roomId(): string {
       return this.$route.params.id
+    },
+    ifOwner(): Boolean {
+      if (this.me.uid === this.room.owner_id) {
+        return true
+      }
+      return false
     },
   },
   methods: {
