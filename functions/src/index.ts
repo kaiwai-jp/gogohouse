@@ -3,6 +3,7 @@ import * as admin from 'firebase-admin'
 
 admin.initializeApp()
 const firestore = admin.firestore()
+const checkFriendShip = require('./twitterProc')
 
 /**
  * Realtime Databaseを監視して、オンラインステータスの変更を検知、更新します.
@@ -14,7 +15,6 @@ exports.onUserStatusChanged = functions
     const eventStatus = change.after.val()
 
     const beforeStatus = change.before.val()
-    console.log(beforeStatus, eventStatus)
 
     if (beforeStatus.last_changed > eventStatus.last_changed) {
       return null
@@ -72,13 +72,67 @@ exports.enterOpenRoom = functions
     })
 
     // 入室処理
-    return await firestore.collection('users').doc(context.auth!.uid).update({
+    return await firestore.collection('users').doc(uid).update({
       current_room: data.roomId,
     })
   })
 
 /**
- * クローズドルームに入室するための処理を行います(open).
+ * ソーシャルルームに入室するための処理を行います(social).
+ * @params roomId
+ */
+exports.enterSocialRoom = functions
+  .region('asia-northeast1')
+  .https.onCall(async (data, context) => {
+    const uid = context.auth!.uid
+
+    const roomsRef = firestore.collection('rooms').doc(data.roomId)
+    await roomsRef.get().then(async (doc) => {
+      if (!doc.exists) {
+        throw new functions.https.HttpsError('not-found', 'room not found')
+      }
+
+      const room = doc.data()!
+      if (room.room_type !== 'social') {
+        throw new functions.https.HttpsError(
+          'unauthenticated',
+          'this room is not social'
+        )
+      }
+
+      if (room.owner_id === uid) return // 自分がオーナーの時
+
+      if (room.ban && room.ban.indexOf(uid) >= 0) {
+        throw new functions.https.HttpsError('unauthenticated', 'banned')
+      }
+
+      const owner_twitter_id = room.owner_twitter_id
+
+      const userPrivatesRef = firestore.collection('user_privates').doc(uid)
+      const userPrivateDoc = await userPrivatesRef.get()
+      const userPrivateData = userPrivateDoc.data()!
+
+      const isFriend = await checkFriendShip(
+        userPrivateData.accessToken,
+        userPrivateData.accessTokenSecret,
+        owner_twitter_id
+      )
+      if (!isFriend) {
+        throw new functions.https.HttpsError(
+          'unauthenticated',
+          'not follow and followed'
+        )
+      }
+    })
+
+    // 入室処理
+    return await firestore.collection('users').doc(uid).update({
+      current_room: data.roomId,
+    })
+  })
+
+/**
+ * クローズドルームに入室するための処理を行います(closed).
  * @params roomId
  */
 exports.enterClosedRoom = functions
@@ -113,12 +167,12 @@ exports.enterClosedRoom = functions
     })
 
     // 入室処理
-    return await firestore.collection('users').doc(context.auth!.uid).update({
+    return await firestore.collection('users').doc(uid).update({
       current_room: data.roomId,
     })
   })
 
-/* 一定時間経過したconnectionsドキュメントを削除しまし */
+/* 一定時間経過したconnectionsドキュメントを削除します */
 exports.clearConnectionsDBAll = functions
   .region('asia-northeast1')
   .https.onCall((data, context) => {
@@ -130,7 +184,6 @@ exports.clearConnectionsDBAll = functions
           const timestamp = doc.data().created_at
           const dt = timestamp.toDate().getTime()
           const systemTime = Date.now()
-          console.log(doc.id, '=>', (systemTime - dt) / 1000 + '秒前')
 
           if ((systemTime - dt) / 1000 <= 3600) return
           const connectionsCandidateOfferRef = connectionsRef

@@ -62,8 +62,12 @@ export default Vue.extend({
     roomDescription(): String {
       if (this.room.room_type === 'open') {
         return 'オープンルームです。誰でも入れます。'
+      } else if (this.room.room_type === 'social') {
+        return 'ソーシャルルームです。オーナーとFFの人だけが入れます。'
       } else if (this.room.room_type === 'closed') {
         return 'クローズドルームです。メンバーだけが入れます。'
+      } else if (this.room.room_type) {
+        return '不明なタイプの部屋です。'
       }
       return 'loading...'
     },

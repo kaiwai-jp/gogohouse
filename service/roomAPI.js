@@ -29,6 +29,12 @@ export const enterOpenRoom = async (roomId) => {
   return func({ roomId })
 }
 
+export const enterSocialRoom = async (roomId) => {
+  const functions = firebase.app().functions('asia-northeast1')
+  const func = functions.httpsCallable('enterSocialRoom')
+  return func({ roomId })
+}
+
 export const enterClosedRoom = async (roomId) => {
   const functions = firebase.app().functions('asia-northeast1')
   const func = functions.httpsCallable('enterClosedRoom')

@@ -16,7 +16,11 @@ import Vue from 'vue'
 import roomMapper from '@/store/room'
 import userMapper from '@/store/user'
 import warpMapper from '@/store/warp'
-import { enterOpenRoom, enterClosedRoom } from '@/service/roomAPI'
+import {
+  enterOpenRoom,
+  enterSocialRoom,
+  enterClosedRoom,
+} from '@/service/roomAPI'
 
 export type DataType = {
   waiting: boolean
@@ -28,8 +32,6 @@ export default Vue.extend({
       waiting: false,
     }
   },
-  async created() {},
-  beforeDestroy() {},
   computed: {
     ...userMapper.mapGetters(['me']),
     ...roomMapper.mapGetters(['room']),
@@ -39,6 +41,9 @@ export default Vue.extend({
     },
     ifPermit(): boolean {
       if (this.room.room_type === 'open') {
+        return true
+      }
+      if (this.room.room_type === 'social') {
         return true
       }
       if (this.room.room_type === 'closed') {
@@ -56,6 +61,16 @@ export default Vue.extend({
       if (this.room.room_type === 'open') {
         this.waiting = true
         enterOpenRoom(this.roomId)
+          .then(() => {
+            this.$router.push(`/room/${this.roomId}`)
+          })
+          .catch((err) => {
+            alert(err)
+            this.waiting = false
+          })
+      } else if (this.room.room_type === 'social') {
+        this.waiting = true
+        enterSocialRoom(this.roomId)
           .then(() => {
             this.$router.push(`/room/${this.roomId}`)
           })
