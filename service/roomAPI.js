@@ -90,7 +90,7 @@ export const listenRoom = (commit, roomId) => {
     .collection('rooms')
     .doc(roomId)
     .onSnapshot(async (doc) => {
-      const room = {}
+      let room = {}
       if (doc.exists) {
         room = doc.data()
       }
