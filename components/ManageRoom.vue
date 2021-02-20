@@ -1,30 +1,38 @@
 <template>
   <div class="modal-base">
     <div class="debug-modal">
+      <h2 class="subtitle">オンラインユーザー</h2>
       <div v-for="user in roomRemoteUsers" :key="user.id">
-        {{ user.twitter }}
+        <NamePlateMini :uid="user.uid" class="twitter_identity" />
         <button @click="clickKick(user.uid)">KICK</button>
         <button @click="clickBan(user.uid)">BAN</button>
       </div>
-      <button @click="clickDeleteRoom">ルーム削除</button>
-
-      <button @click="$emit('close')">閉じる</button>
+      <h2 class="subtitle mt-50">BAN</h2>
+      <div v-for="uid in room.ban" :key="uid">
+        <NamePlateMini :uid="uid" class="twitter_identity" />
+        <button @click="clickRelease(uid)">解除</button>
+      </div>
+      <button @click="clickDeleteRoom" class="danger mt-50">ルーム削除</button>
+      <button @click="$emit('close')" class="close">閉じる</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import NamePlateMini from '@/components/NamePlateMini.vue'
+
 import userMapper from '@/store/user'
 import roomMapper from '@/store/room'
 import { kickUser } from '@/service/userAPI'
-import { ban, deleteRoom } from '@/service/roomAPI'
+import { ban, release, deleteRoom } from '@/service/roomAPI'
 
 export type DataType = {
   modal: boolean
 }
 
 export default Vue.extend({
+  components: { NamePlateMini },
   props: {
     roomId: { default: '', type: String },
   },
@@ -62,6 +70,9 @@ export default Vue.extend({
       this.clickKick(uid, 'BAN')
       ban(this.roomId, uid)
     },
+    clickRelease(uid: String) {
+      release(this.roomId, uid)
+    },
   },
 })
 </script>
@@ -89,5 +100,17 @@ export default Vue.extend({
   background-color: #ffffff;
   overflow-y: scroll;
   word-wrap: break-word;
+}
+
+.twitter_identity {
+  display: inline-block;
+}
+
+.danger {
+  border: solid 3px red;
+}
+
+.close {
+  margin-left: 30px;
 }
 </style>

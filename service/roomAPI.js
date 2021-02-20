@@ -80,6 +80,11 @@ export const ban = async (roomId, uid) => {
   roomRef.update({ ban: firebase.firestore.FieldValue.arrayUnion(uid) })
 }
 
+export const release = async (roomId, uid) => {
+  const roomRef = db.collection('rooms').doc(roomId)
+  roomRef.update({ ban: firebase.firestore.FieldValue.arrayRemove(uid) })
+}
+
 export const deleteRoom = async (roomId) => {
   const roomRef = db.collection('rooms').doc(roomId)
   roomRef.delete()
