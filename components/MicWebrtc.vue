@@ -15,7 +15,7 @@
       </div>
     </div>
     <div v-else>
-      マイクON
+      <MicIcon />
       <button class="button--grey" @click="hangup">マイクを閉じる</button>
     </div>
   </div>
@@ -27,6 +27,7 @@ import Vue from 'vue'
 import roomMapper from '@/store/room'
 import userMapper from '@/store/user'
 import webrtcMapper from '@/store/webrtc'
+import MicIcon from '@/components/MicIcon.vue'
 
 interface DataType {
   localStream: MediaStream | undefined
@@ -43,6 +44,9 @@ interface User {
 }
 
 export default Vue.extend({
+  components: {
+    MicIcon,
+  },
   data(): DataType {
     return {
       localStream: undefined,
