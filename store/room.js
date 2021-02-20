@@ -74,6 +74,7 @@ export default {
         name,
         creater_id: user.me.uid,
         owner_id: user.me.uid,
+        owner_twitter_id: user.me.twitter_id,
         members: [user.me.uid],
         room_type: room_type,
       }

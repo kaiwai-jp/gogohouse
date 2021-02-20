@@ -48,8 +48,13 @@ export default Vue.extend({
         return
       }
 
-      const postJson = { name: this.newRoomName, room_type: this.roomType }
+      const postJson = {
+        name: this.newRoomName,
+        room_type: this.roomType,
+      }
       this.CREATE_ROOM(postJson).catch((err) => alert(err))
+
+      this.newRoomName = ''
     },
   },
 })

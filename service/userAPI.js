@@ -13,11 +13,11 @@ export const twitterSignIn = () => {
           const uid = userCredential.user.uid
           const myName = userCredential.user.displayName
           const screenName = userCredential.additionalUserInfo.username
+          const twitterId = userCredential.additionalUserInfo.profile.id_str
           const iconUrl = userCredential.user.photoURL
           const profile = userCredential.additionalUserInfo.profile.description
           const accessToken = userCredential.credential.accessToken
           const accessTokenSecret = userCredential.credential.secret
-
           const UserRef = db.collection('users').doc(uid)
           UserRef.get().then((doc) => {
             if (!doc.exists) {
@@ -26,6 +26,7 @@ export const twitterSignIn = () => {
                 uid,
                 name: myName,
                 twitter: '@' + screenName,
+                twitter_id: twitterId,
                 icon: iconUrl,
                 profile,
                 mic_enable: true,
@@ -38,14 +39,18 @@ export const twitterSignIn = () => {
               UserRef.update({
                 name: myName,
                 twitter: '@' + screenName,
+                twitter_id: twitterId,
                 icon: iconUrl,
                 profile,
               })
             }
-            db.collection('user_privates').doc(uid).set({
-              accessToken,
-              accessTokenSecret,
-            })
+            db.collection('user_privates').doc(uid).set(
+              {
+                accessToken,
+                accessTokenSecret,
+              },
+              { merge: true }
+            )
           })
           resolve(uid)
         }

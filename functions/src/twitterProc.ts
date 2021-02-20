@@ -16,7 +16,6 @@ module.exports = async (
     const response = await client.get('friendships/lookup', {
       user_id: id,
     })
-    console.log(response)
     if (
       response[0].connections.includes('following') &&
       response[0].connections.includes('followed_by')
