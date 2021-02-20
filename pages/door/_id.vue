@@ -28,7 +28,7 @@
       <DoorGuide class="m-50" />
     </div>
     <div v-if="!roomExists">
-      ルームが見つかりませんでした<br />
+      Loading...<br />
       <button class="button--grey mt-5" @click="goHome">ホームへ</button>
     </div>
     <ManageRoom @close="modal = false" :roomId="room.id" v-if="modal" />
