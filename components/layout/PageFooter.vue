@@ -2,8 +2,8 @@
   <div>
     <footer>
       <ul>
-        <li>利用規約</li>
-        <li>プライバシーポリシー</li>
+        <li><a href="/term.html" target="_blank">利用規約</a></li>
+        <li><nuxt-link to="/qa"> Q&A</nuxt-link></li>
       </ul>
       <span class="copyright">copyright @saikou_kunisaki</span>
     </footer>
@@ -33,5 +33,10 @@ li {
 
 .copyright {
   font-weight: 600;
+}
+
+a {
+  color: #ffffff;
+  text-decoration: none;
 }
 </style>

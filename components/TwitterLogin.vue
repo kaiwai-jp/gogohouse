@@ -1,13 +1,14 @@
 <template>
   <div class="main">
     <div class="agree-checkbox">
-      <span>利用規約に</span>
+      <a href="term.html" target="_blank">利用規約</a>に
       <input type="checkbox" v-model="agree" id="checkbox" />
       <label for="checkbox">同意する</label>
     </div>
     <button class="button--grey" @click="twitterSignin">
       twitter連携してログイン
     </button>
+    <div class="notice">※勝手にツイートすることはありません</div>
   </div>
 </template>
 
@@ -30,7 +31,7 @@ export default Vue.extend({
     ...userMapper.mapActions(['SIGN_IN_TWITTER', 'SIGN_OUT']),
     twitterSignin() {
       if (!this.agree) {
-        alert('利用規約を読んで同意してください')
+        alert('利用規約を読んで同意するにチェックをしてください')
         return
       }
       this.SIGN_IN_TWITTER()
@@ -62,7 +63,7 @@ export default Vue.extend({
   position: absolute;
   right: 15px;
   background-color: #fff;
-  box-shadow: inset 1px 2px 2px 0px #000;
+  box-shadow: inset 1px 1px 1px 0px #000;
   border-radius: 4px 4px 4px 4px;
 }
 .agree-checkbox input[type='checkbox'] {
@@ -73,5 +74,15 @@ export default Vue.extend({
   font-size: 18px;
   color: #000000;
   background-color: #84b5ff;
+}
+
+a {
+  color: #000000;
+}
+
+.notice {
+  margin-top: 20px;
+  color: #636363;
+  font-size: 10px;
 }
 </style>
