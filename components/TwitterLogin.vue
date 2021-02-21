@@ -5,9 +5,9 @@
       <input type="checkbox" v-model="agree" id="checkbox" />
       <label for="checkbox">同意する</label>
     </div>
-    <button class="button--grey" @click="twitterSignin">
+    <a class="button--twitter" @click="twitterSignin">
       twitter連携してログイン
-    </button>
+    </a>
     <div class="notice">※勝手にツイートすることはありません</div>
   </div>
 </template>
@@ -84,5 +84,24 @@ a {
   margin-top: 20px;
   color: #636363;
   font-size: 10px;
+}
+
+.twitter-logo {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+}
+
+.button--twitter {
+  display: inline-block;
+  vertical-align: top;
+  border-radius: 4px;
+  background-color: #1da0f1;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 30px;
+  margin-left: 15px;
+  font-weight: 600;
+  cursor: pointer;
 }
 </style>

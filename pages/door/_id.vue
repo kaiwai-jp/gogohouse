@@ -82,7 +82,7 @@ export default Vue.extend({
       if (this.room.room_type === 'open') {
         return 'オープンルームです。誰でも入れます。'
       } else if (this.room.room_type === 'social') {
-        return 'ソーシャルルームです。オーナーとFFの人だけが入れます。'
+        return 'ソーシャルルームです。オーナーとTwitterで相互フォローの人だけが入れます。'
       } else if (this.room.room_type === 'closed') {
         return 'クローズドルームです。メンバーだけが入れます。'
       } else if (this.room.room_type) {
