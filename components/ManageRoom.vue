@@ -23,6 +23,11 @@
           解除
         </button>
       </div>
+      <h2 class="subtitle mt-50">Twitterアカウントで<wbr>メンバー追加</h2>
+      <div>
+        <input class="room-name" v-model="addTwitter" />
+        <button @click="clickAddMemberByTwitter">追加</button>
+      </div>
       <button @click="clickDeleteRoom" class="danger mt-50">ルーム削除</button>
       <button @click="$emit('close')" class="close">閉じる</button>
     </div>
@@ -36,10 +41,17 @@ import NamePlateMini from '@/components/NamePlateMini.vue'
 import userMapper from '@/store/user'
 import roomMapper from '@/store/room'
 import { kickUser } from '@/service/userAPI'
-import { ban, releaseBan, releaseMember, deleteRoom } from '@/service/roomAPI'
+import {
+  ban,
+  releaseBan,
+  releaseMember,
+  addMemberByTwitter,
+  deleteRoom,
+} from '@/service/roomAPI'
 
 export type DataType = {
   modal: boolean
+  addTwitter: String
 }
 
 export default Vue.extend({
@@ -50,6 +62,7 @@ export default Vue.extend({
   data(): DataType {
     return {
       modal: false,
+      addTwitter: '',
     }
   },
   computed: {
@@ -88,6 +101,9 @@ export default Vue.extend({
     clickReleaseMember(uid: String) {
       releaseMember(this.roomId, uid)
     },
+    clickAddMemberByTwitter() {
+      addMemberByTwitter(this.roomId, this.addTwitter)
+    },
   },
 })
 </script>
@@ -120,6 +136,12 @@ export default Vue.extend({
 
 .twitter_identity {
   display: inline-block;
+}
+
+.room-name {
+  color: #636363;
+  height: 27px;
+  margin-right: 10px;
 }
 
 .danger {

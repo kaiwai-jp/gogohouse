@@ -143,3 +143,15 @@ export const getRoomTargetUserIn = async (uid) => {
     return roomData
   }
 }
+
+export const addMemberByTwitter = async (roomId, screenName) => {
+  const userQuery = db.collection('users').where('twitter', '==', screenName)
+  const querySnapshot = await userQuery.get()
+  querySnapshot.forEach((doc) => {
+    const userData = doc.data()
+    const uid = userData.uid
+
+    const roomRef = db.collection('rooms').doc(roomId)
+    roomRef.update({ members: firebase.firestore.FieldValue.arrayUnion(uid) })
+  })
+}
