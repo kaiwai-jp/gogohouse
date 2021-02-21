@@ -3,6 +3,7 @@
     <div>
       <NamePlate :uid="userId" class="mt-50" />
       <div class="profile">{{ userData.profile }}</div>
+      <InRoomNow :uid="userId" class="m-50" />
     </div>
   </div>
 </template>
@@ -11,10 +12,12 @@
 import Vue from 'vue'
 import userMapper from '@/store/user'
 import NamePlate from '@/components/NamePlate.vue'
+import InRoomNow from '@/components/InRoomNow.vue'
 
 export default Vue.extend({
   components: {
     NamePlate,
+    InRoomNow,
   },
   computed: {
     ...userMapper.mapGetters(['getUserData']),

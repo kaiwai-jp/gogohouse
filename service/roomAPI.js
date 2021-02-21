@@ -81,17 +81,17 @@ export const listenMemberRoomList = (commit, uid) => {
   return unsubscribe
 }
 
-export const ban = async (roomId, uid) => {
+export const ban = (roomId, uid) => {
   const roomRef = db.collection('rooms').doc(roomId)
   roomRef.update({ ban: firebase.firestore.FieldValue.arrayUnion(uid) })
 }
 
-export const release = async (roomId, uid) => {
+export const release = (roomId, uid) => {
   const roomRef = db.collection('rooms').doc(roomId)
   roomRef.update({ ban: firebase.firestore.FieldValue.arrayRemove(uid) })
 }
 
-export const deleteRoom = async (roomId) => {
+export const deleteRoom = (roomId) => {
   const roomRef = db.collection('rooms').doc(roomId)
   roomRef.delete()
 }
@@ -121,4 +121,20 @@ export const removeMeMembers = (roomId) => {
   const functions = firebase.app().functions('asia-northeast1')
   const func = functions.httpsCallable('removeMeMembers')
   return func({ roomId })
+}
+
+export const getRoomTargetUserIn = async (uid) => {
+  let roomId = null
+  const userDoc = await db.collection('users').doc(uid).get()
+  if (userDoc.exists) {
+    const userData = userDoc.data()
+    roomId = userData.current_room
+    if (!roomId) return {}
+  }
+
+  const roomDoc = await db.collection('rooms').doc(roomId).get()
+  if (roomDoc.exists) {
+    const roomData = roomDoc.data()
+    return roomData
+  }
 }

@@ -4,7 +4,7 @@
       <h1 class="title">{{ room.name }}</h1>
       オーナー：<NamePlateMini :uid="room.owner_id" class="owner-identity" />
       <IamMemberDisplay class="i-am-member" />
-      <button @click="manageModal = true" v-if="ifOwner">管理</button>
+      <button @click="manageModal = true" v-if="ifOwner">ルーム管理</button>
       <ManageRoom
         @close="manageModal = false"
         :roomId="room.id"

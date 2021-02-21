@@ -1,0 +1,42 @@
+<template>
+  <div v-if="inRoomName">
+    ただいま「
+    <nuxt-link :to="inRoomLink">{{ inRoomName }}</nuxt-link>
+    」にいます
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+import { getRoomTargetUserIn } from '@/service/roomAPI'
+
+export type DataType = {
+  roomData: Object
+}
+export default Vue.extend({
+  props: {
+    uid: { default: '', type: String },
+  },
+  data(): DataType {
+    return {
+      roomData: {},
+    }
+  },
+  computed: {
+    inRoomName(): String {
+      // @ts-ignore
+      return this.roomData.name
+    },
+    inRoomLink(): String {
+      // @ts-ignore
+      return `/door/${this.roomData.id}`
+    },
+  },
+  async created() {
+    // @ts-ignore
+    this.roomData = await getRoomTargetUserIn(this.uid)
+  },
+})
+</script>
+
+<style lang="scss" scoped></style>

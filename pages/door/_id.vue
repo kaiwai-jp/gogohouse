@@ -24,7 +24,7 @@
           <RoomMembers :link="true" :members="room.members" />
         </div>
       </div>
-      <button v-if="isOwner" @click="modal = true">管理</button>
+      <button v-if="isOwner" @click="modal = true">ルーム管理</button>
       <DoorGuide class="m-50" />
     </div>
     <div v-if="!roomExists">
