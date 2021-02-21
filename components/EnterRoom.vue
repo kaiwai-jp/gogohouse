@@ -1,9 +1,14 @@
 <template>
   <div>
     <div v-if="!waiting" class="mb-50">
-      <button class="button--grey" @click="enterRoom" v-if="ifPermit">
+      <button
+        class="button--grey"
+        @click="enterRoom"
+        v-if="ifPermit && !alredyInRoom"
+      >
         部屋に入る
       </button>
+      <span v-if="alredyInRoom">すでにルームにいます</span>
     </div>
     <div v-if="waiting" class="mb-50">
       <button class="button--grey" diabled>処理中...</button>
@@ -33,7 +38,7 @@ export default Vue.extend({
     }
   },
   computed: {
-    ...userMapper.mapGetters(['me']),
+    ...userMapper.mapGetters(['me', 'myData']),
     ...roomMapper.mapGetters(['room']),
     roomId(): string {
       return this.$route.params.id
@@ -49,6 +54,12 @@ export default Vue.extend({
         if (this.room.members.includes(this.me.uid)) {
           return true
         }
+      }
+      return false
+    },
+    alredyInRoom(): boolean {
+      if (this.myData.current_room === this.roomId) {
+        return true
       }
       return false
     },
