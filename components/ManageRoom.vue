@@ -23,7 +23,7 @@
           解除
         </button>
       </div>
-      <h2 class="subtitle mt-50">Twitterアカウントで<wbr>メンバー追加</h2>
+      <h2 class="subtitle mt-50">Twitterアカウントで<wbr />メンバー追加</h2>
       <div>
         <input class="room-name" v-model="addTwitter" />
         <button @click="clickAddMemberByTwitter">追加</button>
@@ -102,7 +102,11 @@ export default Vue.extend({
       releaseMember(this.roomId, uid)
     },
     clickAddMemberByTwitter() {
-      addMemberByTwitter(this.roomId, this.addTwitter)
+      const screenName = this.addTwitter.trim()
+      if (!screenName.match(/@[0-9a-zA-Z_]{1,15}/)) {
+        alert('@で始まるTwitterアカウントを入力してください')
+      }
+      addMemberByTwitter(this.roomId, screenName)
     },
   },
 })

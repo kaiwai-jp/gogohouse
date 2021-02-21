@@ -134,7 +134,7 @@ export const getRoomTargetUserIn = async (uid) => {
   if (userDoc.exists) {
     const userData = userDoc.data()
     roomId = userData.current_room
-    if (!roomId) return {}
+    if (!roomId || userData.status !== 'online') return {}
   }
 
   const roomDoc = await db.collection('rooms').doc(roomId).get()

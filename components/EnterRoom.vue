@@ -58,7 +58,10 @@ export default Vue.extend({
       return false
     },
     alredyInRoom(): boolean {
-      if (this.myData.current_room === this.roomId) {
+      if (
+        this.myData.current_room === this.roomId &&
+        this.myData.status === 'online'
+      ) {
         return true
       }
       return false
