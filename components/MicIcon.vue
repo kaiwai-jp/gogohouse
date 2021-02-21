@@ -21,7 +21,7 @@ import userMapper from '@/store/user'
 
 export default Vue.extend({
   props: {
-    ifStream: { default: false, type: Boolean },
+    localStream: { default: undefined }, // type?
   },
   computed: {
     ...userMapper.mapGetters(['myData']),
@@ -43,14 +43,28 @@ export default Vue.extend({
       }
       return false
     },
+    ifStream(): Boolean {
+      if (this.localStream) return true
+      return false
+    },
   },
   methods: {
     ...userMapper.mapActions(['SET_MIC_MUTE', 'SET_MIC_ON']),
     mute() {
       this.SET_MIC_MUTE()
+      if (this.localStream) {
+        // @ts-ignore
+        let audioTrack = this.localStream.getAudioTracks()[0]
+        audioTrack.enabled = false
+      }
     },
     unmute() {
       this.SET_MIC_ON()
+      if (this.localStream) {
+        // @ts-ignore
+        let audioTrack = this.localStream.getAudioTracks()[0]
+        audioTrack.enabled = true
+      }
     },
   },
 })

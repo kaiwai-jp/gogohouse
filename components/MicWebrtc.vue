@@ -2,7 +2,7 @@
   <div class="description">
     <div v-if="!localStream" class="mic_area">
       <div v-if="!permissionDialog">
-        <MicIcon :ifStream="false" />
+        <MicIcon />
         <button class="button--grey" @click="start" v-if="existOwner">
           マイクを開く
         </button>
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div v-else class="mic_area">
-      <MicIcon :ifStream="true" />
+      <MicIcon :localStream="localStream" />
       <button class="button--grey" @click="hangup">マイクを閉じる</button>
     </div>
   </div>
@@ -133,8 +133,8 @@ export default Vue.extend({
         this.permissionDialog = false
       }
       /* 音声と映像のミュート状態を反映 */
-      const audioTrack = this.localStream.getAudioTracks()[0]
-      audioTrack.enabled = this.localAudioEnable
+      //const audioTrack = this.localStream.getAudioTracks()[0]
+      //audioTrack.enabled = this.localAudioEnable
       /* 今オンラインのユーザーにオファーをする */
       this.roomRemoteUsers.forEach((user: User) => {
         if (this.me.uid != user.uid) {

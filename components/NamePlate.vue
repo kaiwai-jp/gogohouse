@@ -15,6 +15,7 @@
         ><br />
         <span class="twitter-id">{{ userData.twitter }}</span>
       </div>
+      <img class="speaker_icon" src="/speaker.png" v-if="isSpeaker" />
     </div>
   </div>
 </template>
@@ -29,13 +30,25 @@ export default Vue.extend({
     link: { default: false, type: Boolean },
   },
   computed: {
-    ...userMapper.mapGetters(['getUserData']),
+    ...userMapper.mapGetters(['getUserData', 'roomOnlineUsers']),
     userData(): Object {
       this.REF_USER_DATA({ uid: this.uid })
       return this.getUserData(this.uid)
     },
     toLink(): String {
       return '/user/' + this.uid
+    },
+    isSpeaker(): Boolean {
+      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
+        if (
+          this.roomOnlineUsers[i].uid === this.uid &&
+          this.roomOnlineUsers[i].current_room &&
+          this.roomOnlineUsers[i].mic_status === 'on'
+        ) {
+          return true
+        }
+      }
+      return false
     },
   },
   methods: {
@@ -67,5 +80,10 @@ export default Vue.extend({
 
 a {
   text-decoration: none;
+}
+
+.speaker_icon {
+  width: 36px;
+  height: 36px;
 }
 </style>
