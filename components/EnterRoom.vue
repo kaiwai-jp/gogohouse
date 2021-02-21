@@ -70,6 +70,7 @@ export default Vue.extend({
   methods: {
     ...userMapper.mapActions(['SET_MIC_OFF']),
     ...warpMapper.mapActions(['PLAY_SILENT_MUSIC']),
+    ...warpMapper.mapActions(['OPEN_ALERT_DIALOG']),
     enterRoom() {
       this.PLAY_SILENT_MUSIC()
       if (this.room.room_type === 'open') {
@@ -80,7 +81,7 @@ export default Vue.extend({
             this.$router.push(`/room/${this.roomId}`)
           })
           .catch((err) => {
-            alert(err)
+            this.OPEN_ALERT_DIALOG(err)
             this.waiting = false
           })
       } else if (this.room.room_type === 'social') {
@@ -91,7 +92,7 @@ export default Vue.extend({
             this.$router.push(`/room/${this.roomId}`)
           })
           .catch((err) => {
-            alert(err)
+            this.OPEN_ALERT_DIALOG(err)
             this.waiting = false
           })
       } else if (this.room.room_type === 'closed') {
@@ -102,7 +103,7 @@ export default Vue.extend({
             this.$router.push(`/room/${this.roomId}`)
           })
           .catch((err) => {
-            alert(err)
+            this.OPEN_ALERT_DIALOG(err)
             this.waiting = false
           })
       }

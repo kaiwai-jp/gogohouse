@@ -47,6 +47,7 @@ import ManageRoom from '@/components/ManageRoom.vue'
 import roomMapper from '@/store/room'
 import userMapper from '@/store/user'
 import webrtcMapper from '@/store/webrtc'
+import warpMapper from '@/store/warp'
 
 interface DataType {
   modal: Boolean
@@ -107,10 +108,11 @@ export default Vue.extend({
     ...roomMapper.mapActions(['ROOM_LISTENER', 'END_ROOM_LISTENER']),
     ...userMapper.mapActions(['GET_USER', 'SIGN_IN_TWITTER', 'SIGN_OUT']),
     ...webrtcMapper.mapActions(['CLEAR_OFFERED_DB']),
+    ...warpMapper.mapActions(['OPEN_ALERT_DIALOG']),
     twitterSignin() {
       this.SIGN_IN_TWITTER()
         .then(() => {})
-        .catch((err: any) => alert(err))
+        .catch((err: any) => this.OPEN_ALERT_DIALOG(err))
 
       return true
     },

@@ -27,6 +27,8 @@ import Vue from 'vue'
 import roomMapper from '@/store/room'
 import userMapper from '@/store/user'
 import webrtcMapper from '@/store/webrtc'
+import warpMapper from '@/store/warp'
+
 import MicIcon from '@/components/MicIcon.vue'
 
 interface DataType {
@@ -113,6 +115,7 @@ export default Vue.extend({
       'CONNECTION_FINISH_ALL',
     ]),
     ...userMapper.mapActions(['SET_MIC_ON', 'SET_MIC_OFF']),
+    ...warpMapper.mapActions(['OPEN_ALERT_DIALOG']),
     async start() {
       /* ローカルストリームにマイクのストリームを割り当て */
       try {
@@ -132,9 +135,6 @@ export default Vue.extend({
       } finally {
         this.permissionDialog = false
       }
-      /* 音声と映像のミュート状態を反映 */
-      //const audioTrack = this.localStream.getAudioTracks()[0]
-      //audioTrack.enabled = this.localAudioEnable
       /* 今オンラインのユーザーにオファーをする */
       this.roomRemoteUsers.forEach((user: User) => {
         if (this.me.uid != user.uid) {
@@ -154,7 +154,7 @@ export default Vue.extend({
       this.CONNECTION_END_FROM_ME()
     },
     notOwnerExist() {
-      alert('オーナーが在室でないときはマイクは開けません')
+      this.OPEN_ALERT_DIALOG('オーナーが在室でないときはマイクは開けません')
     },
   },
 })

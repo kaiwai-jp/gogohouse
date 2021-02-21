@@ -4,6 +4,7 @@
     <Nuxt class="main" />
     <AudioPlay />
     <PageFooter />
+    <AlertModal />
   </div>
 </template>
 <script lang="ts">
@@ -11,9 +12,10 @@ import Vue from 'vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
 import PageFooter from '@/components/layout/PageFooter.vue'
 import AudioPlay from '@/components/layout/AudioPlay.vue'
+import AlertModal from '@/components/layout/AlertModal.vue'
 
 export default Vue.extend({
-  components: { PageHeader, PageFooter, AudioPlay },
+  components: { PageHeader, PageFooter, AudioPlay, AlertModal },
 })
 </script>
 

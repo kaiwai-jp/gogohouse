@@ -15,6 +15,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import userMapper from '@/store/user'
+import warpMapper from '@/store/warp'
 
 interface DataType {
   agree: boolean
@@ -29,9 +30,12 @@ export default Vue.extend({
   },
   methods: {
     ...userMapper.mapActions(['SIGN_IN_TWITTER', 'SIGN_OUT']),
+    ...warpMapper.mapActions(['OPEN_ALERT_DIALOG']),
     twitterSignin() {
       if (!this.agree) {
-        alert('利用規約を読んで同意するにチェックをしてください')
+        this.OPEN_ALERT_DIALOG(
+          '利用規約を読んで同意するにチェックをしてください'
+        )
         return
       }
       this.SIGN_IN_TWITTER()
@@ -40,7 +44,7 @@ export default Vue.extend({
             this.$router.push(this.jump)
           }
         })
-        .catch((err) => alert(err))
+        .catch((err) => this.OPEN_ALERT_DIALOG(err))
     },
   },
 })

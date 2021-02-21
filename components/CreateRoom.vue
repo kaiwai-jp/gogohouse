@@ -15,6 +15,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import roomMapper from '@/store/room'
+import warpMapper from '@/store/warp'
 
 export type DataType = {
   newRoomName: string
@@ -33,18 +34,19 @@ export default Vue.extend({
   },
   methods: {
     ...roomMapper.mapActions(['CREATE_ROOM']),
+    ...warpMapper.mapActions(['OPEN_ALERT_DIALOG']),
     clickCreateRoom() {
       if (this.newRoomName.length === 0) {
-        alert('作成するルーム名を入力してください')
+        this.OPEN_ALERT_DIALOG('作成するルーム名を入力してください')
         return
       }
       if (this.newRoomName.length > 50) {
-        alert('ルーム名が長すぎます')
+        this.OPEN_ALERT_DIALOG('ルーム名が長すぎます')
         return
       }
 
       if (this.myRoomList.length >= 5) {
-        alert('無料ユーザーは5ルームまでしか作れません')
+        this.OPEN_ALERT_DIALOG('無料ユーザーは5ルームまでしか作れません')
         return
       }
 
@@ -52,7 +54,7 @@ export default Vue.extend({
         name: this.newRoomName,
         room_type: this.roomType,
       }
-      this.CREATE_ROOM(postJson).catch((err) => alert(err))
+      this.CREATE_ROOM(postJson).catch((err) => this.OPEN_ALERT_DIALOG(err))
 
       this.newRoomName = ''
     },
