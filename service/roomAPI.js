@@ -86,9 +86,14 @@ export const ban = (roomId, uid) => {
   roomRef.update({ ban: firebase.firestore.FieldValue.arrayUnion(uid) })
 }
 
-export const release = (roomId, uid) => {
+export const releaseBan = (roomId, uid) => {
   const roomRef = db.collection('rooms').doc(roomId)
   roomRef.update({ ban: firebase.firestore.FieldValue.arrayRemove(uid) })
+}
+
+export const releaseMember = (roomId, uid) => {
+  const roomRef = db.collection('rooms').doc(roomId)
+  roomRef.update({ members: firebase.firestore.FieldValue.arrayRemove(uid) })
 }
 
 export const deleteRoom = (roomId) => {

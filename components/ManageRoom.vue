@@ -2,15 +2,26 @@
   <div class="modal-base">
     <div class="debug-modal">
       <h2 class="subtitle">オンラインユーザー</h2>
-      <div v-for="user in roomRemoteUsers" :key="user.id">
+      <div v-for="user in roomOnlineUsers" :key="user.uid + 'online'">
         <NamePlateMini :uid="user.uid" class="twitter_identity" />
-        <button @click="clickKick(user.uid)">KICK</button>
-        <button @click="clickBan(user.uid)">BAN</button>
+        <button v-if="user.uid != me.uid" @click="clickKick(user.uid)">
+          KICK
+        </button>
+        <button v-if="user.uid != me.uid" @click="clickBan(user.uid)">
+          BAN
+        </button>
       </div>
       <h2 class="subtitle mt-50">BAN</h2>
-      <div v-for="uid in room.ban" :key="uid">
+      <div v-for="uid in room.ban" :key="uid + 'ban'">
         <NamePlateMini :uid="uid" class="twitter_identity" />
-        <button @click="clickRelease(uid)">解除</button>
+        <button @click="clickReleaseBan(uid)">解除</button>
+      </div>
+      <h2 class="subtitle mt-50">メンバー</h2>
+      <div v-for="uid in room.members" :key="uid + 'member'">
+        <NamePlateMini :uid="uid" class="twitter_identity" />
+        <button v-if="uid != me.uid" @click="clickReleaseMember(uid)">
+          解除
+        </button>
       </div>
       <button @click="clickDeleteRoom" class="danger mt-50">ルーム削除</button>
       <button @click="$emit('close')" class="close">閉じる</button>
@@ -25,7 +36,7 @@ import NamePlateMini from '@/components/NamePlateMini.vue'
 import userMapper from '@/store/user'
 import roomMapper from '@/store/room'
 import { kickUser } from '@/service/userAPI'
-import { ban, release, deleteRoom } from '@/service/roomAPI'
+import { ban, releaseBan, releaseMember, deleteRoom } from '@/service/roomAPI'
 
 export type DataType = {
   modal: boolean
@@ -42,7 +53,7 @@ export default Vue.extend({
     }
   },
   computed: {
-    ...userMapper.mapGetters(['roomRemoteUsers']),
+    ...userMapper.mapGetters(['me', 'roomOnlineUsers']),
     ...roomMapper.mapGetters(['room']),
   },
   methods: {
@@ -56,8 +67,8 @@ export default Vue.extend({
       let user
       let moveString = move || 'KICK'
 
-      for (let i = 0; i < this.roomRemoteUsers.length; i++) {
-        user = this.roomRemoteUsers[i]
+      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
+        user = this.roomOnlineUsers[i]
       }
       if (!user) return
       //@ts-ignore
@@ -71,8 +82,11 @@ export default Vue.extend({
       this.clickKick(uid, 'BAN')
       ban(this.roomId, uid)
     },
-    clickRelease(uid: String) {
-      release(this.roomId, uid)
+    clickReleaseBan(uid: String) {
+      releaseBan(this.roomId, uid)
+    },
+    clickReleaseMember(uid: String) {
+      releaseMember(this.roomId, uid)
     },
   },
 })
@@ -98,6 +112,7 @@ export default Vue.extend({
   width: 90vw;
   left: 10vw;
   top: 10vh;
+  max-height: 100vh;
   background-color: #ffffff;
   overflow-y: scroll;
   word-wrap: break-word;
