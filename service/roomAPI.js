@@ -110,3 +110,15 @@ export const listenRoom = (commit, roomId) => {
 
   return unsubscribe
 }
+
+export const addMeMembers = (roomId) => {
+  const functions = firebase.app().functions('asia-northeast1')
+  const func = functions.httpsCallable('addMeMembers')
+  return func({ roomId })
+}
+
+export const removeMeMembers = (roomId) => {
+  const functions = firebase.app().functions('asia-northeast1')
+  const func = functions.httpsCallable('removeMeMembers')
+  return func({ roomId })
+}

@@ -2,9 +2,14 @@
   <div class="container">
     <div>
       <h1 class="title">{{ room.name }}</h1>
-      オーナー：<NamePlateMini :uid="room.owner_id" class="owner_identity" />
-      <button @click="modal = true" v-if="ifOwner">管理</button>
-      <ManageRoom @close="modal = false" :roomId="room.id" v-if="modal" />
+      オーナー：<NamePlateMini :uid="room.owner_id" class="owner-identity" />
+      <IamMemberDisplay class="i-am-member" />
+      <button @click="manageModal = true" v-if="ifOwner">管理</button>
+      <ManageRoom
+        @close="manageModal = false"
+        :roomId="room.id"
+        v-if="manageModal"
+      />
       <div class="links">
         <MicWebrtc />
         <div class="m-50">
@@ -29,10 +34,11 @@ import LeaveRoom from '@/components/LeaveRoom.vue'
 import WebrtcDebug from '@/components/WebrtcDebug.vue'
 import NamePlateMini from '@/components/NamePlateMini.vue'
 import ManageRoom from '@/components/ManageRoom.vue'
+import IamMemberDisplay from '@/components/IamMemberDisplay.vue'
 
 interface DataType {
   localStream: MediaStream | undefined
-  modal: Boolean
+  manageModal: Boolean
 }
 
 interface User {
@@ -47,6 +53,7 @@ export default Vue.extend({
     WebrtcDebug,
     NamePlateMini,
     ManageRoom,
+    IamMemberDisplay,
   },
   beforeRouteLeave(to, from, next) {
     if (window.confirm('本当にルームから離れますか？')) {
@@ -58,7 +65,7 @@ export default Vue.extend({
   data(): DataType {
     return {
       localStream: undefined,
-      modal: false,
+      manageModal: false,
     }
   },
   computed: {
@@ -125,7 +132,11 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.owner_identity {
+.owner-identity {
+  display: inline-block;
+}
+
+.i-am-member {
   display: inline-block;
 }
 </style>

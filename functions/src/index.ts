@@ -216,7 +216,7 @@ exports.clearConnectionsDBAll = functions
   })
 
 /**
- * ユーザーをルームからキックします。usersが対象フロアに居る場合のcurrent_roomをnullにします.
+ * ユーザーをルームからキックします。usersが対象ルームに居る場合のcurrent_roomをnullにします.
  * @params roomId, userId
  */
 exports.kickUser = functions
@@ -256,5 +256,62 @@ exports.kickUser = functions
     return firestore.collection('users').doc(targetUid).update({
       // 退室処理
       current_room: null,
+    })
+  })
+
+/**
+ * ユーザーをルームのメンバーに追加します。オープンかソーシャルのとき。
+ * @params roomId
+ */
+exports.addMeMembers = functions
+  .region('asia-northeast1')
+  .https.onCall(async (data, context) => {
+    const roomId = data.roomId
+    const uid = context.auth!.uid
+
+    const roomsRef = firestore.collection('rooms').doc(roomId)
+    await roomsRef.get().then(async (doc) => {
+      if (!doc.exists) {
+        throw new functions.https.HttpsError('not-found', 'room not found')
+      }
+      const room = doc.data()!
+
+      if (room.room_type !== 'open' && room.room_type !== 'social') {
+        throw new functions.https.HttpsError(
+          'unauthenticated',
+          'room type not open or social'
+        )
+      }
+
+      if (room.ban && room.ban.indexOf(uid) >= 0) {
+        throw new functions.https.HttpsError('unauthenticated', 'banned')
+      }
+      return
+    })
+
+    return roomsRef.update({
+      members: admin.firestore.FieldValue.arrayUnion(uid),
+    })
+  })
+
+  /**
+ * ユーザーをルームのメンバーから削除します。
+ * @params roomId
+ */
+exports.removeMeMembers = functions
+  .region('asia-northeast1')
+  .https.onCall(async (data, context) => {
+    const roomId = data.roomId
+    const uid = context.auth!.uid
+
+    const roomsRef = firestore.collection('rooms').doc(roomId)
+    await roomsRef.get().then(async (doc) => {
+      if (!doc.exists) {
+        throw new functions.https.HttpsError('not-found', 'room not found')
+      }
+    })
+
+    return roomsRef.update({
+      members: admin.firestore.FieldValue.arrayRemove(uid),
     })
   })
