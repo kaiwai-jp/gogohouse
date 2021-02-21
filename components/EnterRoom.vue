@@ -35,7 +35,6 @@ export default Vue.extend({
   computed: {
     ...userMapper.mapGetters(['me']),
     ...roomMapper.mapGetters(['room']),
-
     roomId(): string {
       return this.$route.params.id
     },
@@ -55,6 +54,7 @@ export default Vue.extend({
     },
   },
   methods: {
+    ...userMapper.mapActions(['SET_MIC_OFF']),
     ...warpMapper.mapActions(['PLAY_SILENT_MUSIC']),
     enterRoom() {
       this.PLAY_SILENT_MUSIC()
@@ -62,6 +62,7 @@ export default Vue.extend({
         this.waiting = true
         enterOpenRoom(this.roomId)
           .then(() => {
+            this.SET_MIC_OFF()
             this.$router.push(`/room/${this.roomId}`)
           })
           .catch((err) => {
@@ -72,6 +73,7 @@ export default Vue.extend({
         this.waiting = true
         enterSocialRoom(this.roomId)
           .then(() => {
+            this.SET_MIC_OFF()
             this.$router.push(`/room/${this.roomId}`)
           })
           .catch((err) => {
@@ -82,6 +84,7 @@ export default Vue.extend({
         this.waiting = true
         enterClosedRoom(this.roomId)
           .then(() => {
+            this.SET_MIC_OFF()
             this.$router.push(`/room/${this.roomId}`)
           })
           .catch((err) => {

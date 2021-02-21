@@ -183,3 +183,8 @@ export const kickUser = async (payload) => {
   const func = functions.httpsCallable('kickUser')
   return func(payload)
 }
+
+export const setMicStatus = (myUid, statusString) => {
+  const userRef = db.collection('users').doc(myUid)
+  userRef.update({ mic_status: statusString })
+}

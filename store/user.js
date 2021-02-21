@@ -10,6 +10,7 @@ import {
   online,
   unregistDisconnect,
   offline,
+  setMicStatus,
 } from '@/service/userAPI'
 
 export default {
@@ -24,7 +25,7 @@ export default {
   },
 
   getters: {
-    me: (state) => state.me,
+    me: (state) => state.me, //  1回ずつgetされるだけ
     isSignin: (state) => state.me && state.me.uid !== undefined,
     getUserData: (state) => (uid) => {
       if (state.userDataCache[uid]) {
@@ -47,7 +48,16 @@ export default {
         return ''
       }
     },
-    roomOnlineUsers: (state) => state.roomOnlineUsers,
+    roomOnlineUsers: (state) => state.roomOnlineUsers, // リアルタイムリスナー
+    myData: (state) => {
+      let userData = {}
+      for (let i = 0; i < state.roomOnlineUsers.length; i++) {
+        if (state.roomOnlineUsers[i].uid === state.me.uid) {
+          userData = state.roomOnlineUsers[i]
+        }
+      }
+      return userData
+    },
     roomRemoteUsers: (state) => {
       let users = state.roomOnlineUsers.slice()
       for (let i = 0; i < state.roomOnlineUsers.length; i++) {
@@ -181,6 +191,18 @@ export default {
       const { user } = rootState
       unregistDisconnect(user.me.uid)
       offline(user.me.uid)
+    },
+    SET_MIC_MUTE({ rootState }) {
+      const { user } = rootState
+      setMicStatus(user.me.uid, 'mute')
+    },
+    SET_MIC_ON({ rootState }) {
+      const { user } = rootState
+      setMicStatus(user.me.uid, 'on')
+    },
+    SET_MIC_OFF({ rootState }) {
+      const { user } = rootState
+      setMicStatus(user.me.uid, 'off')
     },
   },
 }

@@ -2,7 +2,7 @@
   <div class="description">
     <div v-if="!localStream" class="mic_area">
       <div v-if="!permissionDialog">
-        マイクOFF
+        <MicIcon :ifStream="false" />
         <button class="button--grey" @click="start" v-if="existOwner">
           マイクを開く
         </button>
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div v-else class="mic_area">
-      <MicIcon />
+      <MicIcon :ifStream="true" />
       <button class="button--grey" @click="hangup">マイクを閉じる</button>
     </div>
   </div>
@@ -32,7 +32,6 @@ import MicIcon from '@/components/MicIcon.vue'
 interface DataType {
   localStream: MediaStream | undefined
   permissionDialog: boolean
-  localAudioEnable: boolean
 }
 
 interface User {
@@ -51,7 +50,6 @@ export default Vue.extend({
     return {
       localStream: undefined,
       permissionDialog: false,
-      localAudioEnable: true,
     }
   },
   async mounted() {
@@ -75,7 +73,12 @@ export default Vue.extend({
   },
   computed: {
     ...roomMapper.mapGetters(['room']),
-    ...userMapper.mapGetters(['me', 'roomRemoteUsers', 'roomOnlineUsers']),
+    ...userMapper.mapGetters([
+      'me',
+      'roomRemoteUsers',
+      'roomOnlineUsers',
+      'myData',
+    ]),
     ...webrtcMapper.mapGetters(['remoteStreamObj']),
     roomId(): string {
       return this.$route.params.id
@@ -90,6 +93,15 @@ export default Vue.extend({
       }
       return false
     },
+    localAudioEnable(): boolean {
+      if (
+        this.myData.mic_status === 'on' ||
+        this.myData.mic_status === 'mute'
+      ) {
+        return true
+      }
+      return false
+    },
   },
   methods: {
     ...webrtcMapper.mapActions([
@@ -100,6 +112,7 @@ export default Vue.extend({
       'END_CONNECTION_OFFERED_LISTENER',
       'CONNECTION_FINISH_ALL',
     ]),
+    ...userMapper.mapActions(['SET_MIC_ON', 'SET_MIC_OFF']),
     async start() {
       /* ローカルストリームにマイクのストリームを割り当て */
       try {
@@ -107,6 +120,7 @@ export default Vue.extend({
         this.localStream = await navigator.mediaDevices.getUserMedia({
           audio: true,
         })
+        this.SET_MIC_ON()
         /* カメラを開いて即ページ遷移した場合にマイクアクセスが残るのを防ぐ */
         if (this.$route.name != 'room-id') {
           this.hangup()
@@ -120,7 +134,7 @@ export default Vue.extend({
       }
       /* 音声と映像のミュート状態を反映 */
       const audioTrack = this.localStream.getAudioTracks()[0]
-      //      audioTrack.enabled = this.localAudioEnable
+      audioTrack.enabled = this.localAudioEnable
       /* 今オンラインのユーザーにオファーをする */
       this.roomRemoteUsers.forEach((user: User) => {
         if (this.me.uid != user.uid) {
@@ -135,6 +149,7 @@ export default Vue.extend({
           track.stop()
         })
         this.localStream = undefined
+        this.SET_MIC_OFF()
       }
       this.CONNECTION_END_FROM_ME()
     },
