@@ -8,6 +8,7 @@
       <br />
       <span class="twitter-id"> {{ userData.twitter }}</span>
     </span>
+    <img class="speaker_icon" src="/speaker.png" v-if="isSpeaker" />
   </div>
 </template>
 
