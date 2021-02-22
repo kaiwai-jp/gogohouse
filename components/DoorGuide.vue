@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <ul class="notice">
-      <li>ChromeかFirefoxをご利用ください。</li>
+      <li>ChromeかSafariかFirefoxをご利用ください。</li>
       <li>iPhone/iPadのTwitterアプリ内では動作しません。</li>
     </ul>
   </div>

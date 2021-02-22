@@ -1,17 +1,11 @@
 <template>
   <div class="plate">
-    <nuxt-link v-if="link" :to="toLink">
+    <a :href="toLink" :disabled="!link">
       <img :src="userData.icon" v-if="userData.icon" class="icon" />
       <span class="display-name" v-if="userData.name">
         {{ userData.name }}
       </span>
-    </nuxt-link>
-    <div v-if="!link">
-      <img :src="userData.icon" v-if="userData.icon" class="icon" />
-      <span class="display-name" v-if="userData.name">
-        {{ userData.name }}
-      </span>
-    </div>
+    </a>
   </div>
 </template>
 

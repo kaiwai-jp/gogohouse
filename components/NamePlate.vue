@@ -1,13 +1,13 @@
 <template>
   <div class="plate">
     <img class="icon" :src="userData.icon" />
-    <span class="name-area">
+    <div class="name-area">
       <a :href="toLink" :disabled="isDisabled">
-        <span class="name">{{ userData.name }} </span>
+        <span class="name">{{ userData.name }}</span>
+        <br />
+        <span class="twitter-id">{{ userData.twitter }}</span>
       </a>
-      <br />
-      <span class="twitter-id"> {{ userData.twitter }}</span>
-    </span>
+    </div>
     <img class="speaker_icon" src="/speaker.png" v-if="isSpeaker" />
   </div>
 </template>

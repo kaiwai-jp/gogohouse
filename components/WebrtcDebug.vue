@@ -17,7 +17,9 @@
           </tr>
         </table>
         <div class="err-info">
-          <div v-for="report in errReport" :key="report">{{ report }}</div>
+          <div v-for="report in errReport" :key="report + random">
+            {{ report }}
+          </div>
         </div>
         <button @click="modal = false">閉じる</button>
       </div>
@@ -73,7 +75,9 @@ export default Vue.extend({
     },
   },
   methods: {
-    async reConnect() {},
+    random() {
+      return Math.random()
+    },
   },
 })
 </script>
