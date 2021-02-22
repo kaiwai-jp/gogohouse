@@ -44,6 +44,7 @@ export default Vue.extend({
 .alert-modal {
   padding: 30px;
   min-width: 100px;
+  max-width: 90vw;
   background-color: #ffffff;
   overflow-y: scroll;
   word-wrap: break-word;

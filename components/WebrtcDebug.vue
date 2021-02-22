@@ -96,6 +96,7 @@ export default Vue.extend({
   padding: 10px;
   text-align: left;
   width: 90vw;
+  max-height: 90vh;
   left: 10vw;
   top: 10vh;
   background-color: #ffffff;
@@ -113,6 +114,5 @@ export default Vue.extend({
 }
 
 .err-info {
-  overflow-y: scroll;
 }
 </style>
