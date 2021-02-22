@@ -1,8 +1,11 @@
 <template>
   <div v-if="inRoomName">
-    ただいま「
-    <nuxt-link :to="inRoomLink">{{ inRoomName }}</nuxt-link>
-    」にいます
+    <div>
+      >ただいま「
+      <nuxt-link :to="inRoomLink">{{ inRoomName }}</nuxt-link>
+      」にいます
+    </div>
+    >
   </div>
 </template>
 

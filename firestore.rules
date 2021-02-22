@@ -27,7 +27,7 @@ service cloud.firestore {
     // roomsコレクション
     match /rooms/{roomId} {
       allow get: if true;
-      allow list: if request.auth.uid in resource.data.members
+      allow list: if true;//request.auth.uid in resource.data.members || request.auth.uid == resource.data.owner_id
       allow create: if request.auth.uid == request.resource.data.creater_id;
       allow update, delete: if request.auth.uid == resource.data.owner_id;
     }

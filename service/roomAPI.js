@@ -81,6 +81,30 @@ export const listenMemberRoomList = (commit, uid) => {
   return unsubscribe
 }
 
+export const getUsersMyRoomList = async (uid) => {
+  let roomList = []
+  const userQuery = db.collection('rooms').where('owner_id', '==', uid)
+  const querySnapshot = await userQuery.get()
+  querySnapshot.forEach((doc) => {
+    const roomData = doc.data()
+    roomList.push(roomData)
+  })
+  return roomList
+}
+
+export const getUsersMemberRoomList = async (uid) => {
+  let roomList = []
+  const userQuery = db
+    .collection('rooms')
+    .where('members', 'array-contains', uid)
+  const querySnapshot = await userQuery.get()
+  querySnapshot.forEach((doc) => {
+    const roomData = doc.data()
+    roomList.push(roomData)
+  })
+  return roomList
+}
+
 export const ban = (roomId, uid) => {
   const roomRef = db.collection('rooms').doc(roomId)
   roomRef.update({ ban: firebase.firestore.FieldValue.arrayUnion(uid) })

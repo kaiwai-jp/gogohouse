@@ -2,11 +2,9 @@
   <div class="main">
     <ul class="notice">
       <li>
-        ChromeかSafariをご利用ください。<br>Twitterアプリ内からはうまく動作しません。
+        ChromeかFirefoxをご利用ください。現状Twitterアプリ内からはうまく動作しません。
       </li>
-      <li>
-        iPhone/iPadでは、マイクを開かないと相手の音が聞こえません。
-      </li>
+      <li>iPhone/iPadのSafariでは動作しません。</li>
     </ul>
   </div>
 </template>

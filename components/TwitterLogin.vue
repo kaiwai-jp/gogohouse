@@ -56,7 +56,7 @@ export default Vue.extend({
   display: inline-block;
 }
 .agree-checkbox {
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .agree-checkbox label:before {
@@ -85,7 +85,7 @@ a {
 }
 
 .notice {
-  margin-top: 20px;
+  margin-top: 10px;
   color: #636363;
   font-size: 10px;
 }

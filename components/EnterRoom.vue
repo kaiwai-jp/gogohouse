@@ -8,6 +8,7 @@
       >
         部屋に入る
       </button>
+      <button class="button--grey" v-if="!ifPermit" disalbed>入れません</button>
       <span v-if="alredyInRoom">すでにルームにいます</span>
     </div>
     <div v-if="waiting" class="mb-50">

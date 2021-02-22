@@ -1,22 +1,13 @@
 <template>
   <div class="plate">
-    <nuxt-link v-if="link" :to="toLink">
-      <img class="icon" :src="userData.icon" />
-      <div class="name-area">
-        <span class="name">{{ userData.name }}</span
-        ><br />
-        <span class="twitter-id">{{ userData.twitter }}</span>
-      </div>
-    </nuxt-link>
-    <div v-if="!link">
-      <img class="icon" :src="userData.icon" />
-      <div class="name-area">
-        <span class="name">{{ userData.name }}</span
-        ><br />
-        <span class="twitter-id">{{ userData.twitter }}</span>
-      </div>
-      <img class="speaker_icon" src="/speaker.png" v-if="isSpeaker" />
-    </div>
+    <img class="icon" :src="userData.icon" />
+    <span class="name-area">
+      <span class="name">
+        <a :href="toLink" :disabled="isDisabled"> {{ userData.name }} </a>
+      </span>
+      <br />
+      <span class="twitter-id"> {{ userData.twitter }}</span>
+    </span>
   </div>
 </template>
 
@@ -35,8 +26,14 @@ export default Vue.extend({
       this.REF_USER_DATA({ uid: this.uid })
       return this.getUserData(this.uid)
     },
-    toLink(): String {
-      return '/user/' + this.uid
+    toLink(): String | Boolean {
+      if (this.link) {
+        return '/user/' + this.uid
+      }
+      return false
+    },
+    isDisabled(): Boolean {
+      return !this.link
     },
     isSpeaker(): Boolean {
       for (let i = 0; i < this.roomOnlineUsers.length; i++) {
