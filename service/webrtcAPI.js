@@ -37,7 +37,7 @@ export const offer = async (
     created_at: new Date(),
   }
   const connectionsRef = connRef.doc(connectionId)
-  connectionsRef.set(roomWithOffer)
+  await connectionsRef.set(roomWithOffer)
 
   /* オファーの通知を相手のconnections_offeredサブコレクションに書き込み */
   const connectionsOfferedRef = db

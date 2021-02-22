@@ -3,7 +3,9 @@
     <div>
       <h1 class="title">Q&A</h1>
       <h2 class="subtitle mt-50">動作状況</h2>
-      いずれも最新版
+      <p class="words">
+        いずれも最新版<br />△は受信時に音がならないことがある
+      </p>
       <table class="connect-info">
         <tr>
           <td></td>
@@ -14,7 +16,7 @@
         </tr>
         <tr>
           <td>Chrome</td>
-          <td>〇</td>
+          <td>△</td>
           <td>△</td>
           <td>〇</td>
           <td>△</td>
@@ -24,7 +26,7 @@
           <td>―</td>
           <td>〇</td>
           <td>―</td>
-          <td>△</td>
+          <td>〇</td>
         </tr>
         <tr>
           <td>Firefox</td>
