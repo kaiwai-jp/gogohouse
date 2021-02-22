@@ -3,9 +3,7 @@
     <div>
       <h1 class="title">Q&A</h1>
       <h2 class="subtitle mt-50">動作状況</h2>
-      <p class="words">
-        いずれも最新版<br />△は受信時に音がならないことがある
-      </p>
+      <p class="words">いずれも最新版<br />△は受信時に音がならないことがある</p>
       <table class="connect-info">
         <tr>
           <td></td>
@@ -72,7 +70,14 @@
       <h2 class="subtitle mt-50">Tips</h2>
       <ul class="words">
         <li>
+          Android
+          TwitterアプリだとツイートのリンクからそのままGoGoHouseを始めることができます。
+        </li>
+        <li>
           招待制ではありません。twitterアカウントを持っていれば誰でも参加できます。
+        </li>
+        <li>
+          Twitterアカウントを持っているということは参加者は13歳以上のはずです。
         </li>
         <li>通信状態の安定した環境でご利用ください。</li>
         <li>
@@ -94,10 +99,12 @@
         <li>
           一度ログアウトしてログインしなおすとTwitterのプロフィールが反映されます。
         </li>
+        <li>
+          Twitterにドアのリンクを張ったあと、ルームの中で待機していればお客さんが入りやすくなります。
+        </li>
       </ul>
       <h2 class="subtitle mt-50">既知の問題</h2>
       <ul class="words">
-        <li>/user/を直接リンクで表示できない</li>
         <li>ファイアウォールの状態によっては音声の通信ができない</li>
         <li>プライベートウインドウでアイコンが表示されない</li>
         <li>短時間で連続入場しようとするとルームを追い出される</li>

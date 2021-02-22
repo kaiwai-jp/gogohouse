@@ -24,8 +24,11 @@ export default Vue.extend({
       this.REF_USER_DATA({ uid: this.uid })
       return this.getUserData(this.uid)
     },
-    toLink(): String {
-      return '/user/' + this.uid
+    toLink(): String | Boolean {
+      if (this.link) {
+        return '/user/' + this.uid
+      }
+      return false
     },
   },
   methods: {
@@ -42,6 +45,7 @@ export default Vue.extend({
 }
 
 .display-name {
+  color: #35495e;
   vertical-align: top;
   text-decoration: none;
 }
