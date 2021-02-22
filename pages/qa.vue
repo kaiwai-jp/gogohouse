@@ -59,15 +59,37 @@
         <li>メンバールーム一覧・・・ユーザーが属しているルーム一覧</li>
         <li>オンラインユーザー・・・ルームにこの瞬間に入っているユーザー</li>
       </ul>
+      <h2 class="subtitle mt-50">無料ユーザーの仕様</h2>
+      <ul class="words">
+        <li>音声通信・・・webRTCによるメッシュ型P2Pネットワーク</li>
+        <li>ルームの最大接続人数・・・10人</li>
+        <li>立てられるルームの数・・・5部屋</li>
+      </ul>
       <h2 class="subtitle mt-50">Tips</h2>
       <ul class="words">
         <li>
           招待制ではありません。twitterアカウントを持っていれば誰でも参加できます。
         </li>
+        <li>通信状態の安定した環境でご利用ください。</li>
+        <li>
+          マイクを開くボタンを押すとブラウザでマイクの使用許可を求められるので許可してください。
+        </li>
+        <li>
+          マイクを開けないときはブラウザでマイクの使用許可の設定を見直してみてください。
+        </li>
+        <li>
+          マイクを開いた状態で赤いマイクアイコンを押すとミュートできます。
+        </li>
+        <li>
+          相手に聞こえてなさそうなときはマイクを閉じてから開きなおしてみてください。
+        </li>
+        <li>debugボタンからwebRTCのデバッグ情報が見られます。</li>
+        <li>
+          GoGoHouse内にプロフィール、アイコン、フォロー、チャット、お気に入り、DMなどの機能はありません。Twitterで行ってください。
+        </li>
         <li>
           一度ログアウトしてログインしなおすとTwitterのプロフィールが反映されます。
         </li>
-        <li>通信状態の安定した環境でご利用ください。</li>
       </ul>
       <h2 class="subtitle mt-50">既知の問題</h2>
       <ul class="words">
@@ -77,7 +99,7 @@
         <li>短時間で連続入場しようとするとルームを追い出される</li>
         <li>
           Twitter
-          APIの制限により、ソーシャルルームに入場判定をするのに1時間に15回程度の制限がある
+          APIの制限により、ソーシャルルームの入場判定をするのに1時間に15回程度の制限がある
         </li>
       </ul>
       <p class="reload m-50">
@@ -95,7 +117,7 @@ export default Vue.extend({})
 
 <style lang="scss" scoped>
 .connect-info {
-  width: 320px;
+  width: 300px;
   border: solid 1px #35495e;
   border-collapse: collapse;
   table-layout: fixed;

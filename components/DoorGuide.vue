@@ -17,7 +17,7 @@ export default Vue.extend({})
 
 <style lang="scss" scoped>
 .main {
-  padding: 20px;
+  padding: 20px 20px 10px 10px;
   color: #526488;
   border: 3px solid #526488;
   border-radius: 5px;

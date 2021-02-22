@@ -2,9 +2,9 @@
   <div class="plate">
     <img class="icon" :src="userData.icon" />
     <span class="name-area">
-      <span class="name">
-        <a :href="toLink" :disabled="isDisabled"> {{ userData.name }} </a>
-      </span>
+      <a :href="toLink" :disabled="isDisabled">
+        <span class="name">{{ userData.name }} </span>
+      </a>
       <br />
       <span class="twitter-id"> {{ userData.twitter }}</span>
     </span>
@@ -68,6 +68,10 @@ export default Vue.extend({
   display: inline-block;
   vertical-align: top;
   margin-left: 5px;
+}
+
+.name {
+  color: #000000;
 }
 
 .twitter-id {
