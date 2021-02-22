@@ -1,10 +1,8 @@
 <template>
   <div class="main">
     <ul class="notice">
-      <li>
-        ChromeかFirefoxをご利用ください。現状Twitterアプリ内からはうまく動作しません。
-      </li>
-      <li>iPhone/iPadのSafariでは動作しません。</li>
+      <li>ChromeかFirefoxをご利用ください。</li>
+      <li>iPhone/iPadのTwitterアプリ内では動作しません。</li>
     </ul>
   </div>
 </template>

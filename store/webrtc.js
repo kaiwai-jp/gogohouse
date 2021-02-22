@@ -98,12 +98,16 @@ export default {
       const now = new Date()
       const month = now.getMonth() + 1
       const date = now.getDate()
-      const hour = now.getHours()
-      const min = now.getMinutes()
-      const sec = now.getSeconds()
+      const hour = getdoubleDigestNumer(now.getHours())
+      const min = getdoubleDigestNumer(now.getMinutes())
+      const sec = getdoubleDigestNumer(now.getSeconds())
       const nowString = month + '/' + date + ' ' + hour + ':' + min + ':' + sec
-      console.log('????')
+
       state.errReport.push(nowString + ' ' + err.toString())
+
+      function getdoubleDigestNumer(number) {
+        return ('0' + number).slice(-2)
+      }
     },
     reset_err_report(state) {
       state.errReport.splice(-state.errReport)

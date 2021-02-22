@@ -33,7 +33,8 @@ export const offer = async (
       type: offer.type,
       sdp: offer.sdp,
     },
-    created_at: firebase.firestore.FieldValue.serverTimestamp(),
+    /* serverTimestampだとonSnapshotが2回発火するので */
+    created_at: new Date(),
   }
   const connectionsRef = connRef.doc(connectionId)
   connectionsRef.set(roomWithOffer)
@@ -193,7 +194,7 @@ export const offered = async (dispatch, commit, connectionId) => {
         })
       })
       commit('set_remote_stream', { connectionId, stream: remoteStream })
-      // OfferとAnswerをpeerConnectionにセット
+      /* OfferとAnswerをpeerConnectionにセット */
       const offer = doc.data().offer
       try {
         await peerConnection.setRemoteDescription(offer)
