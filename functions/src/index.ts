@@ -260,7 +260,7 @@ exports.kickUser = functions
   })
 
 /**
- * ユーザーをルームのメンバーに追加します。オープンかソーシャルのとき。
+ * ユーザーをルームのメンバーに追加します。
  * @params roomId
  */
 exports.addMeMembers = functions
@@ -276,17 +276,35 @@ exports.addMeMembers = functions
       }
       const room = doc.data()!
 
-      if (room.room_type !== 'open' && room.room_type !== 'social') {
-        throw new functions.https.HttpsError(
-          'unauthenticated',
-          'room type not open or social'
-        )
+      if (room.room_type === 'open' || room.room_type === 'social') {
+        if (room.ban && room.ban.indexOf(uid) >= 0) {
+          throw new functions.https.HttpsError('unauthenticated', 'banned')
+        }
+        return
       }
 
-      if (room.ban && room.ban.indexOf(uid) >= 0) {
-        throw new functions.https.HttpsError('unauthenticated', 'banned')
+      if (room.room_type === 'closed') {
+        if (room.ban && room.ban.indexOf(uid) >= 0) {
+          throw new functions.https.HttpsError('unauthenticated', 'banned')
+        }
+
+        const usersRef = firestore.collection('users').doc(uid)
+        await usersRef.get().then((userDoc) => {
+          const user = userDoc.data()!
+          if (user.current_room !== room.id || user.status !== 'online') {
+            throw new functions.https.HttpsError(
+              'unauthenticated',
+              'room type is closed but user not in the room'
+            )
+          }
+        })
+        return
       }
-      return
+
+      throw new functions.https.HttpsError(
+        'unauthenticated',
+        'room type not open or social or close'
+      )
     })
 
     return roomsRef.update({
@@ -294,7 +312,7 @@ exports.addMeMembers = functions
     })
   })
 
-  /**
+/**
  * ユーザーをルームのメンバーから削除します。
  * @params roomId
  */

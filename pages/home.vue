@@ -3,9 +3,9 @@
     <div>
       <NamePlate :uid="me.uid" :link="true" class="mt-50" />
       <div class="profile">{{ me.profile }}</div>
-      <MyRoomList class="mt-50" />
-      <MemberRoomList class="mt-50" />
       <CreateRoom class="m-50" />
+      <MyRoomList class="mt-50" />
+      <MemberRoomList class="m-50" />
     </div>
   </div>
 </template>
