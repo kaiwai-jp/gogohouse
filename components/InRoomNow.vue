@@ -16,6 +16,7 @@ import { getRoomTargetUserIn } from '@/service/roomAPI'
 export type DataType = {
   roomData: Object
 }
+
 export default Vue.extend({
   props: {
     uid: { default: '', type: String },

@@ -2,7 +2,7 @@
   <div class="bt-1">
     <h2 class="subtitle">メンバールーム一覧</h2>
     <div class="main">
-      <div v-for="room in myRoomList" :key="room.id" class="list">
+      <div v-for="room in othersMemberRoomList" :key="room.id" class="list">
         <nuxt-link :to="{ name: 'door-id', params: { id: room.id } }">
           {{ room.name }}
         </nuxt-link>
@@ -16,7 +16,7 @@ import Vue from 'vue'
 import { getUsersMemberRoomList } from '@/service/roomAPI'
 
 interface DataType {
-  myRoomList: Object
+  memberRoomList: Array<Object>
 }
 
 export default Vue.extend({
@@ -25,11 +25,24 @@ export default Vue.extend({
   },
   data(): DataType {
     return {
-      myRoomList: {},
+      memberRoomList: [],
     }
   },
+  computed: {
+    othersMemberRoomList(): Array<Object> {
+      let roomList = []
+      for (let i = 0; i < this.memberRoomList.length; i++) {
+        // @ts-ignore
+        if (this.memberRoomList[i].owner_id !== this.uid) {
+          roomList.push(this.memberRoomList[i])
+        }
+      }
+      return roomList
+    },
+  },
+
   async created() {
-    this.myRoomList = await getUsersMemberRoomList(this.uid)
+    this.memberRoomList = await getUsersMemberRoomList(this.uid)
   },
 })
 </script>
