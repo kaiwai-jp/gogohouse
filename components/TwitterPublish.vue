@@ -9,7 +9,7 @@
     >
       Tweet
     </a>
-    <a href="https://twitter.com" class="twitter-link">Go To Twitter</a>
+    <a href="https://twitter.com/login" class="twitter-link">Go To Twitter</a>
     <script
       async
       src="https://platform.twitter.com/widgets.js"

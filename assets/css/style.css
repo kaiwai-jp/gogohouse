@@ -15,26 +15,27 @@ html {
 
 .button--grey {
   display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
+  border-radius: 20px;;
+  color: #ffffff;
+  background-color: #35bd53;
   text-decoration: none;
   padding: 10px 30px;
   margin-left: 15px;
+  font-weight: 700;
 }
 
 .button--grey:hover {
   color: #fff;
-  background-color: #35495e;
+  background-color: #009721;
 }
 
 .button--mini {
   display: inline-block;
-  border-radius: 2px;
+  border-radius: 5px;
   border: 1px solid #35495e;
   color: #35495e;
   text-decoration: none;
-  padding: 3px 6px;
+  padding: 4px 8px;
   margin-left: 15px;
 }
 
