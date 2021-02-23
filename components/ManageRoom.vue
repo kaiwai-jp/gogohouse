@@ -47,11 +47,13 @@
         <select
           v-model="micEnable"
           @change="clickUpdateMicEnable"
-          class="mic_enable_select"
+          class="mic-enable-select"
         >
           <option value="owner">オーナーがルームにいるとき</option>
           <option value="any">いつでも誰でも</option>
-          <option value="assign" disabled>オーナーが指名したとき</option>
+          <option value="assign" disabled class="disable-option">
+            オーナーが指名したとき
+          </option>
         </select>
       </div>
       <button @click="clickDeleteRoom" class="danger mt-50 button--mini">
@@ -185,9 +187,12 @@ export default Vue.extend({
   margin-right: 10px;
 }
 
-.mic_enable_select {
+.mic-enable-select {
   color: $color3;
   height: 40px;
+}
+.disable-option {
+  background-color: $color6;
 }
 
 .danger {
