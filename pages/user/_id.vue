@@ -35,8 +35,11 @@ export default Vue.extend({
       return this.getUserData(this.userId)
     },
   },
+  created() {
+    this.GET_USER()
+  },
   methods: {
-    ...userMapper.mapActions(['REF_USER_DATA']),
+    ...userMapper.mapActions(['GET_USER', 'REF_USER_DATA']),
   },
 })
 </script>

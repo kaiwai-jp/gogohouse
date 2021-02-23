@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div>
-      <NamePlate :uid="me.uid" class="mt-50" />
+      <NamePlate :uid="me.uid" :link="true" class="mt-50" />
       <div class="profile">{{ me.profile }}</div>
       <MyRoomList class="mt-50" />
       <MemberRoomList class="mt-50" />

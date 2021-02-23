@@ -19,10 +19,10 @@ export const twitterSignIn = () => {
           const accessToken = userCredential.credential.accessToken
           const accessTokenSecret = userCredential.credential.secret
           const UserRef = db.collection('users').doc(uid)
-          UserRef.get().then((doc) => {
+          UserRef.get().then(async (doc) => {
             if (!doc.exists) {
               /* Firestoreにドキュメントを作成 */
-              UserRef.set({
+              await UserRef.set({
                 uid,
                 name: myName,
                 twitter: '@' + screenName,
@@ -34,7 +34,6 @@ export const twitterSignIn = () => {
                 created_at: firebase.firestore.FieldValue.serverTimestamp(),
               })
               /* RealtimeDatabaseにstatusとlast_changedを作成 */
-              offline()
             } else {
               UserRef.update({
                 name: myName,
@@ -44,7 +43,7 @@ export const twitterSignIn = () => {
                 profile,
               })
             }
-            db.collection('user_privates').doc(uid).set(
+            await db.collection('user_privates').doc(uid).set(
               {
                 accessToken,
                 accessTokenSecret,

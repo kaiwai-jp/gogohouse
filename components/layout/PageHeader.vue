@@ -1,11 +1,16 @@
 <template>
   <div>
     <header>
-      <img src="/peace.png" class="gogo-icon" />
-      <nuxt-link to="/" class="top-link">GoGoHouse</nuxt-link>
-      <nuxt-link to="/home">
-        <NamePlateMini :uid="me.uid" class="twitter_identity" />
-      </nuxt-link>
+      <div class="left-area">
+        <img src="/peace.png" class="gogo-icon" />
+        <nuxt-link to="/" class="top-link">GoGoHouse</nuxt-link>
+      </div>
+      <div class="right-area">
+        <NamePlateMini :uid="me.uid" :shorten="true" class="twitter_identity" />
+        <nuxt-link to="/home" class="home_area">
+          <img src="/home.png" class="home-icon" />
+        </nuxt-link>
+      </div>
     </header>
   </div>
 </template>
@@ -26,23 +31,41 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 header {
+  display: table;
+  width: 100%;
   border-bottom: solid 1px #efefef;
   color: #35495e;
   padding: 10px;
   font-weight: 600;
 }
 
+.left-area {
+  display: table-cell;
+}
+
+.right-area {
+  display: table-cell;
+  text-align: right;
+}
 .top-link {
   text-decoration: none;
 }
 
 .gogo-icon {
-  display: inline-block;
+  width: 18px;
+  height: 18px;
+}
+
+.home_area {
+  margin-left: 5px;
+}
+
+.home-icon {
   width: 18px;
   height: 18px;
 }
 
 .twitter_identity {
-  float: right;
+  display: inline;
 }
 </style>
