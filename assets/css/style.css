@@ -3,6 +3,7 @@ html {
     Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 14px;
   word-spacing: 1px;
+  background-color: #f2efe4;
 }
 
 *,
@@ -33,6 +34,7 @@ html {
   border: 1px solid #35495e;
   color: #35495e;
   text-decoration: none;
+  padding: 3px 6px;
   margin-left: 15px;
 }
 
@@ -94,6 +96,6 @@ a {
 }
 
 .bt-1 {
-  border-top: solid 1px #efefef;
+  border-top: solid 1px #a0a0a0;
   padding-top: 10px;
 }
