@@ -162,7 +162,7 @@ export default Vue.extend({
 
 <style lang="scss">
 .description {
-  color: #526488;
+  color: $color2;
   margin-bottom: 20px;
 }
 

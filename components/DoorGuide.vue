@@ -1,8 +1,8 @@
 <template>
   <div class="main">
     <ul class="notice">
-      <li>ChromeかSafariかFirefoxをご利用ください。</li>
       <li>iPhone/iPadのTwitterアプリ内では動作しません。</li>
+      <li>このページをTwitterでシェアしてください。</li>
     </ul>
   </div>
 </template>
@@ -16,8 +16,8 @@ export default Vue.extend({})
 <style lang="scss" scoped>
 .main {
   padding: 20px 20px 10px 10px;
-  color: #526488;
-  border: 3px solid #526488;
+  color: $color2;
+  border: 3px solid $color2;
   border-radius: 5px;
 }
 

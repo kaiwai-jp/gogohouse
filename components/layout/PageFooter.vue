@@ -18,7 +18,7 @@ export default Vue.extend({})
 
 <style lang="scss" scoped>
 footer {
-  background-color: #35495e;
+  background-color: $color1;
   color: #ffffff;
   padding: 10px;
   text-align: center;
@@ -29,7 +29,7 @@ li {
   padding-right: 10px;
   padding-left: 10px;
   &:first-child {
-    border-right: solid 1px #efefef;
+    border-right: solid 1px $color6;
   }
 }
 

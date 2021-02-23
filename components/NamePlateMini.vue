@@ -59,7 +59,7 @@ export default Vue.extend({
 }
 
 .display-name {
-  color: #35495e;
+  color: $color1;
   vertical-align: top;
   text-decoration: none;
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="modal = true">Debug</button>
+    <button @click="modal = true" class="button--mini">Debug</button>
     <div class="modal-base" v-if="modal">
       <div class="debug-modal">
         information
@@ -18,12 +18,10 @@
             </tr>
           </tbody>
         </table>
-        <div class="err-info">
-          <div v-for="report in errReport" :key="report + random">
-            {{ report }}
-          </div>
+        <div v-for="report in errReport" :key="report + random">
+          {{ report }}
         </div>
-        <button @click="modal = false">閉じる</button>
+        <button @click="modal = false" class="button--mini">閉じる</button>
       </div>
     </div>
   </div>
@@ -111,14 +109,11 @@ export default Vue.extend({
 }
 
 .connect-info {
-  border: solid 1px #35495e;
+  border: solid 1px $color1;
   border-collapse: collapse;
 }
 
 .connect-info td {
-  border: solid 1px #35495e;
-}
-
-.err-info {
+  border: solid 1px $color1;
 }
 </style>

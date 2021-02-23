@@ -136,13 +136,12 @@ export default Vue.extend({})
 <style lang="scss" scoped>
 .connect-info {
   width: 300px;
-  border: solid 1px #35495e;
   border-collapse: collapse;
   table-layout: fixed;
 }
 
 .connect-info td {
-  border: solid 1px #35495e;
+  border: solid 1px $color1;
 }
 
 .words {

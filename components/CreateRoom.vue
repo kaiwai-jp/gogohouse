@@ -64,13 +64,13 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .room-name {
-  color: #636363;
+  color: $color3;
   height: 40px;
   margin-bottom: 5px;
 }
 
 .room-type {
-  color: #636363;
+  color: $color3;
   height: 40px;
 }
 </style>

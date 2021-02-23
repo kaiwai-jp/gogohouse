@@ -89,7 +89,7 @@ a {
 
 .notice {
   margin-top: 10px;
-  color: #636363;
+  color: $color3;
   font-size: 10px;
 }
 

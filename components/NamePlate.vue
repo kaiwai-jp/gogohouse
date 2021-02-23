@@ -1,6 +1,6 @@
 <template>
   <div class="plate">
-    <no-ssr>
+    <client-only>
       <a :href="toLink" :disabled="isDisabled">
         <img class="icon" :src="userData.icon" />
         <div class="name-area">
@@ -10,7 +10,7 @@
         </div>
       </a>
       <img class="speaker_icon" src="/speaker.png" v-if="isSpeaker" />
-    </no-ssr>
+    </client-only>
   </div>
 </template>
 
@@ -78,7 +78,7 @@ export default Vue.extend({
 }
 
 .twitter-id {
-  color: #636363;
+  color: $color3;
   font-size: 14px;
 }
 

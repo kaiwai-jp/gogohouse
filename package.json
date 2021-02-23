@@ -17,6 +17,7 @@
   "devDependencies": {
     "@nuxt/types": "^2.14.12",
     "@nuxt/typescript-build": "^2.0.4",
+    "@nuxtjs/style-resources": "^1.0.0",
     "cross-env": "^7.0.3",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",

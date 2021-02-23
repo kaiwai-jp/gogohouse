@@ -4,32 +4,46 @@
       <h2 class="subtitle">オンラインユーザー</h2>
       <div v-for="user in roomOnlineUsers" :key="user.uid + 'online'">
         <NamePlateMini :uid="user.uid" class="twitter_identity" />
-        <button v-if="user.uid != me.uid" @click="clickKick(user.uid)">
+        <button
+          v-if="user.uid != me.uid"
+          @click="clickKick(user.uid)"
+          class="button--mini"
+        >
           KICK
         </button>
-        <button v-if="user.uid != me.uid" @click="clickBan(user.uid)">
+        <button
+          v-if="user.uid != me.uid"
+          @click="clickBan(user.uid)"
+          class="button--mini"
+        >
           BAN
         </button>
       </div>
       <h2 class="subtitle mt-50">BAN</h2>
       <div v-for="uid in room.ban" :key="uid + 'ban'">
         <NamePlateMini :uid="uid" class="twitter_identity" />
-        <button @click="clickReleaseBan(uid)">解除</button>
+        <button @click="clickReleaseBan(uid)" class="button--mini">解除</button>
       </div>
       <h2 class="subtitle mt-50">メンバー</h2>
       <div v-for="uid in room.members" :key="uid + 'member'">
         <NamePlateMini :uid="uid" class="twitter_identity" />
-        <button v-if="uid != me.uid" @click="clickReleaseMember(uid)">
+        <button
+          v-if="uid != me.uid"
+          @click="clickReleaseMember(uid)"
+          class="button--mini"
+        >
           解除
         </button>
       </div>
       <h2 class="subtitle mt-50">Twitterアカウントで<wbr />メンバー追加</h2>
       <div>
         <input class="room-name" v-model="addTwitter" />
-        <button @click="clickAddMemberByTwitter">追加</button>
+        <button @click="clickAddMemberByTwitter" class="button--mini">
+          追加
+        </button>
       </div>
-      <button @click="clickDeleteRoom" class="danger mt-50">ルーム削除</button>
-      <button @click="$emit('close')" class="close">閉じる</button>
+      <button @click="clickDeleteRoom" class="danger mt-50 button--mini">ルーム削除</button>
+      <button @click="$emit('close')" class="close button--grey">閉じる</button>
     </div>
   </div>
 </template>
@@ -143,7 +157,7 @@ export default Vue.extend({
 }
 
 .room-name {
-  color: #636363;
+  color: $color3;
   height: 27px;
   margin-right: 10px;
 }

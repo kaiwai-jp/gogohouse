@@ -33,8 +33,8 @@ export default Vue.extend({
 header {
   display: table;
   width: 100%;
-  border-bottom: solid 1px #efefef;
-  color: #35495e;
+  border-bottom: solid 1px $color6;
+  color: $color1;
   padding: 10px;
   font-weight: 600;
 }

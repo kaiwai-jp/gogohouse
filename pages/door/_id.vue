@@ -24,7 +24,7 @@
           <RoomMembers :link="true" :members="room.members" />
         </div>
       </div>
-      <button v-if="isOwner" @click="modal = true">ルーム管理</button>
+      <button v-if="isOwner" @click="modal = true" class="button--mini">ルーム管理</button>
       <DoorGuide class="m-50" />
       <TwitterPublish :text="twitterText" />
     </div>
@@ -131,7 +131,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .description {
-  color: #526488;
+  color: $color2;
   margin-bottom: 20px;
 }
 
