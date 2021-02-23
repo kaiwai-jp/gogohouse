@@ -1,14 +1,16 @@
 <template>
   <div class="plate">
-    <img class="icon" :src="userData.icon" />
-    <div class="name-area">
+    <no-ssr>
       <a :href="toLink" :disabled="isDisabled">
-        <span class="name">{{ userData.name }}</span>
-        <br />
-        <span class="twitter-id">{{ userData.twitter }}</span>
+        <img class="icon" :src="userData.icon" />
+        <div class="name-area">
+          <span class="name">{{ userData.name }}</span>
+          <br />
+          <span class="twitter-id">{{ userData.twitter }}</span>
+        </div>
       </a>
-    </div>
-    <img class="speaker_icon" src="/speaker.png" v-if="isSpeaker" />
+      <img class="speaker_icon" src="/speaker.png" v-if="isSpeaker" />
+    </no-ssr>
   </div>
 </template>
 
