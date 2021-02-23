@@ -28,9 +28,6 @@ export default {
     me: (state) => state.me, //  1回ずつgetされるだけ
     isSignin: (state) => state.me && state.me.uid !== undefined,
     getUserData: (state) => (uid) => {
-      if (state.me.uid === uid) {
-        return state.me
-      }
       if (state.userDataCache[uid]) {
         return state.userDataCache[uid].userData
       } else {

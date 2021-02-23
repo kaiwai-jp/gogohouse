@@ -23,7 +23,7 @@ export default Vue.extend({
     shorten: { default: false, type: Boolean },
   },
   computed: {
-    ...userMapper.mapGetters(['me', 'getUserData']),
+    ...userMapper.mapGetters(['getUserData']),
     userData(): User {
       this.REF_USER_DATA({ uid: this.uid })
       return this.getUserData(this.uid)
