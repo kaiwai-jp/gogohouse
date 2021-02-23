@@ -12,17 +12,21 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'Twitterフォロワーとお喋りしよう。ブラウザかTwitter for Androidアプリ内から使えます。',
+          'Androidユーザーの皆さんお待たせしました。ブラウザかTwitter for Androidアプリ内から使える音声チャットアプリです。',
       },
       { hid: 'og:site_name', property: 'og:site_name', content: 'GoGoHouse' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:url', property: 'og:url', content: 'https://gogo.house' },
-      { hid: 'og:title', property: 'og:title', content: 'ゴーゴーを踊ろう' },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: 'GoGoHouse | Twitterフォロワーとお喋りしよう',
+      },
       {
         hid: 'og:description',
         property: 'og:description',
         content:
-          'Twitterフォロワーとお喋りしよう。ブラウザかTwitter for Androidアプリ内から使えます。',
+          'Androidユーザーの皆さんお待たせしました。ブラウザかTwitter for Androidアプリ内から使える音声チャットアプリです。',
       },
       {
         hid: 'og:image',

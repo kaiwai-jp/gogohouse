@@ -6,7 +6,10 @@
       <label for="checkbox">同意する</label>
     </div>
     <a class="button--twitter" @click="twitterSignin">
-      twitter連携してログイン
+      <img
+        src="/twitter_logo.png"
+        class="twitter-logo"
+      />twitter連携してログイン
     </a>
     <div class="notice">※勝手にツイートすることはありません</div>
   </div>
@@ -91,9 +94,9 @@ a {
 }
 
 .twitter-logo {
-  display: inline-block;
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 18px;
+  margin-right: 5px;
 }
 
 .button--twitter {
@@ -103,7 +106,7 @@ a {
   background-color: #1da0f1;
   color: #ffffff;
   text-decoration: none;
-  padding: 10px 30px;
+  padding: 10px 20px;
   margin-left: 15px;
   font-weight: 600;
   cursor: pointer;

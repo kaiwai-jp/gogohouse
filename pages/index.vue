@@ -14,6 +14,9 @@
           <button class="button--grey" @click="reload">リロード</button>
         </div>
       </div>
+      <TwitterPublish
+        text="アプリ不要でフォロワーとお喋りできる音声チャットサービスができました！その名もGoGoHouse"
+      />
     </div>
   </div>
 </template>
@@ -25,9 +28,10 @@ import userMapper from '@/store/user'
 import warpMapper from '@/store/warp'
 
 import TwitterLogin from '@/components/TwitterLogin.vue'
+import TwitterPublish from '@/components/TwitterPublish.vue'
 
 export default Vue.extend({
-  components: { TwitterLogin },
+  components: { TwitterLogin, TwitterPublish },
   computed: {
     ...roomMapper.mapGetters(['room']),
     ...userMapper.mapGetters(['me', 'isSignin']),
