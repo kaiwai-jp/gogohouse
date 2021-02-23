@@ -42,7 +42,21 @@
           追加
         </button>
       </div>
-      <button @click="clickDeleteRoom" class="danger mt-50 button--mini">ルーム削除</button>
+      <h2 class="subtitle mt-50">マイク権</h2>
+      <div>
+        <select
+          v-model="micEnable"
+          @change="clickUpdateMicEnable"
+          class="mic_enable_select"
+        >
+          <option value="owner">オーナーがルームにいるとき</option>
+          <option value="any">いつでも誰でも</option>
+          <option value="assign" disabled>オーナーが指名したとき</option>
+        </select>
+      </div>
+      <button @click="clickDeleteRoom" class="danger mt-50 button--mini">
+        ルーム削除
+      </button>
       <button @click="$emit('close')" class="close button--grey">閉じる</button>
     </div>
   </div>
@@ -61,11 +75,13 @@ import {
   releaseMember,
   addMemberByTwitter,
   deleteRoom,
+  updateMicEnable,
 } from '@/service/roomAPI'
 
 export type DataType = {
   modal: boolean
   addTwitter: String
+  micEnable: 'owner' | 'any' | 'assign'
 }
 
 export default Vue.extend({
@@ -77,11 +93,15 @@ export default Vue.extend({
     return {
       modal: false,
       addTwitter: '',
+      micEnable: 'owner',
     }
   },
   computed: {
     ...userMapper.mapGetters(['me', 'roomOnlineUsers']),
     ...roomMapper.mapGetters(['room']),
+  },
+  created() {
+    this.micEnable = this.room.mic_enable || 'owner'
   },
   methods: {
     clickDeleteRoom() {
@@ -122,6 +142,9 @@ export default Vue.extend({
       }
       addMemberByTwitter(this.roomId, screenName)
     },
+    clickUpdateMicEnable() {
+      updateMicEnable(this.roomId, this.micEnable)
+    },
   },
 })
 </script>
@@ -160,6 +183,11 @@ export default Vue.extend({
   color: $color3;
   height: 27px;
   margin-right: 10px;
+}
+
+.mic_enable_select {
+  color: $color3;
+  height: 40px;
 }
 
 .danger {

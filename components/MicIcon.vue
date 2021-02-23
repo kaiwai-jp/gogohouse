@@ -1,14 +1,14 @@
 <template>
   <div class="main">
-    <span v-if="!ifStream">
+    <span v-show="!ifStream">
       <img src="/mic_off_icon.png" class="mic" />
     </span>
-    <span v-if="ifStream">
-      <span v-if="micStatusOn" @click="mute">
+    <span v-show="ifStream">
+      <span v-show="micStatusOn" @click="mute">
         <img src="/mic_on_icon.png" class="mic" />
         <img src="/mic_on_icon.png" class="mic_animation" />
       </span>
-      <span v-if="micStatusMute" @click="unmute">
+      <span v-show="micStatusMute" @click="unmute">
         <img src="/mic_mute_icon.png" class="mic" />
       </span>
     </span>

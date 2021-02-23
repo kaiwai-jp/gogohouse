@@ -179,3 +179,8 @@ export const addMemberByTwitter = async (roomId, screenName) => {
     roomRef.update({ members: firebase.firestore.FieldValue.arrayUnion(uid) })
   })
 }
+
+export const updateMicEnable = (roomId, statusString) => {
+  const roomRef = db.collection('rooms').doc(roomId)
+  roomRef.update({ mic_enable: statusString })
+}

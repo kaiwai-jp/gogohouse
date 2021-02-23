@@ -3,10 +3,14 @@
     <div v-if="!localStream" class="mic_area">
       <div v-if="!permissionDialog">
         <MicIcon />
-        <button class="button--grey" @click="start" v-if="existOwner">
+        <button class="button--grey" @click="start" v-if="micPermitted">
           マイクを開く
         </button>
-        <button class="button--grey" v-if="!existOwner" @click="notOwnerExist">
+        <button
+          class="button--grey"
+          v-if="!micPermitted"
+          @click="notOwnerExist"
+        >
           オーナー不在
         </button>
       </div>
@@ -85,7 +89,9 @@ export default Vue.extend({
     roomId(): string {
       return this.$route.params.id
     },
-    existOwner(): boolean {
+    micPermitted(): boolean {
+      if (this.room.mic_enable === 'any') return true
+
       const owner_id = this.room.owner_id
       for (let i = 0; i < this.roomOnlineUsers.length; i++) {
         //@ts-ignore
