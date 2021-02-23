@@ -11,7 +11,8 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'GoGoHouseでTwitterフォロワーとお喋りしよう',
+        content:
+          'Twitterフォロワーとお喋りしよう。ブラウザかTwitter for Androidアプリ内から使えます。',
       },
       { hid: 'og:site_name', property: 'og:site_name', content: 'GoGoHouse' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
@@ -20,12 +21,13 @@ export default {
       {
         hid: 'og:description',
         property: 'og:description',
-        content: 'Twitterフォロワーとお喋りしよう',
+        content:
+          'Twitterフォロワーとお喋りしよう。ブラウザかTwitter for Androidアプリ内から使えます。',
       },
       {
         hid: 'og:image',
         property: 'og:image',
-        content: 'https://gogohouse-bf623.web.app/logo.png',
+        content: 'https://gogo.house/logo.png',
       },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
