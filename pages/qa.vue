@@ -3,43 +3,45 @@
     <div>
       <h1 class="title">Q&A</h1>
       <h2 class="subtitle mt-50">動作状況</h2>
-      <p class="words">いずれも最新版<br />△は受信時に音がならないことがある</p>
+      <p class="words">いずれも最新版<br />EdgeはWindows Chromeに準ずる</p>
       <table class="connect-info">
-        <tr>
-          <td></td>
-          <td>Windows</td>
-          <td>Mac</td>
-          <td>Android</td>
-          <td>iOS</td>
-        </tr>
-        <tr>
-          <td>Chrome</td>
-          <td>△</td>
-          <td>△</td>
-          <td>〇</td>
-          <td>△</td>
-        </tr>
-        <tr>
-          <td>Safari</td>
-          <td>―</td>
-          <td>〇</td>
-          <td>―</td>
-          <td>〇</td>
-        </tr>
-        <tr>
-          <td>Firefox</td>
-          <td>〇</td>
-          <td>〇</td>
-          <td>〇</td>
-          <td>〇</td>
-        </tr>
-        <tr>
-          <td>Twitter WebView</td>
-          <td>―</td>
-          <td>―</td>
-          <td>〇</td>
-          <td>×</td>
-        </tr>
+        <tbody>
+          <tr>
+            <td></td>
+            <td>Windows</td>
+            <td>Mac</td>
+            <td>Android</td>
+            <td>iOS</td>
+          </tr>
+          <tr>
+            <td>Chrome</td>
+            <td>〇</td>
+            <td>〇</td>
+            <td>〇</td>
+            <td>〇</td>
+          </tr>
+          <tr>
+            <td>Safari</td>
+            <td>―</td>
+            <td>〇</td>
+            <td>―</td>
+            <td>〇</td>
+          </tr>
+          <tr>
+            <td>Firefox</td>
+            <td>〇</td>
+            <td>〇</td>
+            <td>〇</td>
+            <td>〇</td>
+          </tr>
+          <tr>
+            <td>Twitter WebView</td>
+            <td>―</td>
+            <td>―</td>
+            <td>〇</td>
+            <td>×</td>
+          </tr>
+        </tbody>
       </table>
       <h2 class="subtitle mt-50">用語解説</h2>
       <ul class="words">
@@ -58,7 +60,6 @@
         <li>KICK・・・ルームから一度だけ追い出す</li>
         <li>マイルーム一覧・・・ユーザーが作って管理しているルーム一覧</li>
         <li>メンバールーム一覧・・・ユーザーが属しているルーム一覧</li>
-        <li>オンラインユーザー・・・ルームにこの瞬間に入っているユーザー</li>
       </ul>
       <h2 class="subtitle mt-50">無料ユーザーの仕様</h2>
       <ul class="words">

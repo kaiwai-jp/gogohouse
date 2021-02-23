@@ -5,16 +5,18 @@
       <div class="debug-modal">
         information
         <table class="connect-info">
-          <tr>
-            <td>twitter</td>
-            <td>inbound</td>
-            <td>outbound</td>
-          </tr>
-          <tr v-for="user in roomRemoteUsers" :key="user.uid">
-            <td>{{ user.twitter }}</td>
-            <td>{{ userInboundState(user.uid) }}</td>
-            <td>{{ userOutboundState(user.uid) }}</td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>twitter</td>
+              <td>inbound</td>
+              <td>outbound</td>
+            </tr>
+            <tr v-for="user in roomRemoteUsers" :key="user.uid">
+              <td>{{ user.twitter }}</td>
+              <td>{{ userInboundState(user.uid) }}</td>
+              <td>{{ userOutboundState(user.uid) }}</td>
+            </tr>
+          </tbody>
         </table>
         <div class="err-info">
           <div v-for="report in errReport" :key="report + random">

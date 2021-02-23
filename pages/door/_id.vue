@@ -15,7 +15,7 @@
         <div v-else>満員です！</div>
         <div class="members">
           <h2 class="subtitle mt-50" v-show="roomOnlineUsers.length">
-            オンラインユーザー
+            今ルームにいるユーザー
           </h2>
         </div>
         <OnlineUsers :link="true" />
