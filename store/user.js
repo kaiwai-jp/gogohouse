@@ -114,9 +114,11 @@ export default {
 
       return new Promise((resolve, reject) => {
         twitterSignIn()
-          .then((uid) => {
-            commit('set_user', { uid })
-            resolve(uid)
+          .then((myData) => {
+            console.log(myData)
+            commit('set_user_data_cache', { uid: myData.uid, data: myData })
+            commit('set_user', { uid: myData.uid })
+            resolve(myData.uid)
           })
           .catch((err) => reject(err))
       })

@@ -8,7 +8,7 @@ export const twitterSignIn = () => {
   return new Promise((resolve, reject) => {
     auth
       .signInWithPopup(provider)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         if (userCredential.user) {
           const uid = userCredential.user.uid
           const myName = userCredential.user.displayName
@@ -19,10 +19,12 @@ export const twitterSignIn = () => {
           const accessToken = userCredential.credential.accessToken
           const accessTokenSecret = userCredential.credential.secret
           const UserRef = db.collection('users').doc(uid)
-          UserRef.get().then(async (doc) => {
+          let myData = {}
+
+          await UserRef.get().then(async (doc) => {
             if (!doc.exists) {
               /* Firestoreにドキュメントを作成 */
-              await UserRef.set({
+              myData = {
                 uid,
                 name: myName,
                 twitter: '@' + screenName,
@@ -32,16 +34,19 @@ export const twitterSignIn = () => {
                 mic_enable: true,
                 status: 'offline',
                 created_at: firebase.firestore.FieldValue.serverTimestamp(),
-              })
+              }
+              await UserRef.set(myData)
               /* RealtimeDatabaseにstatusとlast_changedを作成 */
             } else {
-              UserRef.update({
+              myData = {
                 name: myName,
                 twitter: '@' + screenName,
                 twitter_id: twitterId,
                 icon: iconUrl,
                 profile,
-              })
+              }
+              await UserRef.update(myData)
+              myData.uid = uid
             }
             await db.collection('user_privates').doc(uid).set(
               {
@@ -51,7 +56,7 @@ export const twitterSignIn = () => {
               { merge: true }
             )
           })
-          resolve(uid)
+          resolve(myData)
         }
       })
       .catch((err) => reject(err))
