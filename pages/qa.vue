@@ -65,7 +65,7 @@
       <h2 class="subtitle mt-50">無料ユーザーの仕様</h2>
       <ul class="words">
         <li>音声通信・・・webRTCによるメッシュ型P2Pネットワーク</li>
-        <li>ルームの最大接続人数・・・10人</li>
+        <li>ルームの最大接続人数・・・20人</li>
         <li>立てられるルームの数・・・5部屋</li>
       </ul>
       <h2 class="subtitle mt-50">Tips</h2>

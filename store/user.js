@@ -116,7 +116,7 @@ export default {
         twitterSignIn()
           .then((myData) => {
             commit('set_user_data_cache', { uid: myData.uid, data: myData })
-            commit('set_user', { uid: myData.uid })
+            commit('set_user', myData)
             resolve(myData.uid)
           })
           .catch((err) => reject(err))

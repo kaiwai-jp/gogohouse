@@ -11,7 +11,7 @@
         <TwitterLogin class="mb-50" />
       </div>
       <div v-if="isSignin">
-        <div v-if="roomOnlineUsers.length <= 10"><EnterRoom /></div>
+        <div v-if="roomOnlineUsers.length <= 20"><EnterRoom /></div>
         <div v-else>満員です！</div>
         <div class="members">
           <h2 class="subtitle mt-50" v-show="roomOnlineUsers.length">
@@ -24,12 +24,14 @@
           <RoomMembers :link="true" :members="room.members" />
         </div>
       </div>
-      <button v-if="isOwner" @click="modal = true" class="button--mini">ルーム管理</button>
+      <button v-if="isOwner" @click="modal = true" class="button--mini">
+        ルーム管理
+      </button>
       <DoorGuide class="m-50" />
       <TwitterPublish :text="twitterText" />
     </div>
     <div v-if="!roomExists">
-      Loading...<br />
+      ルームが見つかりません<br />
       <button class="button--grey mt-5" @click="goHome">ホームへ</button>
     </div>
     <ManageRoom @close="modal = false" :roomId="room.id" v-if="modal" />
