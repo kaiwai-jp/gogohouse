@@ -18,7 +18,7 @@
             </tr>
           </tbody>
         </table>
-        <div v-for="report in errReport" :key="report + random">
+        <div v-for="report in errReport" :key="random(report)">
           {{ report }}
         </div>
         <button @click="modal = false" class="button--mini">閉じる</button>
@@ -73,10 +73,10 @@ export default Vue.extend({
         return '-'
       }
     },
-  },
-  methods: {
     random() {
-      return Math.random()
+      return function (string: string) {
+        return Math.random().toString()
+      }
     },
   },
 })
