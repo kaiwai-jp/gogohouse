@@ -9,7 +9,16 @@
           <span class="twitter-id">{{ userData.twitter }}</span>
         </div>
       </a>
-      <img class="speaker_icon" src="/speaker.png" v-if="isSpeaker" />
+      <img
+        class="speaker-icon"
+        src="/speaker_icon.png"
+        v-show="isSpeaker && !isDisconnect"
+      />
+      <img
+        class="speaker-icon"
+        src="/speaker_disconnect_icon.png"
+        v-show="isSpeaker && isDisconnect"
+      />
     </client-only>
   </div>
 </template>
@@ -17,6 +26,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import userMapper from '@/store/user'
+import webrtcMapper from '@/store/webrtc'
 
 export default Vue.extend({
   props: {
@@ -24,7 +34,8 @@ export default Vue.extend({
     link: { default: false, type: Boolean },
   },
   computed: {
-    ...userMapper.mapGetters(['getUserData', 'roomOnlineUsers']),
+    ...userMapper.mapGetters(['me', 'getUserData', 'roomOnlineUsers']),
+    ...webrtcMapper.mapGetters(['userPeerConnectionState']),
     userData(): Object {
       this.REF_USER_DATA({ uid: this.uid })
       return this.getUserData(this.uid)
@@ -49,6 +60,17 @@ export default Vue.extend({
         }
       }
       return false
+    },
+    isDisconnect(): Boolean {
+      if (this.me && this.me.uid === this.uid) return false
+      if (
+        this.userPeerConnectionState &&
+        this.userPeerConnectionState[this.uid] &&
+        this.userPeerConnectionState[this.uid].inbound === 'connected'
+      ) {
+        return false
+      }
+      return true
     },
   },
   methods: {
@@ -86,7 +108,7 @@ a {
   text-decoration: none;
 }
 
-.speaker_icon {
+.speaker-icon {
   width: 36px;
   height: 36px;
 }
