@@ -2,7 +2,7 @@
   <div class="main">
     <ul class="notice">
       <li>iPhone/iPadのTwitterアプリ内では動作しません。</li>
-      <li>このページをTwitterでシェアしてください。</li>
+      <li>このページのURLをTwitterでシェアしてください。</li>
     </ul>
   </div>
 </template>

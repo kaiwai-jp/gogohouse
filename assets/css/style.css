@@ -15,7 +15,7 @@ html {
 
 .button--grey {
   display: inline-block;
-  border-radius: 20px;;
+  border-radius: 20px;
   color: #ffffff;
   background-color: #35bd53;
   text-decoration: none;
@@ -81,6 +81,17 @@ html {
 
 a {
   color: #636363;
+}
+
+.list_square {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.list_square:before {
+  content: '■';
+  color: #636363;
+  margin-right: 5px;
 }
 
 .m-50 {

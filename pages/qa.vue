@@ -106,6 +106,12 @@
         <li>
           デフォルトではオーナー不在時にはマイクは開けません。このルーム管理から変更できます。
         </li>
+        <li>
+          Twitterブラウザ内でのログインユーザーを切り替えたいときは<a
+            href="https://twitter.com/login"
+            >Twitterログイン画面</a
+          >からログインしなおしてください。
+        </li>
       </ul>
       <h2 class="subtitle mt-50">既知の問題</h2>
       <ul class="words">
