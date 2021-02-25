@@ -120,8 +120,7 @@ export default {
       offer(dispatch, commit, user.me.uid, uid, localStream)
     },
     OFFERED({ dispatch, commit }, { uid, connectionId }) {
-      offered(dispatch, commit, connectionId)
-      commit('set_remote_user_to_conn_id', { uid, connectionId })
+      offered(dispatch, commit, uid, connectionId)
     },
     STATE_CHANGE({ commit }, { connectionId, stateString }) {
       commit('set_peerconnection_state', { connectionId, stateString })

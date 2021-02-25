@@ -18,15 +18,70 @@ export const offer = async (
 ) => {
   const connRef = db.collection('connections')
   const connectionId = connRef.doc().id
+  const connectionsRef = connRef.doc(connectionId)
+
   dispatch('STATE_CHANGE', { connectionId, stateString: 'offer' })
 
   /* WebRTC通信用のオブジェクトを作成 */
   const peerConnection = new RTCPeerConnection(configuration)
-  registerPeerConnectionListeners(dispatch, { connectionId, peerConnection })
+
   localStream.getTracks().forEach((track) => {
     peerConnection.addTrack(track, localStream)
   })
+
+  commit('set_peerconnection_obj', { connectionId, peerConnection })
+  commit('set_local_user_to_conn_id', { uid: partnerUid, connectionId })
+
+  /*--- 監視系---*/
+  registerPeerConnectionListeners(dispatch, { connectionId, peerConnection })
+
+  /* ICE Candidateが取れたらcandidate_offerサブコレクションに書き込み */
+  const candidatesOfferCollection = connectionsRef.collection('candidate_offer')
+  peerConnection.addEventListener('icecandidate', (event) => {
+    if (event.candidate) {
+      const json = event.candidate.toJSON()
+      candidatesOfferCollection.add(json)
+    }
+  })
+
+  /* ICE Candidateを監視*/
+  const candidatesAnswerCollection = connectionsRef.collection(
+    'candidate_answer'
+  )
+  const iceUnsubscribe = candidatesAnswerCollection.onSnapshot(function (
+    snapshot
+  ) {
+    snapshot.docChanges().forEach((change) => {
+      if (change.type === 'added') {
+        const candidate = new RTCIceCandidate(change.doc.data())
+        peerConnection
+          .addIceCandidate(candidate)
+          .catch((err) => commit('set_err_report', err))
+      }
+    })
+  })
+
+  /* 相手からのAnswerを監視 */
+  const unsubscribe = connectionsRef.onSnapshot(async (doc) => {
+    const data = doc.data()
+    if (data.answer) {
+      const answer = new RTCSessionDescription(data.answer)
+      /* AnswerをpeerConnectionにセット */
+      try {
+        await peerConnection.setRemoteDescription(answer)
+      } catch (err) {
+        commit('set_err_report', err)
+      }
+      unsubscribe()
+    }
+    commit('set_ice_unsubscribe', { connectionId, iceUnsubscribe })
+  })
+  /*--- 監視系ここまで---*/
+
+  /* OfferをpeerConnectionにセット */
   const offer = await peerConnection.createOffer()
+  await peerConnection.setLocalDescription(offer)
+
   /* offerのデータをconnectionsコレクションに書き込み */
   const roomWithOffer = {
     offer: {
@@ -36,7 +91,6 @@ export const offer = async (
     /* serverTimestampだとonSnapshotが2回発火するので */
     created_at: new Date(),
   }
-  const connectionsRef = connRef.doc(connectionId)
   await connectionsRef.set(roomWithOffer)
 
   /* オファーの通知を相手のconnections_offeredサブコレクションに書き込み */
@@ -50,53 +104,7 @@ export const offer = async (
     data: 'mic',
   }
   await connectionsOfferedRef.set(connectionsOfferedData)
-  commit('set_local_user_to_conn_id', { uid: partnerUid, connectionId })
-  commit('set_peerconnection_obj', { connectionId, peerConnection })
 
-  /* ICE Candidateを書き込み */
-  const candidatesOfferCollection = connectionsRef.collection('candidate_offer')
-  const candidatesAnswerCollection = connectionsRef.collection(
-    'candidate_answer'
-  )
-  peerConnection.addEventListener('icecandidate', (event) => {
-    if (event.candidate) {
-      const json = event.candidate.toJSON()
-      candidatesOfferCollection.add(json)
-    }
-  })
-  /* OfferをpeerConnectionにセット */
-  await peerConnection.setLocalDescription(offer)
-  /* ICE Candidateを監視*/
-  const iceUnsubscribe = candidatesAnswerCollection.onSnapshot(function (
-    snapshot
-  ) {
-    snapshot.docChanges().forEach((change) => {
-      if (change.type === 'added') {
-        const candidate = new RTCIceCandidate(change.doc.data())
-        peerConnection
-          .addIceCandidate(candidate)
-          .catch((err) => commit('set_err_report', err))
-      }
-    })
-  })
-  commit('set_ice_unsubscribe', { connectionId, iceUnsubscribe })
-
-  /* 相手からのAnswerを監視 */
-  const unsubscribe = connectionsRef.onSnapshot(async (doc) => {
-    const data = doc.data()
-    if (data.answer) {
-      if (!peerConnection.currentRemoteDescription) {
-        const answer = new RTCSessionDescription(data.answer)
-        /* AnswerをpeerConnectionにセット */
-        try {
-          await peerConnection.setRemoteDescription(answer)
-        } catch (err) {
-          commit('set_err_report', err)
-        }
-      }
-      unsubscribe()
-    }
-  })
   return { connectionId, peerConnection, iceUnsubscribe }
 }
 
@@ -145,25 +153,28 @@ export const listenConnectionOffered = (dispatch, uid) => {
   return unsubscribe
 }
 
-export const offered = async (dispatch, commit, connectionId) => {
-  dispatch('STATE_CHANGE', { connectionId, stateString: 'offered' })
+export const offered = async (dispatch, commit, partnerUid, connectionId) => {
   const connectionsRef = db.collection('connections').doc(connectionId)
   let peerConnection, remoteStream, iceUnsubscribe
+
+  dispatch('STATE_CHANGE', { connectionId, stateString: 'offered' })
+
   const unsubscribe = connectionsRef.onSnapshot(async (doc) => {
     /* offerのデータを検知した */
     if (doc.data().offer && !doc.data().answer) {
       peerConnection = new RTCPeerConnection(configuration)
       commit('set_peerconnection_obj', { connectionId, peerConnection })
+      commit('set_remote_user_to_conn_id', { uid: partnerUid, connectionId })
+
+      /*--- 監視系---*/
       registerPeerConnectionListeners(dispatch, {
         connectionId,
         peerConnection,
       })
-      /* ICE Candidateを書き込み */
+
+      /* ICE Candidateが取れたらcandidate_answerサブコレクションに書き込み */
       const candidatesAnswerCollection = connectionsRef.collection(
         'candidate_answer'
-      )
-      const candidatesOfferCollection = connectionsRef.collection(
-        'candidate_offer'
       )
       peerConnection.addEventListener('icecandidate', (event) => {
         if (event.candidate) {
@@ -171,7 +182,11 @@ export const offered = async (dispatch, commit, connectionId) => {
           candidatesAnswerCollection.add(json)
         }
       })
+
       /* ICE Candidateを監視 */
+      const candidatesOfferCollection = connectionsRef.collection(
+        'candidate_offer'
+      )
       iceUnsubscribe = candidatesOfferCollection.onSnapshot(function (
         snapshot
       ) {
@@ -185,6 +200,7 @@ export const offered = async (dispatch, commit, connectionId) => {
         })
       })
       commit('set_ice_unsubscribe', { connectionId, iceUnsubscribe })
+      /*--- 監視系ここまで---*/
 
       remoteStream = new MediaStream()
       /* 受信したストリームをリモートストリームに設定 */
@@ -194,6 +210,7 @@ export const offered = async (dispatch, commit, connectionId) => {
         })
       })
       commit('set_remote_stream', { connectionId, stream: remoteStream })
+
       /* OfferとAnswerをpeerConnectionにセット */
       const offer = doc.data().offer
       try {

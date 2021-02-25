@@ -19,8 +19,10 @@ export default Vue.extend({
     ...webrtcMapper.mapGetters(['remoteStreamObj']),
   },
   mounted() {
-    this.$store.subscribeAction((action, state) => {
+    this.$store.subscribeAction(async (action, state) => {
       if (action.type == 'warp/PLAY_SILENT_MUSIC') {
+        // @ts-ignore
+        this.$refs.audioEl.currentTime = 0
         // @ts-ignore
         this.$refs.audioEl.play()
       }
