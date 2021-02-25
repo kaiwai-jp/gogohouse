@@ -66,20 +66,23 @@ export const offer = async (
   })
 
   /* 相手からのAnswerを監視 */
-  const unsubscribe = connectionsRef.onSnapshot(async (doc) => {
-    const data = doc.data()
-    if (data.answer) {
-      const answer = new RTCSessionDescription(data.answer)
-      /* AnswerをpeerConnectionにセット */
-      try {
-        await peerConnection.setRemoteDescription(answer)
-      } catch (err) {
-        commit('set_err_report', err)
+  const unsubscribe = connectionsRef
+    .collection('answer')
+    .doc('0')
+    .onSnapshot(async (doc) => {
+      if (!doc.exists) return
+      if (doc.data().answer) {
+        const answer = new RTCSessionDescription(doc.data().answer)
+        /* AnswerをpeerConnectionにセット */
+        try {
+          await peerConnection.setRemoteDescription(answer)
+        } catch (err) {
+          commit('set_err_report', err)
+        }
+        unsubscribe()
       }
-      unsubscribe()
-    }
-    commit('set_ice_unsubscribe', { connectionId, iceUnsubscribe })
-  })
+      commit('set_ice_unsubscribe', { connectionId, iceUnsubscribe })
+    })
   /*--- 監視系ここまで---*/
 
   /* OfferをpeerConnectionにセット */
@@ -171,7 +174,8 @@ export const offered = async (dispatch, commit, partnerUid, connectionId) => {
 
   const unsubscribe = connectionsRef.onSnapshot(async (doc) => {
     /* offerのデータを検知した */
-    if (doc.data().offer && !doc.metadata.hasPendingWrites) {
+    if (doc.exists && doc.data().offer) {
+      console.log(doc.data().offer)
       peerConnection = new RTCPeerConnection(configuration)
       commit('set_peerconnection_obj', { connectionId, peerConnection })
       commit('set_remote_user_to_conn_id', { uid: partnerUid, connectionId })
@@ -240,7 +244,7 @@ export const offered = async (dispatch, commit, partnerUid, connectionId) => {
           sdp: answer.sdp,
         },
       }
-      await connectionsRef.update(roomWithAnswer)
+      await connectionsRef.collection('answer').doc('0').set(roomWithAnswer)
     }
     unsubscribe()
   })

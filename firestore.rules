@@ -36,6 +36,11 @@ service cloud.firestore {
     match /connections/{connectionId} {
       allow get, write: if request.auth.uid != null;
 
+      // answerサブコレクション
+      match /answer/{answerId} {
+        allow read, write: if request.auth.uid != null;
+      }
+      
       // candidate_offerサブコレクション
       match /candidate_offer/{candidateOfferId} {
         allow read, write: if request.auth.uid != null;
