@@ -54,9 +54,13 @@ export const offer = async (
     snapshot.docChanges().forEach((change) => {
       if (change.type === 'added') {
         const candidate = new RTCIceCandidate(change.doc.data())
-        peerConnection
-          .addIceCandidate(candidate)
-          .catch((err) => commit('set_err_report', err))
+        if (peerConnection.signalingState === 'stable') {
+          peerConnection
+            .addIceCandidate(candidate)
+            .catch((err) => commit('set_err_report', err))
+        } else {
+          commit('push_ice_candidate', { connectionId, candidate })
+        }
       }
     })
   })
@@ -127,7 +131,11 @@ const registerPeerConnectionListeners = (
       dispatch('CONNECTION_FINISH_WITH_PEERCONNECTION', peerConnection)
     }
   })
-  peerConnection.addEventListener('signalingstatechange', () => {})
+  peerConnection.addEventListener('signalingstatechange', () => {
+    if (peerConnection.signalingState === 'stable') {
+      dispatch('ICE_CANDIDATE', { connectionId, peerConnection })
+    }
+  })
   peerConnection.addEventListener('iceconnectionstatechange ', () => {})
 }
 

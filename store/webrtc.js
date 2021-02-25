@@ -19,6 +19,7 @@ export default {
       iceUnsubscribe: {}, // ice Candidateリスナーの解除用 connectionsId:unsubscribe
       unsubscribe: [], // offeredを終了するときに解除すべきunsubscribeの配列
       errReport: [], //  catchしたerr
+      iceQueue: {}, // stableになるのを待つice candidate connectionId:[candidate,]
     }
   },
 
@@ -112,6 +113,18 @@ export default {
     reset_err_report(state) {
       state.errReport.splice(-state.errReport)
     },
+    push_ice_candidate(state, { connectionId, candidate }) {
+      if (!state.iceQueue[connectionId]) {
+        state.iceQueue[connectionId] = []
+      }
+      state.iceQueue[connectionId].push(candidate)
+    },
+    pop_ice_candidate(state, { connectionId, index }) {
+      state.iceQueue[connectionId].splice(index, 1)
+    },
+    reset_ice_candidate(state, connectionId) {
+      delete state.iceQueue[connectionId]
+    },
   },
 
   actions: {
@@ -166,6 +179,7 @@ export default {
           }
         }
         state.peerConnectionObj[connectionId].close()
+        commit('reset_ice_candidate', connectionId)
         commit('remove_peerconnection_obj', connectionId)
         commit('remove_peerconnection_state', connectionId)
         /* ローカルストリームの時はオブジェクトを削除 */
@@ -176,6 +190,7 @@ export default {
           }
         }
         state.peerConnectionObj[connectionId].close()
+        commit('reset_ice_candidate', connectionId)
         commit('remove_peerconnection_obj', connectionId)
         commit('remove_peerconnection_state', connectionId)
       }
@@ -225,6 +240,16 @@ export default {
     CLEAR_OFFERED_DB({ rootState }) {
       const { user } = rootState
       clearOfferedDB(user.me.uid)
+    },
+    ICE_CANDIDATE({ commit, state }, { connectionId, peerConnection }) {
+      if (!state.iceQueue[connectionId]) return
+      const candidateArray = state.iceQueue[connectionId]
+      for (let i = 0; i < candidateArray.length; i++) {
+        peerConnection
+          .addIceCandidate(candidateArray[i])
+          .catch((err) => commit('set_err_report', err))
+        commit('pop_ice_candidate', { connectionId, index: i })
+      }
     },
   },
 }
