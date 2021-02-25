@@ -84,12 +84,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    ...webrtcMapper.mapActions([
-      'OFFER',
-      'CONNECTION_END_FROM_ME',
-      'CONNECTION_OFFERED_LISTENER',
-      'END_CONNECTION_OFFERED_LISTENER',
-    ]),
+    ...webrtcMapper.mapActions(['OFFER']),
     async start() {
       /* ローカルストリームにマイクを割り当て */
       try {
@@ -127,7 +122,6 @@ export default Vue.extend({
         })
         this.localStream = undefined
       }
-      this.CONNECTION_END_FROM_ME()
     },
   },
 })

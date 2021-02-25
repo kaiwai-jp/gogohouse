@@ -241,7 +241,10 @@ export default {
       const { user } = rootState
       clearOfferedDB(user.me.uid)
     },
-    ADD_ICE_CANDIDATE_QUEUED({ commit, state }, { connectionId, peerConnection }) {
+    ADD_ICE_CANDIDATE_QUEUED(
+      { commit, state },
+      { connectionId, peerConnection }
+    ) {
       if (!state.iceQueue[connectionId]) return
       const candidateArray = state.iceQueue[connectionId]
       for (let i = 0; i < candidateArray.length; i++) {

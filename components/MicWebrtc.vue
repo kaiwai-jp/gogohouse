@@ -58,7 +58,7 @@ export default Vue.extend({
       permissionDialog: false,
     }
   },
-  async mounted() {
+  created() {
     this.CONNECTION_OFFERED_LISTENER()
     this.$store.subscribe((mutation, state) => {
       if (!this.localStream) return
