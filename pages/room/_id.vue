@@ -28,7 +28,7 @@
 import Vue from 'vue'
 import roomMapper from '@/store/room'
 import userMapper from '@/store/user'
-import webrtcMapper from '@/store/webrtc'
+import warpMapper from '@/store/warp'
 
 import MicWebrtc from '@/components/MicWebrtc.vue'
 import OnlineUsers from '@/components/OnlineUsers.vue'
@@ -57,13 +57,6 @@ export default Vue.extend({
     ManageRoom,
     IamMemberDisplay,
   },
-  beforeRouteLeave(to, from, next) {
-    if (window.confirm('本当にルームから離れますか？')) {
-      next()
-    } else {
-      next(false)
-    }
-  },
   data(): DataType {
     return {
       localStream: undefined,
@@ -83,33 +76,18 @@ export default Vue.extend({
       return false
     },
   },
-  methods: {
-    ...webrtcMapper.mapActions(['OFFER']),
-    async start() {
-      /* ローカルストリームにマイクを割り当て */
-      try {
-        this.localStream = await navigator.mediaDevices.getUserMedia({
-          audio: true,
-        })
-        /* カメラを開いて即ページ遷移した場合にマイクアクセスが残るのを防ぐ */
-        if (this.$route.name != 'room-id') {
-          this.hangup()
-          return
-        }
-      } catch (err) {
-        console.log(err.message)
-        return
-      }
-      /* 音声と映像のミュート状態を反映 */
-      const audioTrack = this.localStream.getAudioTracks()[0]
-      //      audioTrack.enabled = this.localAudioEnable
-      /* 今オンラインのユーザーにオファーをする */
-      this.roomOnlineUsers.forEach((user: User) => {
-        if (this.me.uid != user.uid) {
-          this.OFFER({ uid: user.uid, localStream: this.localStream })
-        }
+  beforeRouteLeave(to, from, next) {
+    const promise = new Promise((resolve, reject) => {
+      this.$store.commit('warp/set_leaveroom_dialog_object', {
+        message: '部屋を離れますか？',
+        resolve,
+        reject,
+        next,
       })
-    },
+    })
+    promise.catch(() => null)
+  },
+  methods: {
     leave(): void {
       this.hangup()
       this.$router.push(`/home`)

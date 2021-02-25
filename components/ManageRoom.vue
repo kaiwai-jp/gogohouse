@@ -56,7 +56,7 @@
           </option>
         </select>
       </div>
-      <button @click="clickDeleteRoom" class="danger mt-50 button--mini">
+      <button @click="clickDeleteRoom" class="danger m-50 button--mini">
         ルーム削除
       </button>
       <button @click="$emit('close')" class="close button--grey">閉じる</button>

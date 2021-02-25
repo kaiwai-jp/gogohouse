@@ -5,6 +5,7 @@
     <AudioPlay />
     <PageFooter />
     <AlertModal />
+    <LeaveRoomModal />
   </div>
 </template>
 <script lang="ts">
@@ -13,9 +14,10 @@ import PageHeader from '@/components/layout/PageHeader.vue'
 import PageFooter from '@/components/layout/PageFooter.vue'
 import AudioPlay from '@/components/layout/AudioPlay.vue'
 import AlertModal from '@/components/layout/AlertModal.vue'
+import LeaveRoomModal from '@/components/layout/LeaveRoomModal.vue'
 
 export default Vue.extend({
-  components: { PageHeader, PageFooter, AudioPlay, AlertModal },
+  components: { PageHeader, PageFooter, AudioPlay, AlertModal, LeaveRoomModal },
 })
 </script>
 
