@@ -1,5 +1,6 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  mode: 'spa',
   head: {
     title: 'GoGoHouse',
     htmlAttrs: {
@@ -61,5 +62,10 @@ export default {
   build: {},
   router: {
     middleware: 'authenticated',
+  },
+  loadingIndicator: {
+    name: 'rectangle-bounce',
+    color: '#3B8070',
+    background: 'white',
   },
 }

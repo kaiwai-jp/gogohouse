@@ -161,6 +161,7 @@ export default Vue.extend({})
 
 .words {
   text-align: left;
+  font-size: 16px;
 }
 
 li {
