@@ -84,7 +84,9 @@ export const offer = async (
 
   /* OfferをpeerConnectionにセット */
   const offer = await peerConnection.createOffer()
-  await peerConnection.setLocalDescription(offer)
+  await peerConnection
+    .setLocalDescription(offer)
+    .catch((err) => commit('set_err_report', err))
 
   /* offerのデータをconnectionsコレクションに書き込み */
   const roomWithOffer = {
@@ -229,7 +231,9 @@ export const offered = async (dispatch, commit, partnerUid, connectionId) => {
         return
       }
       const answer = await peerConnection.createAnswer()
-      await peerConnection.setLocalDescription(answer)
+      await peerConnection
+        .setLocalDescription(answer)
+        .catch((err) => commit('set_err_report', err))
       const roomWithAnswer = {
         answer: {
           type: answer.type,
