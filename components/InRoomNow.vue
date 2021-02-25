@@ -1,11 +1,10 @@
 <template>
   <div v-if="inRoomName">
-    <div>
-      >ただいま「
+    <div class="now">
+      ただいま「
       <nuxt-link :to="inRoomLink">{{ inRoomName }}</nuxt-link>
       」にいます
     </div>
-    >
   </div>
 </template>
 
@@ -43,4 +42,8 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.now {
+  font-size: 22px;
+}
+</style>
