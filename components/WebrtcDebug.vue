@@ -21,6 +21,7 @@
         <div v-for="report in errReport" :key="random(report)">
           {{ report }}
         </div>
+        <button @click="playSilentMusic" class="button--mini">無音再生</button>
         <button @click="modal = false" class="button--mini">閉じる</button>
       </div>
     </div>
@@ -31,6 +32,7 @@
 import Vue from 'vue'
 import userMapper from '@/store/user'
 import webrtcMapper from '@/store/webrtc'
+import warpMapper from '@/store/warp'
 
 export type DataType = {
   modal: boolean
@@ -73,10 +75,16 @@ export default Vue.extend({
         return '-'
       }
     },
-    random() {
+    random(): (arg0: string) => String {
       return function (string: string) {
         return Math.random().toString()
       }
+    },
+  },
+  methods: {
+    ...warpMapper.mapActions(['PLAY_SILENT_MUSIC']),
+    playSilentMusic() {
+      this.PLAY_SILENT_MUSIC()
     },
   },
 })

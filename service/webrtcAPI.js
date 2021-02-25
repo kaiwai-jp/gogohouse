@@ -133,7 +133,7 @@ const registerPeerConnectionListeners = (
   })
   peerConnection.addEventListener('signalingstatechange', () => {
     if (peerConnection.signalingState === 'stable') {
-      dispatch('ICE_CANDIDATE', { connectionId, peerConnection })
+      dispatch('ADD_ICE_CANDIDATE_QUEUED', { connectionId, peerConnection })
     }
   })
   peerConnection.addEventListener('iceconnectionstatechange ', () => {})
@@ -163,14 +163,13 @@ export const listenConnectionOffered = (dispatch, uid) => {
 
 export const offered = async (dispatch, commit, partnerUid, connectionId) => {
   const connectionsRef = db.collection('connections').doc(connectionId)
-  let peerConnection, remoteStream, iceUnsubscribe, onceFlag
+  let peerConnection, remoteStream, iceUnsubscribe
 
   dispatch('STATE_CHANGE', { connectionId, stateString: 'offered' })
 
   const unsubscribe = connectionsRef.onSnapshot(async (doc) => {
     /* offerのデータを検知した */
-    if (doc.data().offer && !onceFlag) {
-      onceFlag = true
+    if (doc.data().offer && !doc.metadata.hasPendingWrites) {
       peerConnection = new RTCPeerConnection(configuration)
       commit('set_peerconnection_obj', { connectionId, peerConnection })
       commit('set_remote_user_to_conn_id', { uid: partnerUid, connectionId })
