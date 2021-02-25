@@ -6,12 +6,8 @@
         <button class="button--grey" @click="start" v-if="micPermitted">
           マイクを開く
         </button>
-        <button
-          class="button--grey"
-          v-if="!micPermitted"
-          @click="notOwnerExist"
-        >
-          オーナー不在
+        <button class="button--grey" v-if="!micPermitted" @click="cantMicOpen">
+          マイク権なし
         </button>
       </div>
       <div v-if="permissionDialog">
@@ -90,15 +86,29 @@ export default Vue.extend({
       return this.$route.params.id
     },
     micPermitted(): boolean {
+      const owner_id = this.room.owner_id
+
       if (this.room.mic_enable === 'any') return true
 
-      const owner_id = this.room.owner_id
-      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
+      if (this.room.mic_enable === 'owner') {
+        for (let i = 0; i < this.roomOnlineUsers.length; i++) {
+          //@ts-ignore
+          if (owner_id === this.roomOnlineUsers[i].uid) {
+            return true
+          }
+        }
+      }
+
+      if (this.room.mic_enable === 'assign') {
+        if (owner_id === this.me.uid) return true
+        if (!this.room.mic_assign) return false
+
         //@ts-ignore
-        if (owner_id === this.roomOnlineUsers[i].uid) {
+        if (this.room.mic_assign.includes(this.me.uid)) {
           return true
         }
       }
+
       return false
     },
     localAudioEnable(): boolean {
@@ -159,8 +169,12 @@ export default Vue.extend({
       }
       this.CONNECTION_END_FROM_ME()
     },
-    notOwnerExist() {
-      this.OPEN_ALERT_DIALOG('オーナーが在室でないときはマイクは開けません')
+    cantMicOpen() {
+      let message = 'このルームはオーナーが在室でないときはマイクは開けません'
+      if (this.room.mic_enable === 'assign') {
+        message = 'このルームはオーナーがマイク権を割り当てた人だけ発言できます'
+      }
+      this.OPEN_ALERT_DIALOG(message)
     },
   },
 })

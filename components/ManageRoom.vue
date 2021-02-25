@@ -1,7 +1,7 @@
 <template>
   <div class="modal-base">
     <div class="debug-modal">
-      <h2 class="subtitle">オンラインユーザー</h2>
+      <h2 class="subtitle">今ルームにいるユーザー</h2>
       <div v-for="user in roomOnlineUsers" :key="user.uid + 'online'">
         <NamePlateMini :uid="user.uid" class="twitter_identity" />
         <button
@@ -51,9 +51,7 @@
         >
           <option value="owner">オーナーがルームにいるとき</option>
           <option value="any">いつでも誰でも</option>
-          <option value="assign" disabled class="disable-option">
-            オーナーが指名したとき
-          </option>
+          <option value="assign">オーナーが指名したとき</option>
         </select>
       </div>
       <button @click="clickDeleteRoom" class="danger m-50 button--mini">
