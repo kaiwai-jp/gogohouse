@@ -53,6 +53,7 @@ export const offer = async (
   ) {
     snapshot.docChanges().forEach((change) => {
       if (change.type === 'added') {
+        if (!change.doc.data().candidate) return
         const candidate = new RTCIceCandidate(change.doc.data())
         if (peerConnection.signalingState === 'stable') {
           peerConnection
@@ -202,6 +203,7 @@ export const offered = async (dispatch, commit, partnerUid, connectionId) => {
       ) {
         snapshot.docChanges().forEach((change) => {
           if (change.type === 'added') {
+            if (!change.doc.data().candidate) return
             const candidate = new RTCIceCandidate(change.doc.data())
             peerConnection
               .addIceCandidate(candidate)
