@@ -31,7 +31,7 @@
     </div>
     <div v-if="!roomExists">
       ルームが見つかりません<br />
-      <button class="button--grey mt-5" @click="goHome">ホームへ</button>
+      <button class="button--green mt-5" @click="goHome">ホームへ</button>
     </div>
     <ManageRoom @close="modal = false" :roomId="room.id" v-if="modal" />
   </div>

@@ -8,7 +8,7 @@
       <option value="closed">クローズド</option>
     </select>
 
-    <button class="button--grey" @click="clickCreateRoom">作成</button>
+    <button class="button--green" @click="clickCreateRoom">作成</button>
     <ul class="room-type-description">
       <li>オープン・・・誰でも入れるルーム</li>
       <li>ソーシャル・・・Twitterで相互フォローの人だけ入れるルーム</li>

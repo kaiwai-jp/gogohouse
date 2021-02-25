@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="button--grey" @click="leave">退出</button>
+    <button class="button--green" @click="leave">退出</button>
   </div>
 </template>
 

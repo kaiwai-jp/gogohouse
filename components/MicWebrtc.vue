@@ -3,10 +3,10 @@
     <div v-if="!localStream" class="mic_area">
       <div v-if="!permissionDialog">
         <MicIcon v-if="micPermitted" />
-        <button class="button--grey" @click="start" v-if="micPermitted">
+        <button class="button--green" @click="start" v-if="micPermitted">
           マイクを開く
         </button>
-        <button class="button--grey" v-if="!micPermitted" @click="cantMicOpen">
+        <button class="button--green" v-if="!micPermitted" @click="cantMicOpen">
           マイク権なし
         </button>
       </div>
@@ -16,7 +16,7 @@
     </div>
     <div v-else class="mic_area">
       <MicIcon :localStream="localStream" />
-      <button class="button--grey" @click="hangup">マイクを閉じる</button>
+      <button class="button--green" @click="hangup">マイクを閉じる</button>
     </div>
   </div>
 </template>

@@ -6,6 +6,15 @@ html {
   background-color: #f2efe4;
 }
 
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 1s;
+}
+.page-enter,
+.page-leave-active {
+  opacity: 0;
+}
+
 *,
 *::before,
 *::after {
@@ -13,7 +22,7 @@ html {
   margin: 0;
 }
 
-.button--grey {
+.button--green {
   display: inline-block;
   border-radius: 20px;
   color: #ffffff;
@@ -25,7 +34,7 @@ html {
   font-weight: 700;
 }
 
-.button--grey:hover {
+.button--green:hover {
   color: #fff;
   background-color: #009721;
 }

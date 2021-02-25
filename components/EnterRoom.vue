@@ -2,17 +2,17 @@
   <div>
     <div v-if="!waiting" class="mb-50">
       <button
-        class="button--grey"
+        class="button--green"
         @click="enterRoom"
         v-if="ifPermit && !alredyInRoom"
       >
         部屋に入る
       </button>
-      <button class="button--grey" v-if="!ifPermit" disalbed>入れません</button>
+      <button class="button--green" v-if="!ifPermit" disalbed>入れません</button>
       <span v-if="alredyInRoom">すでにルームにいます</span>
     </div>
     <div v-if="waiting" class="mb-50">
-      <button class="button--grey" diabled>処理中...</button>
+      <button class="button--green" diabled>処理中...</button>
     </div>
   </div>
 </template>

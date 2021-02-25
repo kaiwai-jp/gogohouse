@@ -88,10 +88,12 @@
         </button>
       </div>
 
-      <button @click="clickDeleteRoom" class="danger m-50 button--mini">
+      <button @click="clickDeleteRoom" class="danger mt-50 button--mini">
         ルーム削除
       </button>
-      <button @click="$emit('close')" class="close button--grey">閉じる</button>
+      <button @click="$emit('close')" class="close button--green">
+        閉じる
+      </button>
     </div>
   </div>
 </template>
@@ -245,5 +247,6 @@ export default Vue.extend({
 
 .close {
   margin-left: 30px;
+  margin-bottom: 100px;
 }
 </style>

@@ -10,8 +10,8 @@
           <nuxt-link to="/home">ホームへ</nuxt-link>
         </div>
         <div class="mb-50">
-          <button class="button--grey" @click="signout">ログアウト</button>
-          <button class="button--grey" @click="reload">リロード</button>
+          <button class="button--green" @click="signout">ログアウト</button>
+          <button class="button--green" @click="reload">リロード</button>
         </div>
       </div>
       <TwitterPublish

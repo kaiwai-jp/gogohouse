@@ -2,7 +2,7 @@
   <div class="modal-base" v-if="modal">
     <div class="alert-modal">
       <p>{{ alertDialogObject.message }}</p>
-      <button class="button--grey mt-50" @click="close">OK</button>
+      <button class="button--green mt-50" @click="close">OK</button>
     </div>
   </div>
 </template>

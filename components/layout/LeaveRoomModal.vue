@@ -2,8 +2,8 @@
   <div class="modal-base" v-if="modal">
     <div class="alert-modal">
       <p>{{ leaveroomDialogObject.message }}</p>
-      <button class="button--grey mt-50" @click="success">OK</button>
-      <button class="button--grey mt-50" @click="fail">キャンセル</button>
+      <button class="button--green mt-50" @click="success">OK</button>
+      <button class="button--green mt-50" @click="fail">キャンセル</button>
     </div>
   </div>
 </template>
