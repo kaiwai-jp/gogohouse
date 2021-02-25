@@ -28,7 +28,6 @@
         ルーム管理
       </button>
       <DoorGuide class="m-50" />
-      <TwitterPublish :text="twitterText" />
     </div>
     <div v-if="!roomExists">
       ルームが見つかりません<br />
@@ -46,7 +45,6 @@ import EnterRoom from '@/components/EnterRoom.vue'
 import TwitterLogin from '@/components/TwitterLogin.vue'
 import DoorGuide from '@/components/DoorGuide.vue'
 import ManageRoom from '@/components/ManageRoom.vue'
-import TwitterPublish from '@/components/TwitterPublish.vue'
 
 import roomMapper from '@/store/room'
 import userMapper from '@/store/user'
@@ -65,7 +63,6 @@ export default Vue.extend({
     TwitterLogin,
     DoorGuide,
     ManageRoom,
-    TwitterPublish,
   },
   data(): DataType {
     return {

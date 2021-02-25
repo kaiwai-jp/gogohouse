@@ -28,7 +28,6 @@
 import Vue from 'vue'
 import roomMapper from '@/store/room'
 import userMapper from '@/store/user'
-import warpMapper from '@/store/warp'
 
 import MicWebrtc from '@/components/MicWebrtc.vue'
 import OnlineUsers from '@/components/OnlineUsers.vue'
@@ -41,10 +40,6 @@ import IamMemberDisplay from '@/components/IamMemberDisplay.vue'
 interface DataType {
   localStream: MediaStream | undefined
   manageModal: Boolean
-}
-
-interface User {
-  uid: string | undefined
 }
 
 export default Vue.extend({

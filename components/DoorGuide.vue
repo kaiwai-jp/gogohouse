@@ -3,14 +3,28 @@
     <ul class="notice">
       <li>iPhone/iPadのTwitterアプリ内では動作しません。</li>
       <li>このページのURLをTwitterでシェアしてください。</li>
+      <TwitterPublish :text="twitterText" />
     </ul>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import roomMapper from '@/store/room'
 
-export default Vue.extend({})
+import TwitterPublish from '@/components/TwitterPublish.vue'
+
+export default Vue.extend({
+  components: {
+    TwitterPublish,
+  },
+  computed: {
+    ...roomMapper.mapGetters(['room']),
+    twitterText(): String {
+      return 'GoGoHouse「' + this.room.name + '」でフォロワーとお喋りしよう'
+    },
+  },
+})
 </script>
 
 <style lang="scss" scoped>

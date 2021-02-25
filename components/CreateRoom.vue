@@ -9,6 +9,11 @@
     </select>
 
     <button class="button--grey" @click="clickCreateRoom">作成</button>
+    <ul class="room-type-description">
+      <li>オープン・・・誰でも入れるルーム</li>
+      <li>ソーシャル・・・Twitterで相互フォローの人だけ入れるルーム</li>
+      <li>クローズド・・・メンバーになった人だけ入れるルーム</li>
+    </ul>
   </div>
 </template>
 
@@ -72,5 +77,18 @@ export default Vue.extend({
 .room-type {
   color: $color3;
   height: 40px;
+}
+
+.room-type-description {
+  width: 310px;
+  margin: 20px auto;
+  padding: 0;
+  font-size: 11px;
+  color: $color2;
+  list-style-type: none;
+}
+
+.room-type-description li {
+  text-align: left;
 }
 </style>
