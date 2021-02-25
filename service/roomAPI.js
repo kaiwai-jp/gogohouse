@@ -115,9 +115,24 @@ export const releaseBan = (roomId, uid) => {
   roomRef.update({ ban: firebase.firestore.FieldValue.arrayRemove(uid) })
 }
 
+export const addMember = (roomId, uid) => {
+  const roomRef = db.collection('rooms').doc(roomId)
+  roomRef.update({ members: firebase.firestore.FieldValue.arrayUnion(uid) })
+}
+
 export const releaseMember = (roomId, uid) => {
   const roomRef = db.collection('rooms').doc(roomId)
   roomRef.update({ members: firebase.firestore.FieldValue.arrayRemove(uid) })
+}
+
+export const micAssign = (roomId, uid) => {
+  const roomRef = db.collection('rooms').doc(roomId)
+  roomRef.update({ mic_assign: firebase.firestore.FieldValue.arrayUnion(uid) })
+}
+
+export const releaseMicAssign = (roomId, uid) => {
+  const roomRef = db.collection('rooms').doc(roomId)
+  roomRef.update({ mic_assign: firebase.firestore.FieldValue.arrayRemove(uid) })
 }
 
 export const deleteRoom = (roomId) => {

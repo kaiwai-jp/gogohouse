@@ -2,7 +2,7 @@
   <div class="description">
     <div v-if="!localStream" class="mic_area">
       <div v-if="!permissionDialog">
-        <MicIcon />
+        <MicIcon v-if="micPermitted" />
         <button class="button--grey" @click="start" v-if="micPermitted">
           マイクを開く
         </button>

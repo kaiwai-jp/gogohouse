@@ -18,12 +18,28 @@
         >
           BAN
         </button>
+        <button
+          v-if="user.uid != me.uid"
+          @click="clickMicAssign(user.uid)"
+          class="button--mini"
+        >
+          MIC
+        </button>
+        <button
+          v-if="user.uid != me.uid"
+          @click="clickAddMember(user.uid)"
+          class="button--mini"
+        >
+          MEM
+        </button>
       </div>
+
       <h2 class="subtitle mt-50">BAN</h2>
       <div v-for="uid in room.ban" :key="uid + 'ban'">
         <NamePlateMini :uid="uid" class="twitter_identity" />
         <button @click="clickReleaseBan(uid)" class="button--mini">解除</button>
       </div>
+
       <h2 class="subtitle mt-50">メンバー</h2>
       <div v-for="uid in room.members" :key="uid + 'member'">
         <NamePlateMini :uid="uid" class="twitter_identity" />
@@ -34,7 +50,15 @@
         >
           解除
         </button>
+        <button
+          v-if="uid != me.uid"
+          @click="clickMicAssign(uid)"
+          class="button--mini"
+        >
+          MIC
+        </button>
       </div>
+
       <h2 class="subtitle mt-50">Twitterアカウントで<wbr />メンバー追加</h2>
       <div>
         <input class="room-name" v-model="addTwitter" />
@@ -42,6 +66,7 @@
           追加
         </button>
       </div>
+
       <h2 class="subtitle mt-50">マイク権</h2>
       <div>
         <select
@@ -54,6 +79,15 @@
           <option value="assign">オーナーが指名したとき</option>
         </select>
       </div>
+
+      <h2 class="subtitle mt-50">マイク権ありの人</h2>
+      <div v-for="uid in room.mic_assign" :key="uid + 'mic_enable'">
+        <NamePlateMini :uid="uid" class="twitter_identity" />
+        <button @click="clickReleaseMicAssign(uid)" class="button--mini">
+          解除
+        </button>
+      </div>
+
       <button @click="clickDeleteRoom" class="danger m-50 button--mini">
         ルーム削除
       </button>
@@ -72,10 +106,13 @@ import { kickUser } from '@/service/userAPI'
 import {
   ban,
   releaseBan,
+  addMember,
   releaseMember,
   addMemberByTwitter,
   deleteRoom,
   updateMicEnable,
+  micAssign,
+  releaseMicAssign,
 } from '@/service/roomAPI'
 
 export type DataType = {
@@ -132,6 +169,9 @@ export default Vue.extend({
     clickReleaseBan(uid: String) {
       releaseBan(this.roomId, uid)
     },
+    clickAddMember(uid: String) {
+      addMember(this.roomId, uid)
+    },
     clickReleaseMember(uid: String) {
       releaseMember(this.roomId, uid)
     },
@@ -144,6 +184,12 @@ export default Vue.extend({
     },
     clickUpdateMicEnable() {
       updateMicEnable(this.roomId, this.micEnable)
+    },
+    clickMicAssign(uid: String) {
+      micAssign(this.roomId, uid)
+    },
+    clickReleaseMicAssign(uid: String) {
+      releaseMicAssign(this.roomId, uid)
     },
   },
 })
