@@ -1,14 +1,18 @@
 <template>
   <div class="bt-1">
     <h2 class="subtitle">ルーム作成</h2>
-    <input v-model="newRoomName" class="room-name" />
-    <select v-model="roomType" class="room-type">
-      <option value="open">オープン</option>
-      <option value="social">ソーシャル</option>
-      <option value="closed">クローズド</option>
-    </select>
-
-    <button class="button--green" @click="clickCreateRoom">作成</button>
+    <div class="room-block">
+      <label for="room-name" class="room-label">ルーム名 50文字まで</label>
+      <input v-model="newRoomName" class="room-name" id="room-name" />
+      <select v-model="roomType" class="room-type">
+        <option value="open">オープン</option>
+        <option value="social">ソーシャル</option>
+        <option value="closed">クローズド</option>
+      </select>
+    </div>
+    <button class="button--green create-room" @click="clickCreateRoom">
+      作成
+    </button>
     <ul class="room-type-description">
       <li>オープン・・・誰でも入れるルーム</li>
       <li>ソーシャル・・・Twitterで相互フォローの人だけ入れるルーム</li>
@@ -68,6 +72,18 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.room-block {
+  display: inline-block;
+}
+
+.room-label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+  font-size: 11px;
+  color: $color2;
+}
+
 .room-name {
   color: $color3;
   height: 40px;

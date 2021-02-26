@@ -24,6 +24,11 @@ footer {
   text-align: center;
 }
 
+ul {
+  padding-left: 0;
+  margin-bottom: 5px;
+}
+
 li {
   display: inline-block;
   padding-right: 10px;
