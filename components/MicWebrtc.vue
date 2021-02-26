@@ -88,6 +88,8 @@ export default Vue.extend({
     micPermitted(): boolean {
       const owner_id = this.room.owner_id
 
+      if (owner_id === this.me.uid) return true
+
       if (this.room.mic_enable === 'any') return true
 
       if (this.room.mic_enable === 'owner') {
@@ -100,7 +102,6 @@ export default Vue.extend({
       }
 
       if (this.room.mic_enable === 'assign') {
-        if (owner_id === this.me.uid) return true
         if (!this.room.mic_assign) return false
 
         //@ts-ignore
