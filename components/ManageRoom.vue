@@ -40,53 +40,9 @@
         <button @click="clickReleaseBan(uid)" class="button--mini">解除</button>
       </div>
 
-      <h2 class="subtitle mt-50">メンバー</h2>
-      <div v-for="uid in room.members" :key="uid + 'member'">
-        <NamePlateMini :uid="uid" class="twitter_identity" />
-        <button
-          v-if="uid != me.uid"
-          @click="clickReleaseMember(uid)"
-          class="button--mini"
-        >
-          解除
-        </button>
-        <button
-          v-if="uid != me.uid"
-          @click="clickMicAssign(uid)"
-          class="button--mini"
-        >
-          MIC
-        </button>
-      </div>
+      <ManageRoomMembers :roomId="roomId" />
 
-      <h2 class="subtitle mt-50">Twitterアカウントで<wbr />メンバー追加</h2>
-      <div>
-        <input class="room-name" v-model="addTwitter" />
-        <button @click="clickAddMemberByTwitter" class="button--mini">
-          追加
-        </button>
-      </div>
-
-      <h2 class="subtitle mt-50">マイク権</h2>
-      <div>
-        <select
-          v-model="micEnable"
-          @change="clickUpdateMicEnable"
-          class="mic-enable-select"
-        >
-          <option value="owner">オーナーがルームにいるとき</option>
-          <option value="any">いつでも誰でも</option>
-          <option value="assign">オーナーが指名したとき</option>
-        </select>
-      </div>
-
-      <h2 class="subtitle mt-50">マイク権ありの人</h2>
-      <div v-for="uid in room.mic_assign" :key="uid + 'mic_enable'">
-        <NamePlateMini :uid="uid" class="twitter_identity" />
-        <button @click="clickReleaseMicAssign(uid)" class="button--mini">
-          解除
-        </button>
-      </div>
+      <ManageRoomMics :roomId="roomId" />
 
       <button @click="clickDeleteRoom" class="danger mt-50 button--mini">
         ルーム削除
@@ -101,6 +57,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import NamePlateMini from '@/components/NamePlateMini.vue'
+import ManageRoomMembers from '@/components/ManageRoomMembers.vue'
+import ManageRoomMics from '@/components/ManageRoomMics.vue'
 
 import userMapper from '@/store/user'
 import roomMapper from '@/store/room'
@@ -108,30 +66,24 @@ import { kickUser } from '@/service/userAPI'
 import {
   ban,
   releaseBan,
-  addMember,
-  releaseMember,
-  addMemberByTwitter,
   deleteRoom,
-  updateMicEnable,
+  addMember,
   micAssign,
-  releaseMicAssign,
 } from '@/service/roomAPI'
 
 export type DataType = {
   modal: boolean
-  addTwitter: String
   micEnable: 'owner' | 'any' | 'assign'
 }
 
 export default Vue.extend({
-  components: { NamePlateMini },
+  components: { NamePlateMini, ManageRoomMembers, ManageRoomMics },
   props: {
     roomId: { default: '', type: String },
   },
   data(): DataType {
     return {
       modal: false,
-      addTwitter: '',
       micEnable: 'owner',
     }
   },
@@ -174,24 +126,8 @@ export default Vue.extend({
     clickAddMember(uid: String) {
       addMember(this.roomId, uid)
     },
-    clickReleaseMember(uid: String) {
-      releaseMember(this.roomId, uid)
-    },
-    clickAddMemberByTwitter() {
-      const screenName = this.addTwitter.trim()
-      if (!screenName.match(/@[0-9a-zA-Z_]{1,15}/)) {
-        alert('@で始まるTwitterアカウントを入力してください')
-      }
-      addMemberByTwitter(this.roomId, screenName)
-    },
-    clickUpdateMicEnable() {
-      updateMicEnable(this.roomId, this.micEnable)
-    },
     clickMicAssign(uid: String) {
       micAssign(this.roomId, uid)
-    },
-    clickReleaseMicAssign(uid: String) {
-      releaseMicAssign(this.roomId, uid)
     },
   },
 })
@@ -214,7 +150,7 @@ export default Vue.extend({
 .debug-modal {
   padding: 10px;
   text-align: left;
-  width: 90vw;
+  width: 95vw;
   left: 10vw;
   top: 10vh;
   max-height: 100vh;

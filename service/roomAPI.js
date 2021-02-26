@@ -125,6 +125,11 @@ export const releaseMember = (roomId, uid) => {
   roomRef.update({ members: firebase.firestore.FieldValue.arrayRemove(uid) })
 }
 
+export const releaseReservedMember = (roomId, uid) => {
+  const roomRef = db.collection('rooms').doc(roomId)
+  roomRef.update({ reserved_members: firebase.firestore.FieldValue.arrayRemove(uid) })
+}
+
 export const micAssign = (roomId, uid) => {
   const roomRef = db.collection('rooms').doc(roomId)
   roomRef.update({ mic_assign: firebase.firestore.FieldValue.arrayUnion(uid) })
