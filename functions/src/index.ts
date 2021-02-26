@@ -4,6 +4,7 @@ import * as admin from 'firebase-admin'
 admin.initializeApp()
 const firestore = admin.firestore()
 const checkFriendShip = require('./twitterProc')
+const getTwitterUserData = require('./twitterUserData')
 
 /**
  * Realtime Databaseを監視して、オンラインステータスの変更を検知、更新します.
@@ -332,4 +333,39 @@ exports.removeMeMembers = functions
     return roomsRef.update({
       members: admin.firestore.FieldValue.arrayRemove(uid),
     })
+  })
+
+/**
+ * Twitterのスクリーンネームでルームのreserved_member配列と、reservedコレクションに追加します
+ * @params roomId
+ */
+
+exports.addReservedMembers = functions
+  .region('asia-northeast1')
+  .https.onCall(async (data, context) => {
+    const roomId = data.roomId
+    const screenName = data.screenName
+    const uid = context.auth!.uid
+
+    const userPrivatesRef = firestore.collection('user_privates').doc(uid)
+    const userPrivateDoc = await userPrivatesRef.get()
+    const userPrivateData = userPrivateDoc.data()!
+
+    const twitterUserData = await getTwitterUserData(
+      userPrivateData.accessToken,
+      userPrivateData.accessTokenSecret,
+      screenName
+    )
+
+    const roomsRef = firestore.collection('rooms').doc(roomId)
+    roomsRef
+      .update({
+        reserved_members: admin.firestore.FieldValue.arrayUnion(screenName),
+      })
+      .catch()
+    const reservedUserRef = firestore
+      .collection('reserved_user')
+      .doc(screenName.substring(1))
+
+    return reservedUserRef.set(twitterUserData, { merge: true })
   })

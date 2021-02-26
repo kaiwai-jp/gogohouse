@@ -186,13 +186,19 @@ export const getRoomTargetUserIn = async (uid) => {
 export const addMemberByTwitter = async (roomId, screenName) => {
   const userQuery = db.collection('users').where('twitter', '==', screenName)
   const querySnapshot = await userQuery.get()
+  let alreadyExists = false
   querySnapshot.forEach((doc) => {
+    alreadyExists = true
     const userData = doc.data()
     const uid = userData.uid
 
     const roomRef = db.collection('rooms').doc(roomId)
     roomRef.update({ members: firebase.firestore.FieldValue.arrayUnion(uid) })
   })
+  if (alreadyExists) return
+  const functions = firebase.app().functions('asia-northeast1')
+  const func = functions.httpsCallable('addReservedMembers')
+  return func({ roomId, screenName })
 }
 
 export const updateMicEnable = (roomId, statusString) => {

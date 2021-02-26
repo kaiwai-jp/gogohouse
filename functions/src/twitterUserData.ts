@@ -1,7 +1,7 @@
 module.exports = async (
   access_token_key: String,
   access_token_secret: String,
-  id: String
+  screenName: String
 ) => {
   const Twitter = require('twitter')
 
@@ -13,18 +13,21 @@ module.exports = async (
   }
   try {
     const client = new Twitter(twitter_credentials)
-    const response = await client.get('friendships/lookup', {
-      user_id: id,
+    const response = await client.get('users/lookup', {
+      screen_name: screenName.substring(1),
     })
-    if (
-      response[0].connections.includes('following') &&
-      response[0].connections.includes('followed_by')
-    ) {
-      return true
+    if (response[0]) {
+      const userJson = {
+        twitter: screenName,
+        twitter_id: response[0].id_str,
+        icon: response[0].profile_image_url,
+        profile: response[0].description,
+      }
+      return userJson
     }
   } catch (err) {
     console.log(err)
     throw err
   }
-  return false
+  return null
 }
