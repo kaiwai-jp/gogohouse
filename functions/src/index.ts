@@ -369,3 +369,51 @@ exports.addReservedMembers = functions
 
     return reservedUserRef.set(twitterUserData, { merge: true })
   })
+
+/**
+ * usersドキュメントの作成を検知して、各ルームの予約メンバーからメンバーに昇格、reserved_usersを削除
+ * @params roomId
+ */
+
+exports.userCreatedTrigger = functions
+  .region('asia-northeast1')
+  .firestore.document('users/{userId}')
+  .onCreate(async (snap, context) => {
+    const twitterId = snap.data().twitter_id
+    const uid = snap.data().uid
+
+    const querySnapshot = await firestore
+      .collection('reserved_users')
+      .where('twitter_id', '==', twitterId)
+      .get()
+
+    let twitter: string = ''
+    querySnapshot.forEach((doc) => {
+      twitter = doc.data().twitter
+    })
+
+    if (!twitter) return
+
+    const querySnapshot2 = await firestore
+      .collection('rooms')
+      .where('reserved_members', 'array-contains', twitter)
+      .get()
+
+    querySnapshot2.forEach((doc) => {
+      const roomId = doc.data().id
+      firestore
+        .collection('rooms')
+        .doc(roomId)
+        .update({
+          members: admin.firestore.FieldValue.arrayUnion(uid),
+          reserved_members: admin.firestore.FieldValue.arrayRemove(twitter),
+        })
+        .catch()
+    })
+
+    firestore
+      .collection('reserved_users')
+      .doc(twitter.substring(1))
+      .delete()
+      .catch()
+  })
