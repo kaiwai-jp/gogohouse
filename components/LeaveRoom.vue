@@ -11,7 +11,7 @@ import roomMapper from '@/store/room'
 
 export default Vue.extend({
   async created() {
-    await this.GET_USER()
+    await this.GET_USER(true)
     if (this.me.current_room !== this.roomId) {
       this.$router.push(`/home`)
     }

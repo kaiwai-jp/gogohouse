@@ -122,8 +122,8 @@ export default {
           .catch((err) => reject(err))
       })
     },
-    GET_USER({ commit, state }) {
-      if (Object.keys(state.me).length > 0) return
+    GET_USER({ commit, state }, force) {
+      if (!force && Object.keys(state.me).length > 0) return
       return new Promise((resolve, reject) => {
         onAuthChanged().then((userInfo) => {
           commit('set_user', userInfo)
