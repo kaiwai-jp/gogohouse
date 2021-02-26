@@ -31,7 +31,7 @@
     </div>
     <div v-if="!roomExists">
       ルームが見つかりません<br />
-      <button class="button--green mt-5" @click="goHome">ホームへ</button>
+      <HomeButton />
     </div>
     <ManageRoom @close="modal = false" :roomId="room.id" v-if="modal" />
   </div>
@@ -45,6 +45,7 @@ import EnterRoom from '@/components/EnterRoom.vue'
 import TwitterLogin from '@/components/TwitterLogin.vue'
 import DoorGuide from '@/components/DoorGuide.vue'
 import ManageRoom from '@/components/ManageRoom.vue'
+import HomeButton from '@/components/HomeButton.vue'
 
 import roomMapper from '@/store/room'
 import userMapper from '@/store/user'
@@ -63,6 +64,7 @@ export default Vue.extend({
     TwitterLogin,
     DoorGuide,
     ManageRoom,
+    HomeButton,
   },
   data(): DataType {
     return {
@@ -121,9 +123,6 @@ export default Vue.extend({
 
       return true
     },
-    goHome() {
-      this.$router.push(`/home`)
-    },
   },
 })
 </script>
@@ -140,10 +139,6 @@ export default Vue.extend({
 
 .members {
   text-align: left;
-}
-
-.mt-5 {
-  margin-top: 5px;
 }
 
 .twitter-publish {
