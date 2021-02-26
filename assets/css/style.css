@@ -39,6 +39,23 @@ html {
   background-color: #009721;
 }
 
+.button--pink {
+  display: inline-block;
+  border-radius: 20px;
+  color: #ffffff;
+  background-color: #bd51ab;
+  text-decoration: none;
+  padding: 10px 30px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.button--pink:hover {
+  color: #fff;
+  background-color: #bd009d;
+}
+
 .button--mini {
   display: inline-block;
   border-radius: 5px;
