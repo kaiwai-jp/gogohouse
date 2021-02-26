@@ -19,6 +19,7 @@ module.exports = async (
     if (response[0]) {
       const userJson = {
         twitter: screenName,
+        name: response[0].name,
         twitter_id: response[0].id_str,
         icon: response[0].profile_image_url,
         profile: response[0].description,

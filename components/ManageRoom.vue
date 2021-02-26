@@ -153,7 +153,7 @@ export default Vue.extend({
   width: 95vw;
   left: 10vw;
   top: 10vh;
-  max-height: 100vh;
+  max-height: 95vh;
   background-color: #ffffff;
   overflow-y: scroll;
   word-wrap: break-word;

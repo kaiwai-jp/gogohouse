@@ -22,6 +22,7 @@
         <div class="members" v-if="ifRoomMembersShow">
           <h2 class="subtitle mt-50">メンバー</h2>
           <RoomMembers :link="true" :members="room.members" />
+          <ReservedRoomMembers :members="room.reserved_members" />
         </div>
       </div>
       <button v-if="isOwner" @click="modal = true" class="button--mini">

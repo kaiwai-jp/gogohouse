@@ -3,7 +3,7 @@ import * as admin from 'firebase-admin'
 
 admin.initializeApp()
 const firestore = admin.firestore()
-const checkFriendShip = require('./twitterProc')
+const checkFriendShip = require('./twitterFriendShip')
 const getTwitterUserData = require('./twitterUserData')
 
 /**
@@ -364,7 +364,7 @@ exports.addReservedMembers = functions
       })
       .catch()
     const reservedUserRef = firestore
-      .collection('reserved_user')
+      .collection('reserved_users')
       .doc(screenName.substring(1))
 
     return reservedUserRef.set(twitterUserData, { merge: true })

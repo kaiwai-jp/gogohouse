@@ -192,3 +192,13 @@ export const setMicStatus = (myUid, statusString) => {
   const userRef = db.collection('users').doc(myUid)
   userRef.update({ mic_status: statusString })
 }
+
+export const getReservedUserData = async (screenName) => {
+  const reservedUserRef = db
+    .collection('reserved_users')
+    .doc(screenName.substring(1))
+  const userDoc = await reservedUserRef.get()
+  if (userDoc.exists) {
+    return userDoc.data()
+  }
+}

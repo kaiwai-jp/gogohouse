@@ -20,11 +20,13 @@
     </div>
 
     <h2 class="subtitle mt-50">予約メンバー</h2>
-    <div v-for="uid in room.reserved_members" :key="uid">
-      {{ uid }}
+    <div v-for="screenName in room.reserved_members" :key="screenName">
+      <ReservedMemberNamePlateMini
+        :screenName="screenName"
+        class="twitter_identity"
+      />
       <button
-        v-if="uid != me.uid"
-        @click="clickReleaseReservedMember(uid)"
+        @click="clickReleaseReservedMember(screenName)"
         class="button--mini"
       >
         解除
@@ -44,6 +46,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import NamePlateMini from '@/components/NamePlateMini.vue'
+import ReservedMemberNamePlateMini from '@/components/ReservedMemberNamePlateMini.vue'
 
 import userMapper from '@/store/user'
 import roomMapper from '@/store/room'
@@ -61,7 +64,7 @@ export type DataType = {
 }
 
 export default Vue.extend({
-  components: { NamePlateMini },
+  components: { NamePlateMini, ReservedMemberNamePlateMini },
   props: {
     roomId: { default: '', type: String },
   },
@@ -88,8 +91,15 @@ export default Vue.extend({
       const screenName = this.addTwitter.trim()
       if (!screenName.match(/@[0-9a-zA-Z_]{1,15}/)) {
         alert('@で始まるTwitterアカウントを入力してください')
+        return
       }
       addMemberByTwitter(this.roomId, screenName)
+        .then(() => {
+          this.addTwitter = ''
+        })
+        .catch(() => {
+          alert('Twitterユーザーが見つかりませんでした')
+        })
     },
     clickMicAssign(uid: String) {
       micAssign(this.roomId, uid)
