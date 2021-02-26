@@ -156,7 +156,6 @@ export const listenRoom = (commit, roomId) => {
       if (doc.exists) {
         room = doc.data()
       }
-      console.log(room)
       commit('set_room', room)
     })
 
@@ -181,8 +180,9 @@ export const getRoomTargetUserIn = async (uid) => {
   if (userDoc.exists) {
     const userData = userDoc.data()
     roomId = userData.current_room
-    if (!roomId || userData.status !== 'online') return {}
+    if (userData.status !== 'online') return {}
   }
+  if (!roomId) return {}
 
   const roomDoc = await db.collection('rooms').doc(roomId).get()
   if (roomDoc.exists) {
