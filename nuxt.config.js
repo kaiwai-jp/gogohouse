@@ -13,7 +13,7 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'Androidユーザーの皆さんお待たせしました。ブラウザかTwitter for Androidアプリ内から使える音声チャットアプリです。',
+          'DL不要の音声チャット。Twitterフォロワーとお喋りしよう。入室と発言権を細かく管理できて、Twitter連携だけですぐに参加できる音声チャットサービスです。',
       },
       { hid: 'og:site_name', property: 'og:site_name', content: 'GoGoHouse' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
@@ -21,13 +21,13 @@ export default {
       {
         hid: 'og:title',
         property: 'og:title',
-        content: 'GoGoHouse | Twitterフォロワーとお喋りしよう',
+        content: 'GoGoHouse | DL不要の音声チャット',
       },
       {
         hid: 'og:description',
         property: 'og:description',
         content:
-          'Androidユーザーの皆さんお待たせしました。ブラウザかTwitter for Androidアプリ内から使える音声チャットアプリです。',
+          'Twitterフォロワーとお喋りしよう。入室と発言権を細かく管理できて、Twitter連携だけですぐに参加できる音声チャットサービス！',
       },
       {
         hid: 'og:image',

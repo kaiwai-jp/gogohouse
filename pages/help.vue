@@ -79,7 +79,7 @@
       <ul class="words">
         <li>音声通信・・・webRTCによるメッシュ型P2Pネットワーク</li>
         <li>ルームの最大接続人数・・・20人</li>
-        <li>立てられるルームの数・・・10ルーム</li>
+        <li>同時に保持できるマイルームの数・・・10ルーム</li>
       </ul>
       <h2 class="subtitle mt-50">Tips</h2>
       <ul class="words">
@@ -176,6 +176,7 @@ export default Vue.extend({})
   text-align: left;
   font-size: 16px;
   list-style-type: none;
+  padding-left: 0;
 }
 
 li {
