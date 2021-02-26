@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div v-if="roomExists">
+    <div v-if="roomLoaded">
       <h1 class="title">{{ room.name }}</h1>
       <p class="description">{{ roomDescription }}</p>
       <h2 class="subtitle owner" v-show="roomDescription != 'loading...'">
@@ -30,8 +30,9 @@
       </button>
       <DoorGuide class="m-50" />
     </div>
-    <div v-if="!roomExists">
-      ルームが見つかりません<br />
+    <div v-if="!roomLoaded">
+      <div v-show="room" class="subtitle">Loading...</div>
+      <div v-show="!room" class="subtitle">ルームが見つかりません</div>
       <HomeButton />
     </div>
     <ManageRoom @close="modal = false" :roomId="room.id" v-if="modal" />
@@ -55,6 +56,7 @@ import warpMapper from '@/store/warp'
 
 interface DataType {
   modal: Boolean
+  loading: Boolean
 }
 
 export default Vue.extend({
@@ -70,6 +72,7 @@ export default Vue.extend({
   data(): DataType {
     return {
       modal: false,
+      loading: true,
     }
   },
   computed: {
@@ -81,8 +84,10 @@ export default Vue.extend({
     isOwner(): Boolean {
       return this.me.uid === this.room.owner_id
     },
-    roomExists(): Boolean {
-      return Object.keys(this.room).length !== 0
+    roomLoaded(): Boolean {
+      if (!this.room) return false
+      if (Object.keys(this.room).length === 0) return false
+      return true
     },
     roomDescription(): String {
       if (this.room.room_type === 'open') {

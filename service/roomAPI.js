@@ -127,7 +127,9 @@ export const releaseMember = (roomId, uid) => {
 
 export const releaseReservedMember = (roomId, uid) => {
   const roomRef = db.collection('rooms').doc(roomId)
-  roomRef.update({ reserved_members: firebase.firestore.FieldValue.arrayRemove(uid) })
+  roomRef.update({
+    reserved_members: firebase.firestore.FieldValue.arrayRemove(uid),
+  })
 }
 
 export const micAssign = (roomId, uid) => {
@@ -150,10 +152,11 @@ export const listenRoom = (commit, roomId) => {
     .collection('rooms')
     .doc(roomId)
     .onSnapshot(async (doc) => {
-      let room = {}
+      let room = undefined
       if (doc.exists) {
         room = doc.data()
       }
+      console.log(room)
       commit('set_room', room)
     })
 
