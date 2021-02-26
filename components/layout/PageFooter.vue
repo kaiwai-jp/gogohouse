@@ -3,7 +3,7 @@
     <footer>
       <ul>
         <li><a href="/term.html" target="_blank">利用規約</a></li>
-        <li><nuxt-link to="/qa"> Q&A</nuxt-link></li>
+        <li><nuxt-link to="/help">ヘルプ</nuxt-link></li>
       </ul>
       <span class="copyright">copyright @saikou_kunisaki</span>
     </footer>

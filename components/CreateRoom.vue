@@ -54,8 +54,8 @@ export default Vue.extend({
         return
       }
 
-      if (this.myRoomList.length >= 5) {
-        this.OPEN_ALERT_DIALOG('無料ユーザーは5ルームまでしか作れません')
+      if (this.myRoomList.length >= 10) {
+        this.OPEN_ALERT_DIALOG('無料ユーザーは10ルームまでしか作れません')
         return
       }
 

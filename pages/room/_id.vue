@@ -74,7 +74,7 @@ export default Vue.extend({
   beforeRouteLeave(to, from, next) {
     const promise = new Promise((resolve, reject) => {
       this.$store.commit('warp/set_leaveroom_dialog_object', {
-        message: '部屋を離れますか？',
+        message: 'ルームを離れますか？',
         resolve,
         reject,
         next,

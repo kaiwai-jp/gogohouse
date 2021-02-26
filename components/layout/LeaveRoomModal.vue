@@ -3,7 +3,7 @@
     <div class="alert-modal">
       <p>{{ leaveroomDialogObject.message }}</p>
       <button class="button--green mt-50" @click="success">OK</button>
-      <button class="button--pink mt-50" @click="fail">キャンセル</button>
+      <button class="button--brown mt-50" @click="fail">キャンセル</button>
     </div>
   </div>
 </template>

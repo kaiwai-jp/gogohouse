@@ -92,7 +92,7 @@ export default Vue.extend({
       } else if (this.room.room_type === 'closed') {
         return 'クローズドルームです。メンバーだけが入れます。'
       } else if (this.room.room_type) {
-        return '不明なタイプの部屋です。'
+        return '不明なタイプのルームです。'
       }
       return 'loading...'
     },

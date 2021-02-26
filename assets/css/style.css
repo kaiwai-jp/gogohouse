@@ -39,11 +39,11 @@ html {
   background-color: #009721;
 }
 
-.button--pink {
+.button--brown {
   display: inline-block;
   border-radius: 20px;
   color: #ffffff;
-  background-color: #bd51ab;
+  background-color: #d49940;
   text-decoration: none;
   padding: 10px 30px;
   margin-left: 15px;
@@ -51,9 +51,9 @@ html {
   font-weight: 700;
 }
 
-.button--pink:hover {
+.button--brown:hover {
   color: #fff;
-  background-color: #bd009d;
+  background-color: #d48002;
 }
 
 .button--mini {

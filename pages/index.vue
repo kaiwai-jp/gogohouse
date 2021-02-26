@@ -10,7 +10,7 @@
           <nuxt-link to="/home">ホームへ</nuxt-link>
         </div>
         <div class="mb-50">
-          <button class="button--pink" @click="signout">ログアウト</button>
+          <button class="button--brown" @click="signout">ログアウト</button>
           <button class="button--green" @click="reload">リロード</button>
         </div>
       </div>
