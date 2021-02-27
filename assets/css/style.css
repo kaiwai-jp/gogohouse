@@ -77,7 +77,7 @@ html {
 
 .container {
   margin: 0 auto;
-  min-height: calc(100vh - 108px);
+  min-height: calc(100vh - 110px);
   display: flex;
   justify-content: center;
   align-items: center;

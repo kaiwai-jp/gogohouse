@@ -41,6 +41,13 @@
             <td>〇</td>
           </tr>
           <tr>
+            <td>Edge</td>
+            <td>〇</td>
+            <td>―</td>
+            <td>―</td>
+            <td>―</td>
+          </tr>
+          <tr>
             <td>Twitter WebView</td>
             <td>―</td>
             <td>―</td>
@@ -189,7 +196,7 @@ export default Vue.extend({})
 
 <style lang="scss" scoped>
 .connect-info {
-  width: 300px;
+  width: 305px;
   border-collapse: collapse;
   table-layout: fixed;
 }
@@ -207,10 +214,12 @@ export default Vue.extend({})
   font-size: 16px;
   list-style-type: none;
   padding-left: 0;
+  font-weight: 300;
 }
 
 li {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  padding-top: 5px;
   border-top: solid 1px $color6;
 }
 
