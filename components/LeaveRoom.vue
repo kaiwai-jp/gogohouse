@@ -33,6 +33,11 @@ export default Vue.extend({
           location.reload()
         }
       }
+      if (mutation.type === 'user/set_user') {
+        if (mutation.payload.current_room !== this.roomId) {
+          location.reload()
+        }
+      }
     })
     this.ROOM_LISTENER(this.roomId)
   },
