@@ -2,6 +2,12 @@
   <div class="container">
     <div>
       <h1 class="title">ヘルプ</h1>
+      <h2 class="subtitle mt-50">使い方</h2>
+      <ul class="words">
+        <li>
+          Twitter連携してルームに入るだけでフォロワーとワイワイお喋り空間に参加できます。
+        </li>
+      </ul>
       <h2 class="subtitle mt-50">動作状況</h2>
       <p class="words">いずれも最新版にて確認</p>
       <table class="connect-info">
@@ -44,11 +50,17 @@
         </tbody>
       </table>
       <h2 class="subtitle mt-50">公式アカウント</h2>
-      <a href="https://twitter.com/joinGoGoHouse">@joinGoGoHouse</a>
+      <a
+        href="https://twitter.com/joinGoGoHouse"
+        target="_blank"
+        class="official-twitter"
+      >
+        @joinGoGoHouse
+      </a>
       <h2 class="subtitle mt-50">用語解説</h2>
       <ul class="words">
         <li>
-          ルーム・・・音声チャットができる場所です。数人が対談してほかの人は聴くだけのような使い方もできます。
+          ルーム・・・音声チャットができる場所です。数人がトークしてほかの人は聴くだけのような使い方もできます。
         </li>
         <li>
           ドア・・・ルームの入り口です。Twitterにリンクを張るときはここのURLをお願いします。
@@ -71,6 +83,9 @@
         <li>
           予約メンバー・・・TwitterユーザーがまだGoGoHouseにログインしていない場合は、
           予約メンバーとして登録しておき、連携後にメンバーに昇格します。
+        </li>
+        <li>
+          マイク権は「いつでも誰でも」「オーナーがルームにいるとき」「オーナーが指名した時」から選べ細かく管理できるのが特徴です。
         </li>
         <li>マイルーム一覧・・・ユーザーが作って管理しているルーム一覧です</li>
         <li>メンバールーム一覧・・・ユーザーが属しているルーム一覧です</li>
@@ -183,6 +198,10 @@ export default Vue.extend({})
   border: solid 1px $color1;
 }
 
+.official-twitter {
+  font-size: 28px;
+}
+
 .words {
   text-align: left;
   font-size: 16px;
@@ -192,6 +211,7 @@ export default Vue.extend({})
 
 li {
   margin-bottom: 20px;
+  border-top: solid 1px $color6;
 }
 
 .reload {

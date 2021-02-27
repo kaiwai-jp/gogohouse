@@ -5,7 +5,7 @@
         <li><a href="/term.html" target="_blank">利用規約</a></li>
         <li><nuxt-link to="/help">ヘルプ</nuxt-link></li>
       </ul>
-      <span class="copyright">Copyright 国崎犀考</span>
+      <span class="copyright">Copyright 国崎犀考@saikou_kunisaki</span>
     </footer>
   </div>
 </template>
