@@ -29,8 +29,8 @@ html {
   background-color: #35bd53;
   text-decoration: none;
   padding: 10px 30px;
-  margin-left: 15px;
-  margin-bottom: 5px;
+  margin-left: 6px;
+  margin-right: 6px;
   font-weight: 700;
 }
 
@@ -43,17 +43,18 @@ html {
   display: inline-block;
   border-radius: 20px;
   color: #ffffff;
-  background-color: #d49940;
+  background-color: #e0a853;
   text-decoration: none;
   padding: 10px 30px;
-  margin-left: 15px;
+  margin-left: 6px;
+  margin-right: 6px;
   margin-bottom: 5px;
   font-weight: 700;
 }
 
 .button--brown:hover {
   color: #fff;
-  background-color: #d48002;
+  background-color: #e68a00;
 }
 
 .button--mini {

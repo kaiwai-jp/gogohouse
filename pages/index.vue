@@ -15,8 +15,15 @@
         </div>
       </div>
       <TwitterPublish
-        text="DL不要でTwitterフォロワーとお喋りできる音声チャットサービスができました！その名もGoGoHouse！"
+        text="DL不要でTwitterフォロワーとワイワイお喋りできる音声チャットサービスができました！1ルーム20人まで。聴くだけも可。"
       />
+      <ul class="feature">
+        <li>暗号化でセキュリティは安心</li>
+        <li>超低遅延で快適</li>
+        <li>各設定を細かく管理</li>
+        <li>アプリのインストール不要</li>
+        <li>Twitter for Android内で使える</li>
+      </ul>
     </div>
   </div>
 </template>
@@ -61,4 +68,18 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.feature {
+  margin-top: 50px;
+  margin-bottom: 10px;
+  list-style-type: none;
+  text-align: left;
+  color: $color1;
+}
+
+.feature li::before {
+  color: black;
+  content: '☑';
+  margin-right: 5px;
+}
+</style>
