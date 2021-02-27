@@ -92,7 +92,7 @@ export default Vue.extend({
 
       if (this.room.mic_enable === 'any') return true
 
-      if (this.room.mic_enable === 'owner') {
+      if (this.room.mic_enable === 'owner' || !this.room.mic_enable) {
         for (let i = 0; i < this.roomOnlineUsers.length; i++) {
           //@ts-ignore
           if (owner_id === this.roomOnlineUsers[i].uid) {
