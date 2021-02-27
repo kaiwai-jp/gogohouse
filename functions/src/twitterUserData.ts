@@ -21,7 +21,7 @@ module.exports = async (
         twitter: screenName,
         name: response[0].name,
         twitter_id: response[0].id_str,
-        icon: response[0].profile_image_url,
+        icon: response[0].profile_image_url_https,
         profile: response[0].description,
       }
       return userJson
