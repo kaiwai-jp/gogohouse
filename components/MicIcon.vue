@@ -1,15 +1,15 @@
 <template>
   <div class="main">
     <span v-show="!ifStream">
-      <img src="/mic_off_icon.png" class="mic" />
+      <img src="/mic_off_icon.png" alt="マイクオフ" class="mic" />
     </span>
     <span v-show="ifStream">
       <span v-show="micStatusOn" @click="mute">
-        <img src="/mic_on_icon.png" class="mic" />
+        <img src="/mic_on_icon.png" alt="マイクオン" class="mic" />
         <img src="/mic_on_icon.png" class="mic_animation" />
       </span>
       <span v-show="micStatusMute" @click="unmute">
-        <img src="/mic_mute_icon.png" class="mic" />
+        <img src="/mic_mute_icon.png" alt="マイクミュート" class="mic" />
       </span>
     </span>
   </div>

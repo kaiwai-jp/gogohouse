@@ -13,7 +13,7 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'DL不要の音声チャット。Twitterフォロワーとお喋りしよう。入室と発言権を細かく管理できて、Twitter連携だけですぐに参加できる音声チャットサービスです。',
+          'DL不要でフォロワーとお喋りしよう。入室とマイク権を細かく管理できて、Twitter連携だけですぐに参加できる音声チャットサービスです。',
       },
       { hid: 'og:site_name', property: 'og:site_name', content: 'GoGoHouse' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
@@ -21,13 +21,13 @@ export default {
       {
         hid: 'og:title',
         property: 'og:title',
-        content: 'GoGoHouse | DL不要の音声チャット',
+        content: 'GoGoHouse | 5秒で音声チャット',
       },
       {
         hid: 'og:description',
         property: 'og:description',
         content:
-          'Twitterフォロワーとお喋りしよう。入室と発言権を細かく管理できて、Twitter連携だけですぐに参加できる音声チャットサービス！',
+          'DL不要でフォロワーとお喋りしよう。入室とマイク権を細かく管理できて、Twitter連携だけですぐに参加できる音声チャットサービスです。',
       },
       {
         hid: 'og:image',

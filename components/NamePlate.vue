@@ -12,11 +12,13 @@
       <img
         class="speaker-icon"
         src="/speaker_icon.png"
+        alt="接続確立"
         v-show="isSpeaker && !isDisconnect"
       />
       <img
         class="speaker-icon"
         src="/speaker_disconnect_icon.png"
+        alt="接続中"
         v-show="isSpeaker && isDisconnect"
       />
     </client-only>
@@ -109,7 +111,9 @@ a {
 }
 
 .speaker-icon {
+  display: inline-block;
   width: 36px;
   height: 36px;
+  margin-bottom: 8px;
 }
 </style>

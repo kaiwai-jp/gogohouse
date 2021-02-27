@@ -2,8 +2,12 @@
   <div class="bt-1">
     <h2 class="subtitle">ルーム作成</h2>
     <div class="room-block">
-      <label for="room-name" class="room-label">ルーム名 50文字まで</label>
-      <input v-model="newRoomName" class="room-name" id="room-name" />
+      <input
+        v-model="newRoomName"
+        placeholder="ルーム名 50文字まで"
+        class="room-name"
+        id="room-name"
+      />
       <select v-model="roomType" class="room-type">
         <option value="open">オープン</option>
         <option value="social">ソーシャル</option>
@@ -74,14 +78,6 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .room-block {
   display: inline-block;
-}
-
-.room-label {
-  display: block;
-  margin-bottom: 5px;
-  text-align: left;
-  font-size: 11px;
-  color: $color2;
 }
 
 .room-name {

@@ -7,6 +7,7 @@
     </div>
     <a class="button--twitter" @click="twitterSignin">
       <img
+        alt="Twitterアイコン"
         src="/twitter_logo.png"
         class="twitter-logo"
       />twitter連携してログイン

@@ -13,7 +13,7 @@
       </select>
     </div>
 
-    <h2 class="subtitle mt-50">マイク権ありの人</h2>
+    <h2 class="subtitle mt-50">マイク権のある人</h2>
     <div v-for="uid in room.mic_assign" :key="uid + 'mic_enable'">
       <NamePlateMini :uid="uid" class="twitter_identity" />
       <button @click="clickReleaseMicAssign(uid)" class="button--mini">

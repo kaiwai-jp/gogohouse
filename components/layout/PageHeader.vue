@@ -2,13 +2,13 @@
   <div>
     <header>
       <div class="left-area">
-        <img src="/peace.png" class="gogo-icon" />
+        <img src="/peace.png" alt="GoGoHouseアイコン" class="gogo-icon" />
         <nuxt-link to="/" class="top-link">GoGoHouse</nuxt-link>
       </div>
       <div class="right-area">
         <NamePlateMini :uid="me.uid" :shorten="true" class="twitter_identity" />
         <nuxt-link to="/home" class="home_area">
-          <img src="/home.png" class="home-icon" />
+          <img src="/home.png" alt="ホームアイコン" class="home-icon" />
         </nuxt-link>
       </div>
     </header>

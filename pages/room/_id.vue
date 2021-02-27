@@ -3,7 +3,7 @@
     <div>
       <h1 class="title">{{ room.name }}</h1>
       オーナー：<NamePlateMini :uid="room.owner_id" class="owner-identity" />
-      <IamMemberDisplay class="i-am-member" />
+      <IamMemberDisplay class="inline-block" />
       <button @click="manageModal = true" v-if="ifOwner" class="button--mini">
         ルーム管理
       </button>
@@ -19,7 +19,8 @@
         </div>
         <LeaveRoom />
       </div>
-      <WebrtcDebug class="m-50" />
+      <WebrtcDebug class="m-50 inline-block" />
+      <TwitterPublish :text="twitterText" class="m-50 inline-block" />
     </div>
   </div>
 </template>
@@ -36,6 +37,7 @@ import WebrtcDebug from '@/components/WebrtcDebug.vue'
 import NamePlateMini from '@/components/NamePlateMini.vue'
 import ManageRoom from '@/components/ManageRoom.vue'
 import IamMemberDisplay from '@/components/IamMemberDisplay.vue'
+import TwitterPublish from '@/components/TwitterPublish.vue'
 
 interface DataType {
   localStream: MediaStream | undefined
@@ -51,6 +53,7 @@ export default Vue.extend({
     NamePlateMini,
     ManageRoom,
     IamMemberDisplay,
+    TwitterPublish,
   },
   data(): DataType {
     return {
@@ -69,6 +72,9 @@ export default Vue.extend({
         return true
       }
       return false
+    },
+    twitterText(): string {
+      return 'なう'
     },
   },
   beforeRouteLeave(to, from, next) {
@@ -105,7 +111,7 @@ export default Vue.extend({
   display: inline-block;
 }
 
-.i-am-member {
+.inline-block {
   display: inline-block;
 }
 </style>

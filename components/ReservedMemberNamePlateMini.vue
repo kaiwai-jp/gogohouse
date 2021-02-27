@@ -1,6 +1,11 @@
 <template>
   <div class="plate">
-    <img :src="userData.icon" v-if="userData.icon" class="icon" />
+    <img
+      :src="userData.icon"
+      alt="アイコン"
+      v-if="userData.icon"
+      class="icon"
+    />
     <span class="display-name" v-if="name">
       {{ name }}
     </span>

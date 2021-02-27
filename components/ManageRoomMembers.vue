@@ -33,9 +33,13 @@
       </button>
     </div>
 
-    <h2 class="subtitle mt-50">Twitterアカウントで<wbr />メンバー追加</h2>
+    <h2 class="subtitle mt-50">メンバー追加</h2>
     <div>
-      <input class="room-name" v-model="addTwitter" />
+      <input
+        class="room-name"
+        v-model="addTwitter"
+        placeholder="@Twitterアカウント"
+      />
       <button @click="clickAddMemberByTwitter" class="button--mini">
         追加
       </button>

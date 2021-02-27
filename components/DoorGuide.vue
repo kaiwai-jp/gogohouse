@@ -21,7 +21,9 @@ export default Vue.extend({
   computed: {
     ...roomMapper.mapGetters(['room']),
     twitterText(): String {
-      return 'GoGoHouse「' + this.room.name + '」でフォロワーとお喋りしよう'
+      return (
+        'GoGoHouse「' + this.room.name + '」ルームでフォロワーとお喋りしよう'
+      )
     },
   },
 })
