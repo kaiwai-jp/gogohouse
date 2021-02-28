@@ -21,7 +21,7 @@ export default {
       {
         hid: 'og:title',
         property: 'og:title',
-        content: 'GoGoHouse | 5秒で音声チャット',
+        content: 'GoGoHouse',
       },
       {
         hid: 'og:description',

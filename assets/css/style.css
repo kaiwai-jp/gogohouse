@@ -111,8 +111,14 @@ a {
 }
 
 .list_square {
+  display: block;
   margin-top: 10px;
   font-size: 16px;
+}
+
+.list_square a {
+  text-decoration-color: yellow;
+  text-decoration-thickness: 4px;
 }
 
 .list_square:before {

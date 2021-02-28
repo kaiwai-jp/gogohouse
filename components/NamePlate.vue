@@ -89,12 +89,15 @@ export default Vue.extend({
 .icon {
   display: inline-block;
   border-radius: 50%;
+  width: 42px;
+  height: 42px;
 }
 
 .name-area {
   display: inline-block;
   vertical-align: top;
   margin-left: 5px;
+  line-height: 1.4rem;
 }
 
 .name {

@@ -6,7 +6,7 @@
     <span v-show="ifStream">
       <span v-show="micStatusOn" @click="mute">
         <img src="/mic_on_icon.png" alt="マイクオン" class="mic" />
-        <img src="/mic_on_icon.png" class="mic_animation" />
+        <img src="/mic_on_icon.png" class="mic-animation" />
       </span>
       <span v-show="micStatusMute" @click="unmute">
         <img src="/mic_mute_icon.png" alt="マイクミュート" class="mic" />
@@ -78,15 +78,15 @@ export default Vue.extend({
 .mic {
   position: absolute;
   top: 0;
-  left: -30px;
+  left: -35px;
   width: 36px;
   height: 36px;
 }
 
-.mic_animation {
+.mic-animation {
   position: absolute;
   top: 0;
-  left: -30px;
+  left: -35px;
   width: 36px;
   height: 36px;
 
