@@ -29,7 +29,9 @@
         ルーム管理
       </button>
       <DoorGuide class="m-50" />
-      <p>Twitterフォロワーと音声トークができるサービスです。聴くだけも可。</p>
+      <p class="service">
+        Twitterフォロワーと音声トークができるサービスです。聴くだけも可。
+      </p>
     </div>
     <div v-if="!roomLoaded">
       <div v-show="room" class="subtitle">Loading...</div>
@@ -155,5 +157,9 @@ export default Vue.extend({
 
 .twitter-publish {
   display: block;
+}
+
+.service {
+  margin-bottom: 10px;
 }
 </style>

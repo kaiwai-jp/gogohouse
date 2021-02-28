@@ -108,7 +108,6 @@ a {
   color: #ffffff;
   text-decoration: none;
   padding: 10px 20px;
-  margin-left: 15px;
   font-weight: 600;
   cursor: pointer;
 }
