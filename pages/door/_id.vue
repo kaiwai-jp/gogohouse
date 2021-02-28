@@ -108,7 +108,11 @@ export default Vue.extend({
       return false
     },
     twitterText(): String {
-      return 'GoGoHouse「' + this.room.name + '」でフォロワーとお喋りしよう'
+      return (
+        'GoGoHouse「' +
+        this.room.name +
+        '」で音声トークをします。ご参加ください。'
+      )
     },
   },
   async created() {
