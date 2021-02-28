@@ -23,7 +23,7 @@
       <ul class="feature">
         <li>アプリのインストール不要</li>
         <li>暗号化で安心</li>
-        <li>超低遅延で快適</li>
+        <li>音声が超低遅延で快適</li>
       </ul>
     </div>
   </div>

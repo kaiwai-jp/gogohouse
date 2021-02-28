@@ -19,8 +19,11 @@
         </div>
         <LeaveRoom />
       </div>
-      <WebrtcDebug class="m-50 inline-block" />
-      <TwitterPublish :text="twitterText" class="m-50 inline-block" />
+      <div class="m-50">
+        Twitterに貼ってフォロワーに知らせよう
+        <TwitterPublish :text="twitterText" class="inline-block" />
+      </div>
+      <WebrtcDebug class="mb-50 inline-block" />
     </div>
   </div>
 </template>
@@ -74,7 +77,7 @@ export default Vue.extend({
       return false
     },
     twitterText(): string {
-      return 'なう'
+      return '音声トークなう！'
     },
   },
   beforeRouteLeave(to, from, next) {

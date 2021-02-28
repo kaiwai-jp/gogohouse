@@ -2,7 +2,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   mode: 'spa',
   head: {
-    title: 'GoGoHouse',
+    title: 'GoGoHouse | 音声トークをフォロワーと',
     htmlAttrs: {
       lang: 'ja',
     },
@@ -13,21 +13,25 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'DL不要でフォロワーとお喋りしよう。入室とマイク権を細かく管理できて、Twitter連携だけですぐに参加できる音声チャットサービスです。',
+          'DL不要でフォロワーとお喋りしよう。入室とマイク権を細かく管理できて、Twitter連携だけですぐに参加できる音声トークサービスです。',
       },
-      { hid: 'og:site_name', property: 'og:site_name', content: 'GoGoHouse' },
+      {
+        hid: 'og:site_name',
+        property: 'og:site_name',
+        content: 'GoGoHouse | 音声トークをフォロワーと',
+      },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:url', property: 'og:url', content: 'https://gogo.house' },
       {
         hid: 'og:title',
         property: 'og:title',
-        content: 'GoGoHouse',
+        content: 'GoGoHouse | 音声トークをフォロワーと',
       },
       {
         hid: 'og:description',
         property: 'og:description',
         content:
-          'DL不要でフォロワーとお喋りしよう。入室とマイク権を細かく管理できて、Twitter連携だけですぐに参加できる音声チャットサービスです。',
+          'DL不要でフォロワーとお喋りしよう。入室とマイク権を細かく管理できて、Twitter連携だけですぐに参加できる音声トークサービスです。',
       },
       {
         hid: 'og:image',
