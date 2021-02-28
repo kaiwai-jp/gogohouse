@@ -10,6 +10,10 @@
         </li>
       </ul>
       <h2 class="subtitle mt-50">動作状況</h2>
+      <p class="reload m-50">
+        2/28現在、新規のTwitter連携がうまくいかないようです。もう少しお待ちください。
+        クローズドβテストにて連携済みのアカウントはそのまま使えます。
+      </p>
       <p class="words">いずれも最新版にて確認</p>
       <table class="connect-info">
         <tbody>
@@ -118,7 +122,7 @@
           >・・・ユーザーが属しているルーム一覧です
         </li>
       </ul>
-      <h2 class="subtitle mt-50">無料ユーザーの仕様</h2>
+      <h2 class="subtitle mt-50">ユーザーの仕様</h2>
       <ul class="words">
         <li>
           <strong>音声通信</strong>・・・webRTCによるメッシュ型P2Pネットワーク

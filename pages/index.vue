@@ -99,10 +99,7 @@ export default Vue.extend({
 }
 
 .to-home {
-  color: black;
-  font-weight: 700;
-  text-decoration-color: red;
-  text-decoration-thickness: 4px;
+  text-decoration: none;
 }
 
 .feature {
