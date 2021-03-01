@@ -19,9 +19,10 @@
       </div>
 
       <TwitterPublish
-        class="mt-50"
+        class="mt-20"
         text="DL不要でTwitterフォロワーとワイワイお喋りできる音声トークサービスができました！1ルーム20人まで。聴くだけも可。"
       />
+      <p class="mt-20 notice">※iPhone/iPadの人はブラウザからどうぞ</p>
       <ul class="feature">
         <li>アプリのインストール不要</li>
         <li>暗号化で安心</li>
@@ -114,5 +115,13 @@ export default Vue.extend({
   color: black;
   content: '☑';
   margin-right: 5px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.notice {
+  font-weight: 600;
 }
 </style>

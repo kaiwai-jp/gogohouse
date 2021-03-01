@@ -13,17 +13,17 @@
       <div v-if="isSignin">
         <div v-if="roomOnlineUsers.length <= 20"><EnterRoom /></div>
         <div v-else>満員です！</div>
-        <div class="members">
-          <h2 class="subtitle mt-50" v-show="roomOnlineUsers.length">
-            今ルームにいるユーザー
-          </h2>
-        </div>
-        <OnlineUsers :link="true" />
-        <div class="members" v-if="ifRoomMembersShow">
-          <h2 class="subtitle mt-50">メンバー</h2>
-          <RoomMembers :link="true" :members="room.members" />
-          <ReservedRoomMembers :members="room.reserved_members || []" />
-        </div>
+      </div>
+      <div class="members">
+        <h2 class="subtitle mt-50" v-show="roomOnlineUsers.length">
+          今ルームにいるユーザー
+        </h2>
+      </div>
+      <OnlineUsers :link="true" />
+      <div class="members" v-if="ifRoomMembersShow">
+        <h2 class="subtitle mt-50">メンバー</h2>
+        <RoomMembers :link="true" :members="room.members" />
+        <ReservedRoomMembers :members="room.reserved_members || []" />
       </div>
       <button v-if="isOwner" @click="modal = true" class="button--mini">
         ルーム管理

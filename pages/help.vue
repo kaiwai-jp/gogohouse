@@ -11,8 +11,7 @@
       </ul>
       <h2 class="subtitle mt-50">動作状況</h2>
       <p class="reload m-50">
-        2/28現在、新規のTwitter連携がうまくいかないようです。もう少しお待ちください。<br />
-        クローズドβテストにて連携済みのアカウントはそのまま使えます。
+        3/1 API Keyの入れ替えを行い、新規にTwitter連携ができるようになりました。
       </p>
       <p class="words">いずれも最新版にて確認</p>
       <table class="connect-info">
