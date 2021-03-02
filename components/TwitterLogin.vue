@@ -1,18 +1,20 @@
 <template>
   <div class="main">
-    <div class="agree-checkbox">
-      <a href="term.html" target="_blank">利用規約</a>に
-      <input type="checkbox" v-model="agree" id="checkbox" />
-      <label for="checkbox">同意する</label>
+    <div class="agree-area">
+      <div class="agree-checkbox">
+        <a href="/term.html" target="_blank">利用規約</a>に
+        <input type="checkbox" v-model="agree" id="checkbox" />
+        <label for="checkbox">同意する</label>
+      </div>
+      <a class="button--twitter" @click="twitterSignin">
+        <img
+          alt="Twitterアイコン"
+          src="/twitter_logo.png"
+          class="twitter-logo"
+        />twitter連携してログイン
+      </a>
+      <div class="notice">※勝手にツイートすることはありません</div>
     </div>
-    <a class="button--twitter" @click="twitterSignin">
-      <img
-        alt="Twitterアイコン"
-        src="/twitter_logo.png"
-        class="twitter-logo"
-      />twitter連携してログイン
-    </a>
-    <div class="notice">※勝手にツイートすることはありません</div>
     <div class="ios-notice">※iPhone/iPadの人はブラウザからどうぞ</div>
   </div>
 </template>
@@ -60,8 +62,15 @@ export default Vue.extend({
   position: relative;
   display: inline-block;
 }
+
+.agree-area {
+  padding: 20px 45px;
+  background-color: white;
+  box-shadow: 10px 10px 6px -6px #777;
+}
+
 .agree-checkbox {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .agree-checkbox label:before {
@@ -70,7 +79,7 @@ export default Vue.extend({
   height: 20px;
   display: inline-block;
   position: absolute;
-  right: 30px;
+  right: 60px;
   background-color: #fff;
   box-shadow: inset 1px 1px 1px 0px #000;
   border-radius: 4px 4px 4px 4px;

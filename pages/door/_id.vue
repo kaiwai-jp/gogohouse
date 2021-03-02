@@ -8,7 +8,7 @@
       </h2>
       <NamePlate :uid="room.owner_id" :link="true" class="mb-50" />
       <div v-if="!isSignin">
-        <TwitterLogin class="mb-50" />
+        <TwitterLogin class="correct-twitter" />
       </div>
       <div v-if="isSignin">
         <div v-if="roomOnlineUsers.length <= 20"><EnterRoom /></div>
@@ -177,6 +177,11 @@ export default Vue.extend({
 
 .owner {
   text-align: left;
+}
+
+.correct-twitter {
+  margin-left: -20px;
+  margin-right: -20px;
 }
 
 .members {
