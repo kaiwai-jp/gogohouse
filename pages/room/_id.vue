@@ -21,7 +21,7 @@
       </div>
       <div class="m-50">
         Twitterに貼ってフォロワーに知らせよう
-        <TwitterPublish :text="twitterText" class="inline-block" />
+        <TwitterPublish :text="twitterText" class="inline-block mt-10" />
       </div>
       <WebrtcDebug class="mb-50 inline-block" />
     </div>
@@ -116,5 +116,9 @@ export default Vue.extend({
 
 .inline-block {
   display: inline-block;
+}
+
+.mt-10 {
+  margin-top: 10px;
 }
 </style>

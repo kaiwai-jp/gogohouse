@@ -2,7 +2,7 @@
   <div class="container">
     <div>
       <div class="gogo-area">
-        <h1 class="title gogo-title">フォロワーと<br />音声トークしよう</h1>
+        <h1 class="gogo-title">Twitterフォロワーと<br />音声トークしよう</h1>
       </div>
       <div class="m-50" v-if="!isSignin">
         <TwitterLogin jump="/home" />
@@ -22,11 +22,10 @@
         class="mt-20"
         text="DL不要でTwitterフォロワーとワイワイお喋りできる音声トークサービスができました！1ルーム20人まで。聴くだけも可。"
       />
-      <p class="mt-20 notice">※iPhone/iPadの人はブラウザからどうぞ</p>
       <ul class="feature">
         <li>アプリのインストール不要</li>
-        <li>暗号化で安心</li>
-        <li>音声が超低遅延で快適</li>
+        <li>音声通信が暗号化で安心</li>
+        <li>音声を保存しません</li>
         <li>1ルーム20人まで</li>
       </ul>
     </div>
@@ -115,13 +114,5 @@ export default Vue.extend({
   color: black;
   content: '☑';
   margin-right: 5px;
-}
-
-.mt-20 {
-  margin-top: 20px;
-}
-
-.notice {
-  font-weight: 600;
 }
 </style>

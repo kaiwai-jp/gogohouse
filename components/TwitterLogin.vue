@@ -13,6 +13,7 @@
       />twitter連携してログイン
     </a>
     <div class="notice">※勝手にツイートすることはありません</div>
+    <div class="ios-notice">※iPhone/iPadの人はブラウザからどうぞ</div>
   </div>
 </template>
 
@@ -69,7 +70,7 @@ export default Vue.extend({
   height: 20px;
   display: inline-block;
   position: absolute;
-  right: 15px;
+  right: 30px;
   background-color: #fff;
   box-shadow: inset 1px 1px 1px 0px #000;
   border-radius: 4px 4px 4px 4px;
@@ -110,5 +111,11 @@ a {
   padding: 10px 20px;
   font-weight: 600;
   cursor: pointer;
+}
+
+.ios-notice {
+  margin-top: 20px;
+  font-weight: 600;
+  border-bottom: solid 1px red;
 }
 </style>

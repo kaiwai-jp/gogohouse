@@ -8,7 +8,7 @@
         class="mic-enable-select"
       >
         <option value="owner">オーナーがルームにいるとき</option>
-        <option value="any">いつでも誰でも</option>
+        <option value="any">ルーム内のいつでも誰でも</option>
         <option value="assign">オーナーが指名したとき</option>
       </select>
     </div>
@@ -30,11 +30,7 @@ import ManageRoomMembers from '@/components/ManageRoomMembers.vue'
 
 import userMapper from '@/store/user'
 import roomMapper from '@/store/room'
-import {
-  updateMicEnable,
-  micAssign,
-  releaseMicAssign,
-} from '@/service/roomAPI'
+import { updateMicEnable, micAssign, releaseMicAssign } from '@/service/roomAPI'
 
 export type DataType = {
   modal: boolean

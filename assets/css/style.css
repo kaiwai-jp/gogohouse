@@ -144,3 +144,7 @@ a {
   border-top: solid 1px #a0a0a0;
   padding-top: 10px;
 }
+
+.mt-20 {
+  margin-top: 20px;
+}

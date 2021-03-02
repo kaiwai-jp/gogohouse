@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <ul class="notice">
-      <li>iPhone/iPadのTwitterアプリ内では動作しません。</li>
+      <li>Android for Twitterアプリ内でも動作します。</li>
       <li>このページのURLをTwitterでシェアしてください。</li>
       <TwitterPublish :text="twitterText" />
     </ul>

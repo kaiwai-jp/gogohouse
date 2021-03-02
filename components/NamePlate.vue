@@ -115,8 +115,8 @@ a {
 
 .speaker-icon {
   display: inline-block;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   margin-bottom: 8px;
 }
 </style>

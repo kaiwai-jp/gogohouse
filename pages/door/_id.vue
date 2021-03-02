@@ -25,6 +25,10 @@
         <RoomMembers :link="true" :members="room.members" />
         <ReservedRoomMembers :members="room.reserved_members || []" />
       </div>
+      <div class="mic-enable">
+        <h2 class="subtitle mt-50">マイク権</h2>
+        <p class="description">{{ micDescription }}</p>
+      </div>
       <button v-if="isOwner" @click="modal = true" class="button--mini">
         ルーム管理
       </button>
@@ -104,9 +108,33 @@ export default Vue.extend({
       }
       return 'loading...'
     },
+    micDescription(): String {
+      if (this.room.mic_enable === 'owner' || !this.room.mic_enable) {
+        return 'オーナーがルームにいるとき'
+      } else if (this.room.mic_enable === 'any') {
+        return 'ルーム内のいつでも誰でも'
+      } else if (this.room.mic_enable === 'assign') {
+        return 'オーナーが指名したとき'
+      }
+      return '不明なタイプのマイク権です。'
+    },
     ifRoomMembersShow(): Boolean {
-      if (typeof this.room.members === 'object' && this.room.members.length > 1)
+      let count = 0
+      if (
+        typeof this.room.members === 'object' &&
+        this.room.members.length >= 1
+      ) {
+        count += this.room.members.length
+      }
+      if (
+        typeof this.room.reserved_members === 'object' &&
+        this.room.reserved_members.length >= 1
+      ) {
+        count += this.room.reserved_members.length
+      }
+      if (count >= 2) {
         return true
+      }
       return false
     },
     twitterText(): String {
@@ -152,6 +180,10 @@ export default Vue.extend({
 }
 
 .members {
+  text-align: left;
+}
+
+.mic-enable {
   text-align: left;
 }
 
