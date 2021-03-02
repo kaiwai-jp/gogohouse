@@ -19,7 +19,7 @@
         </div>
         <LeaveRoom />
       </div>
-      <div class="m-50">
+      <div class="m-50" v-if="room.name">
         Twitterに貼ってフォロワーに知らせよう
         <TwitterPublish :text="twitterText" class="inline-block mt-10" />
       </div>
@@ -77,7 +77,7 @@ export default Vue.extend({
       return false
     },
     twitterText(): string {
-      return '音声トークなう！'
+      return '「' + this.room.name + '」で音声トークなう！'
     },
   },
   beforeRouteLeave(to, from, next) {

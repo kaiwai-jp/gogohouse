@@ -8,6 +8,7 @@
       </h2>
       <NamePlate :uid="room.owner_id" :link="true" class="mb-50" />
       <div v-if="!isSignin">
+        <p class="service">Twitterフォロワーと音声トークができるサービスです</p>
         <TwitterLogin class="correct-twitter" />
       </div>
       <div v-if="isSignin">
@@ -33,9 +34,6 @@
         ルーム管理
       </button>
       <DoorGuide class="m-50" />
-      <p class="service">
-        Twitterフォロワーと音声トークができるサービスです。聴くだけも可。
-      </p>
     </div>
     <div v-if="!roomLoaded">
       <div v-show="room" class="subtitle">Loading...</div>
@@ -136,13 +134,6 @@ export default Vue.extend({
         return true
       }
       return false
-    },
-    twitterText(): String {
-      return (
-        'GoGoHouse「' +
-        this.room.name +
-        '」で音声トークをします。ご参加ください。'
-      )
     },
   },
   async created() {

@@ -22,9 +22,17 @@
         class="mt-20"
         text="DL不要でTwitterフォロワーとワイワイお喋りできる音声トークサービスができました！1ルーム20人まで。聴くだけも可。"
       />
-      <ul class="feature">
+      <div class="impression">
+        Aさん
+        「AndroidなのでClubhouseを諦めていたのですが、音声トークを楽しめるサービスに出会えました！」 
+      </div>
+      <div class="impression">
+        Bさん
+        「私はオタクだけど会社では隠してて裏垢をもっています、そっちの仲間と話すことができて楽しかったです」
+      </div>
+      <ul class="impression feature">
         <li>アプリのインストール不要</li>
-        <li>音声通信が暗号化で安心</li>
+        <li>すべての通信が暗号化で安心</li>
         <li>音声を保存しません</li>
         <li>1ルーム20人まで</li>
       </ul>
@@ -86,6 +94,9 @@ export default Vue.extend({
   padding-top: 20px;
   padding-left: 20px;
   text-align: left;
+  text-shadow: 2px 2px 1px $color1, -2px 2px 1px $color1, 2px -2px 1px $color1,
+    -2px -2px 1px $color1, 2px 0px 1px $color1, 0px 2px 1px $color1,
+    -2px 0px 1px $color1, 0px -2px 1px $color1;
 }
 
 .home-area {
@@ -102,12 +113,20 @@ export default Vue.extend({
   text-decoration: none;
 }
 
-.feature {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  list-style-type: none;
+.impression {
+  margin: 20px auto;
+  width: calc(100vw - 20px);
+  max-width: 380px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  border: solid 1px $color6;
   text-align: left;
-  color: $color1;
+}
+
+.feature {
+  list-style-type: none;
+  padding-left: 20px;
 }
 
 .feature li::before {
