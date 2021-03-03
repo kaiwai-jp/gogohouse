@@ -54,6 +54,15 @@ export default Vue.extend({
       permissionDialog: false,
     }
   },
+  watch: {
+    micPermitted: {
+      handler: function (val, oldVal) {
+        if (!val && oldVal) {
+          this.hangup()
+        }
+      },
+    },
+  },
   created() {
     this.CONNECTION_OFFERED_LISTENER()
     this.$store.subscribe((mutation, state) => {
