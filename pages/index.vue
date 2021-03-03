@@ -19,20 +19,13 @@
       </div>
 
       <TwitterPublish
-        class="mt-20"
+        class="mt-20 mb-50"
         text="DL不要でTwitterフォロワーとワイワイお喋りできる音声トークサービスができました！1ルーム20人まで。聴くだけも可。"
       />
-      <div class="impression">
-        Aさん
-        「AndroidなのでClubhouseを諦めていたのですが、音声トークを楽しめるサービスに出会えました！」 
-      </div>
-      <div class="impression">
-        Bさん
-        「私はオタクだけど会社では隠してて裏垢をもっています、そっちの仲間と話すことができて楽しかったです」
-      </div>
+      <NewRoomList />
       <ul class="impression feature">
         <li>アプリのインストール不要</li>
-        <li>すべての通信が暗号化で安心</li>
+        <li>すべての通信は暗号化されています</li>
         <li>音声を保存しません</li>
         <li>1ルーム20人まで</li>
       </ul>
@@ -48,9 +41,10 @@ import warpMapper from '@/store/warp'
 
 import TwitterLogin from '@/components/TwitterLogin.vue'
 import TwitterPublish from '@/components/TwitterPublish.vue'
+import NewRoomList from '@/components/NewRoomList.vue'
 
 export default Vue.extend({
-  components: { TwitterLogin, TwitterPublish },
+  components: { TwitterLogin, TwitterPublish, NewRoomList },
   computed: {
     ...roomMapper.mapGetters(['room']),
     ...userMapper.mapGetters(['me', 'isSignin']),
@@ -114,7 +108,7 @@ export default Vue.extend({
 }
 
 .impression {
-  margin: 20px auto;
+  margin: 50px auto;
   width: calc(100vw - 20px);
   max-width: 380px;
   padding: 10px;

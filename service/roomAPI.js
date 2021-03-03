@@ -213,3 +213,14 @@ export const updateMicEnable = (roomId, statusString) => {
   const roomRef = db.collection('rooms').doc(roomId)
   roomRef.update({ mic_enable: statusString })
 }
+
+export const getNewRoomList = async (num) => {
+  let roomList = []
+  const roomQuery = db
+    .collection('rooms')
+    .orderBy('created_at', 'desc')
+    .limit(num)
+  const querySnapshot = await roomQuery.get()
+  querySnapshot.forEach((doc) => roomList.push(doc.data()))
+  return roomList
+}

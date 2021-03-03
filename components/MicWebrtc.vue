@@ -138,7 +138,7 @@ export default Vue.extend({
       try {
         this.permissionDialog = true
         this.localStream = await navigator.mediaDevices.getUserMedia({
-          audio: true,
+          audio: { echoCancellation: true, noiseSuppression: true },
         })
         this.SET_MIC_ON()
         /* カメラを開いて即ページ遷移した場合にマイクアクセスが残るのを防ぐ */

@@ -38,6 +38,32 @@ export default {
         property: 'og:image',
         content: 'https://gogo.house/logo.png',
       },
+      {
+        hid: 'twitter:card',
+        property: 'twitter:card',
+        content: 'summary',
+      },
+      {
+        hid: 'twitter:site',
+        property: 'twitter:site',
+        content: '@joinGoGoHouse',
+      },
+      {
+        hid: 'twitter:title',
+        property: 'twitter:title',
+        content: 'GoGoHouse | 音声トークをフォロワーと',
+      },
+      {
+        hid: 'twitter:description',
+        property: 'twitter:description',
+        content:
+          'DL不要でフォロワーとお喋りしよう。入室とマイク権を細かく管理できて、Twitter連携だけですぐに参加できる音声トークサービスです。',
+      },
+      {
+        hid: 'twitter:image',
+        property: 'twitter:image',
+        content: 'https://gogo.house/logo_twitter.png',
+      },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
