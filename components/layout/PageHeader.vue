@@ -6,8 +6,12 @@
         <nuxt-link to="/" class="top-link">GoGoHouse</nuxt-link>
       </div>
       <div class="right-area">
-        <NamePlateMini :uid="me.uid" :shorten="true" class="twitter_identity" />
         <nuxt-link to="/home" class="home_area">
+          <NamePlateMini
+            :uid="me.uid"
+            :shorten="true"
+            class="twitter_identity"
+          />
           <img src="/home.png" alt="ホームアイコン" class="home-icon" />
         </nuxt-link>
       </div>
@@ -47,7 +51,8 @@ header {
   display: table-cell;
   text-align: right;
 }
-.top-link {
+
+a {
   text-decoration: none;
 }
 

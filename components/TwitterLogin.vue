@@ -11,7 +11,7 @@
           alt="Twitterアイコン"
           src="/twitter_logo.png"
           class="twitter-logo"
-        />twitter連携してログイン
+        />Twitter連携でログイン
       </a>
       <div class="notice">※勝手にツイートすることはありません</div>
     </div>
@@ -60,7 +60,9 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .main {
   position: relative;
-  display: inline-block;
+  display: block;
+  width: 320px;
+  margin: 0 auto;
 }
 
 .agree-area {

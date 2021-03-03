@@ -22,7 +22,7 @@
         class="mt-20 mb-50"
         text="DL不要でTwitterフォロワーとワイワイお喋りできる音声トークサービスができました！1ルーム20人まで。聴くだけも可。"
       />
-      <NewRoomList />
+      <NewRoomList class="new-room-list" />
       <ul class="impression feature">
         <li>アプリのインストール不要</li>
         <li>すべての通信は暗号化されています</li>
@@ -88,9 +88,6 @@ export default Vue.extend({
   padding-top: 20px;
   padding-left: 20px;
   text-align: left;
-  text-shadow: 2px 2px 1px $color1, -2px 2px 1px $color1, 2px -2px 1px $color1,
-    -2px -2px 1px $color1, 2px 0px 1px $color1, 0px 2px 1px $color1,
-    -2px 0px 1px $color1, 0px -2px 1px $color1;
 }
 
 .home-area {
@@ -106,7 +103,9 @@ export default Vue.extend({
 .to-home {
   text-decoration: none;
 }
-
+.new-room-list {
+  max-width: 380px;
+}
 .impression {
   margin: 50px auto;
   width: calc(100vw - 20px);
