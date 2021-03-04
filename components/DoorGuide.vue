@@ -1,8 +1,8 @@
 <template>
   <div class="main">
     <ul class="notice">
-      <li>Android for Twitterアプリ内でも動作します。</li>
-      <li>このページのURLをTwitterでシェアしてください。</li>
+      <li>Android for Twitterアプリ内でも動作！</li>
+      <li>このページのURLをTwitterでシェア！</li>
       <TwitterPublish :text="twitterText" />
     </ul>
   </div>
@@ -21,7 +21,7 @@ export default Vue.extend({
   computed: {
     ...roomMapper.mapGetters(['room']),
     twitterText(): String {
-      return '「' + this.room.name + '」で音声トークをします'
+      return '「' + this.room.name + '」で音声トークに参加なう'
     },
   },
 })
@@ -29,7 +29,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .main {
-  padding: 20px 20px 10px 10px;
+  padding: 20px 20px 10px 0px;
   color: $color2;
   border: 3px solid $color2;
   border-radius: 5px;

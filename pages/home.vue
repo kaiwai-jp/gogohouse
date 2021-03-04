@@ -5,7 +5,8 @@
       <div class="profile">{{ me.profile }}</div>
       <CreateRoom class="m-50" />
       <MyRoomList class="mt-50" />
-      <MemberRoomList class="m-50" />
+      <MemberRoomList class="mt-50" />
+      <NewRoomList class="m-50" />
     </div>
   </div>
 </template>
@@ -17,6 +18,7 @@ import NamePlate from '@/components/NamePlate.vue'
 import MyRoomList from '@/components/MyRoomList.vue'
 import MemberRoomList from '@/components/MemberRoomList.vue'
 import CreateRoom from '@/components/CreateRoom.vue'
+import NewRoomList from '@/components/NewRoomList.vue'
 
 export default Vue.extend({
   components: {
@@ -24,6 +26,7 @@ export default Vue.extend({
     MyRoomList,
     MemberRoomList,
     CreateRoom,
+    NewRoomList,
   },
   computed: {
     ...userMapper.mapGetters(['me']),

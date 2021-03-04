@@ -2,7 +2,7 @@
   <div class="container">
     <div>
       <div class="gogo-area">
-        <h1 class="gogo-title">Twitterフォロワーと<br />音声トークしよう</h1>
+        <h1 class="gogo-title">GoGoHouseで<br />音声トークしよう</h1>
       </div>
       <div class="m-50" v-if="!isSignin">
         <TwitterLogin jump="/home" />
@@ -20,9 +20,15 @@
 
       <TwitterPublish
         class="mt-20 mb-50"
-        text="DL不要でTwitterフォロワーとワイワイお喋りできる音声トークサービスができました！1ルーム20人まで。聴くだけも可。"
+        text="「GoGoHouse」DL不要でTwitterフォロワーとワイワイお喋りできる音声トークサービスができました！聴くだけも可。"
       />
-      <NewRoomList class="new-room-list" />
+      <div class="impression">
+        <h2 class="subtitle">使い方</h2>
+        <p class="how-to">
+          ルームでフォロワーとワイワイお喋り。<br />
+          ルームを作成してURLをTwitterフォロワーに知らせよう！(リプライのほうが参加しやすいようです)
+        </p>
+      </div>
       <ul class="impression feature">
         <li>アプリのインストール不要</li>
         <li>すべての通信は暗号化されています</li>
@@ -41,10 +47,9 @@ import warpMapper from '@/store/warp'
 
 import TwitterLogin from '@/components/TwitterLogin.vue'
 import TwitterPublish from '@/components/TwitterPublish.vue'
-import NewRoomList from '@/components/NewRoomList.vue'
 
 export default Vue.extend({
-  components: { TwitterLogin, TwitterPublish, NewRoomList },
+  components: { TwitterLogin, TwitterPublish },
   computed: {
     ...roomMapper.mapGetters(['room']),
     ...userMapper.mapGetters(['me', 'isSignin']),
@@ -103,11 +108,9 @@ export default Vue.extend({
 .to-home {
   text-decoration: none;
 }
-.new-room-list {
-  max-width: 380px;
-}
+
 .impression {
-  margin: 50px auto;
+  margin: 20px auto;
   width: calc(100vw - 20px);
   max-width: 380px;
   padding: 10px;
@@ -115,6 +118,10 @@ export default Vue.extend({
   border-radius: 10px;
   border: solid 1px $color6;
   text-align: left;
+}
+
+.how-to {
+  padding: 0px 10px 10px 10px;
 }
 
 .feature {

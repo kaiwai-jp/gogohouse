@@ -5,14 +5,12 @@
       <h2 class="subtitle mt-50">使い方</h2>
       <ul class="words">
         <li>
-          Twitter連携してルームに入るだけでフォロワーとワイワイお喋り空間に参加できます。
-          <br />リンクをTwitterに貼ってフォロワーに知らせよう！
+          Twitter連携してルームに入るだけでフォロワーとワイワイお喋り空間に参加できます。<br />
+          ルームを作成してURLをフォロワーに知らせよう！(リプライのほうが参加しやすいようです)<br />
+          ルームの入室権やマイク権を細かく管理できるのが特徴です。
         </li>
       </ul>
       <h2 class="subtitle mt-50">動作状況</h2>
-      <p class="reload m-50">
-        3/1 API Keyの入れ替えを行い、新規にTwitter連携ができるようになりました。
-      </p>
       <p class="words">いずれも最新版にて確認</p>
       <table class="connect-info">
         <tbody>

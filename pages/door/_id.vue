@@ -8,8 +8,8 @@
       </h2>
       <NamePlate :uid="room.owner_id" :link="true" class="mb-50" />
       <div v-if="!isSignin">
-        <p class="service">Twitterフォロワーと音声トークができるサービスです</p>
-        <TwitterLogin class="correct-twitter" />
+        <div class="to-room">ルームに入るには</div>
+        <TwitterLogin />
       </div>
       <div v-if="isSignin">
         <div v-if="roomOnlineUsers.length <= 20"><EnterRoom /></div>
@@ -169,10 +169,8 @@ export default Vue.extend({
 .owner {
   text-align: left;
 }
-
-.correct-twitter {
-  margin-left: -20px;
-  margin-right: -20px;
+.to-room {
+  margin-bottom: 10px;
 }
 
 .members {
@@ -185,9 +183,5 @@ export default Vue.extend({
 
 .twitter-publish {
   display: block;
-}
-
-.service {
-  margin-bottom: 10px;
 }
 </style>

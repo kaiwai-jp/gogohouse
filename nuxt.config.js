@@ -13,7 +13,7 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'DL不要でフォロワーとお喋りしよう。入室とマイク権を細かく管理できて、Twitter連携だけですぐに参加できる音声トークサービスです。',
+          'DL不要でフォロワーとお喋りしよう。Twitter連携だけですぐに参加できる音声トークサービスです。聴くだけも可。',
       },
       {
         hid: 'og:site_name',
@@ -31,7 +31,7 @@ export default {
         hid: 'og:description',
         property: 'og:description',
         content:
-          'DL不要でフォロワーとお喋りしよう。入室とマイク権を細かく管理できて、Twitter連携だけですぐに参加できる音声トークサービスです。',
+          'DL不要でフォロワーとお喋りしよう。Twitter連携だけですぐに参加できる音声トークサービスです。聴くだけも可。',
       },
       {
         hid: 'og:image',
@@ -57,7 +57,7 @@ export default {
         hid: 'twitter:description',
         property: 'twitter:description',
         content:
-          'DL不要でフォロワーとお喋りしよう。入室とマイク権を細かく管理できて、Twitter連携だけですぐに参加できる音声トークサービスです。',
+          'DL不要でフォロワーとお喋りしよう。Twitter連携だけですぐに参加できる音声トークサービスです。聴くだけも可。',
       },
       {
         hid: 'twitter:image',

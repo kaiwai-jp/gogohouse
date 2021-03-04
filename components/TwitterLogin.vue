@@ -1,6 +1,7 @@
 <template>
   <div class="main">
     <div class="agree-area">
+      <p class="service">Twitterフォロワーと音声トークができるサービスです</p>
       <div class="agree-checkbox">
         <a href="/term.html" target="_blank">利用規約</a>に
         <input type="checkbox" v-model="agree" id="checkbox" />
@@ -71,6 +72,14 @@ export default Vue.extend({
   box-shadow: 10px 10px 6px -6px #777;
 }
 
+.service {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: $color1;
+  text-align: left;
+}
+
 .agree-checkbox {
   margin-bottom: 20px;
 }
@@ -125,8 +134,9 @@ a {
 }
 
 .ios-notice {
+  display: inline-block;
   margin-top: 20px;
   font-weight: 600;
-  border-bottom: solid 1px red;
+  border-bottom: solid 2px red;
 }
 </style>

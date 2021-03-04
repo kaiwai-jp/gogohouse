@@ -77,7 +77,7 @@ export default Vue.extend({
       return false
     },
     twitterText(): string {
-      return '「' + this.room.name + '」で音声トークなう！'
+      return '「' + this.room.name + '」で音声トークに参加なう'
     },
   },
   beforeRouteLeave(to, from, next) {

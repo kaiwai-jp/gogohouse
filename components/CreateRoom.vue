@@ -1,6 +1,7 @@
 <template>
   <div class="bt-1">
     <h2 class="subtitle">ルーム作成</h2>
+    <p class="description">自分のルームを作るのはここから</p>
     <div class="room-block">
       <input
         v-model="newRoomName"
@@ -76,6 +77,10 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.description {
+  color: $color3;
+  margin-bottom: 10px;
+}
 .room-block {
   display: inline-block;
 }
