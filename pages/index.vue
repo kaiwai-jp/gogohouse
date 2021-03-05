@@ -24,9 +24,9 @@
       />
       <div class="impression">
         <h2 class="subtitle">使い方</h2>
+        <p class="how-to">ルームでフォロワーとワイワイお喋り。</p>
         <p class="how-to">
-          ルームでフォロワーとワイワイお喋り。<br />
-          ルームを作成してURLをTwitterフォロワーに知らせよう！(リプライのほうが参加しやすいようです)
+          ルームを作成してTwitterフォロワーに知らせよう！(リプライしたほうが参加しやすいようです)
         </p>
       </div>
       <ul class="impression feature">
