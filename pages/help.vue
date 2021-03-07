@@ -105,9 +105,9 @@
         <li><strong>[MIC]</strong>・・・ユーザーにマイク権を与えます</li>
         <li><strong>[MEM]</strong>・・・ルームのメンバーに追加します</li>
         <li>
-          <strong>予約メンバー</strong>
+          <strong>仮メンバー</strong>
           ・・・TwitterユーザーがまだGoGoHouseにログインしていない場合は、
-          予約メンバーとして登録しておき、ログイン後にメンバーに昇格します。
+          仮メンバーとして登録しておき、ログイン後にメンバーに昇格する仕組みです。
         </li>
         <li>
           <strong>マイク権</strong>

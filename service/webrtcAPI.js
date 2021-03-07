@@ -1,6 +1,6 @@
 import firebase, { db } from '@/plugins/firebase'
 
-const configuration = {
+let configuration = {
   iceServers: [
     {
       urls: ['stun:stun3.l.google.com:19302', 'stun:stun4.l.google.com:19302'],
@@ -14,7 +14,8 @@ export const offer = async (
   commit,
   myUid,
   partnerUid,
-  localStream
+  localStream,
+  turnServer
 ) => {
   const connRef = db.collection('connections')
   const connectionId = connRef.doc().id
@@ -23,6 +24,7 @@ export const offer = async (
   dispatch('STATE_CHANGE', { connectionId, stateString: 'offer' })
 
   /* WebRTC通信用のオブジェクトを作成 */
+  setTurnServer(turnServer)
   const peerConnection = new RTCPeerConnection(configuration)
 
   localStream.getTracks().forEach((track) => {
@@ -164,7 +166,13 @@ export const listenConnectionOffered = (dispatch, uid) => {
   return unsubscribe
 }
 
-export const offered = async (dispatch, commit, partnerUid, connectionId) => {
+export const offered = async (
+  dispatch,
+  commit,
+  partnerUid,
+  connectionId,
+  turnServer
+) => {
   const connectionsRef = db.collection('connections').doc(connectionId)
   let peerConnection, remoteStream, iceUnsubscribe
 
@@ -177,6 +185,7 @@ export const offered = async (dispatch, commit, partnerUid, connectionId) => {
       !doc.data().answer &&
       !doc.metadata.hasPendingWrites
     ) {
+      setTurnServer(turnServer)
       peerConnection = new RTCPeerConnection(configuration)
       commit('set_peerconnection_obj', { connectionId, peerConnection })
       commit('set_remote_user_to_conn_id', { uid: partnerUid, connectionId })
@@ -288,4 +297,24 @@ export const clearConnectionsDB = () => {
   const functions = firebase.app().functions('asia-northeast1')
   const func = functions.httpsCallable('clearConnectionsDBAll')
   return func()
+}
+
+export const getTurnServer = (commit) => {
+  const serverRef = db.collection('server').doc('0')
+  serverRef.get().then((doc) => {
+    if (doc.exists) {
+      commit('set_turn_server', doc.data())
+    } else {
+      commit('set_turn_server', {})
+    }
+  })
+}
+
+export const setTurnServer = (turnServer) => {
+  if (turnServer) {
+    configuration['iceServers'][1] = {}
+    configuration['iceServers'][1].urls = turnServer.urls
+    configuration['iceServers'][1].username = turnServer.username
+    configuration['iceServers'][1].credential = turnServer.credential
+  }
 }

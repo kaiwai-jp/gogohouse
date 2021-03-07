@@ -140,6 +140,7 @@ export default Vue.extend({
     this.ROOM_LISTENER(this.roomId)
     await this.GET_USER()
     this.CLEAR_OFFERED_DB()
+    this.GET_TURN_SERVER()
   },
   beforeDestroy() {
     this.END_ROOM_LISTENER()
@@ -147,7 +148,7 @@ export default Vue.extend({
   methods: {
     ...roomMapper.mapActions(['ROOM_LISTENER', 'END_ROOM_LISTENER']),
     ...userMapper.mapActions(['GET_USER', 'SIGN_IN_TWITTER', 'SIGN_OUT']),
-    ...webrtcMapper.mapActions(['CLEAR_OFFERED_DB']),
+    ...webrtcMapper.mapActions(['CLEAR_OFFERED_DB', 'GET_TURN_SERVER']),
     ...warpMapper.mapActions(['OPEN_ALERT_DIALOG']),
     twitterSignin() {
       this.SIGN_IN_TWITTER()

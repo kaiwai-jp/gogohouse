@@ -5,6 +5,7 @@ import {
   offered,
   listenConnectionOffered,
   clearOfferedDB,
+  getTurnServer,
 } from '@/service/webrtcAPI'
 
 export default {
@@ -20,9 +21,9 @@ export default {
       unsubscribe: [], // offeredを終了するときに解除すべきunsubscribeの配列
       errReport: [], //  catchしたerr
       iceQueue: {}, // stableになるのを待つice candidate connectionId:[candidate,]
+      turnServer: undefined,
     }
   },
-
   getters: {
     remoteStreamObj: (state) => state.remoteStreamObj,
     peerConnectionObj: (state) => state.peerConnectionObj,
@@ -45,6 +46,7 @@ export default {
       return retObject
     },
     errReport: (state) => state.errReport,
+    turnServer: (state) => state.turnServer,
   },
 
   mutations: {
@@ -125,15 +127,19 @@ export default {
     reset_ice_candidate(state, connectionId) {
       delete state.iceQueue[connectionId]
     },
+    set_turn_server(state, object) {
+      state.turnServer = object
+    },
   },
 
   actions: {
     OFFER({ dispatch, commit, rootState }, { uid, localStream }) {
-      const { user } = rootState
-      offer(dispatch, commit, user.me.uid, uid, localStream)
+      const { user, webrtc } = rootState
+      offer(dispatch, commit, user.me.uid, uid, localStream, webrtc.turnServer)
     },
-    OFFERED({ dispatch, commit }, { uid, connectionId }) {
-      offered(dispatch, commit, uid, connectionId)
+    OFFERED({ dispatch, commit, rootState }, { uid, connectionId }) {
+      const { webrtc } = rootState
+      offered(dispatch, commit, uid, connectionId, webrtc.turnServer)
     },
     STATE_CHANGE({ commit }, { connectionId, stateString }) {
       commit('set_peerconnection_state', { connectionId, stateString })
@@ -252,6 +258,11 @@ export default {
           .addIceCandidate(candidateArray[i])
           .catch((err) => commit('set_err_report', err))
         commit('pop_ice_candidate', { connectionId, index: i })
+      }
+    },
+    GET_TURN_SERVER({ commit, state }) {
+      if (!state.turnServer) {
+        getTurnServer(commit)
       }
     },
   },

@@ -70,7 +70,10 @@ export default Vue.extend({
       if (this.me.uid === state.uid) return
       if (mutation.type === 'user/add_room_online_users') {
         if (mutation.payload.uid == this.me.uid) return
-        this.OFFER({ uid: mutation.payload.uid, localStream: this.localStream })
+        this.OFFER({
+          uid: mutation.payload.uid,
+          localStream: this.localStream,
+        })
       } else if (mutation.type === 'user/remove_room_online_users') {
         this.CONNECTION_FINISH_WITH_UID(state.uid)
       }
@@ -90,7 +93,7 @@ export default Vue.extend({
       'roomOnlineUsers',
       'myData',
     ]),
-    ...webrtcMapper.mapGetters(['remoteStreamObj']),
+    ...webrtcMapper.mapGetters(['remoteStreamObj', 'turnServer']),
     roomId(): string {
       return this.$route.params.id
     },

@@ -19,7 +19,7 @@
       </button>
     </div>
 
-    <h2 class="subtitle mt-50">予約メンバー</h2>
+    <h2 class="subtitle mt-50">仮メンバー</h2>
     <div v-for="screenName in room.reserved_members" :key="screenName">
       <ReservedMemberNamePlateMini
         :screenName="screenName"
