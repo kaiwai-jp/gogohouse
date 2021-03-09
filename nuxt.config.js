@@ -9,11 +9,12 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'thumbnail', content: 'https://gogo.house/logo_twitter.png' },
       {
         hid: 'description',
         name: 'description',
         content:
-          'DL不要でフォロワーとお喋りしよう。Twitter連携だけですぐに参加できる音声トークサービスです。聴くだけも可。',
+          'アプリ不要でフォロワーとお喋りしよう。Twitter連携だけですぐに参加できる音声トークサービスです。',
       },
       {
         hid: 'og:site_name',
@@ -31,7 +32,7 @@ export default {
         hid: 'og:description',
         property: 'og:description',
         content:
-          'DL不要でフォロワーとお喋りしよう。Twitter連携だけですぐに参加できる音声トークサービスです。聴くだけも可。',
+          'アプリ不要でフォロワーとお喋りしよう。Twitter連携だけですぐに参加できる音声トークサービスです。',
       },
       {
         hid: 'og:image',
@@ -57,7 +58,7 @@ export default {
         hid: 'twitter:description',
         property: 'twitter:description',
         content:
-          'DL不要でフォロワーとお喋りしよう。Twitter連携だけですぐに参加できる音声トークサービスです。聴くだけも可。',
+          'アプリ不要でフォロワーとお喋りしよう。Twitter連携だけですぐに参加できる音声トークサービスです。',
       },
       {
         hid: 'twitter:image',

@@ -2,14 +2,9 @@
   <div>
     <div class="impression">
       <h2 class="subtitle">使い方</h2>
-      <p>Twitter連携してルームに入ると音声トーク空間に参加できます。</p>
-      <p>マイクを開くと発言できます。</p>
-    </div>
-    <div class="impression twitter">
-      <p>
-        このルームのURLをTwitterにシェア！
-        <TwitterPublish :text="twitterText" class="twitter-button" />
-      </p>
+      <p class="how-to">ルームを作成してTwitterフォロワーに知らせよう！</p>
+      <p class="how-to">フォロワーとワイワイお喋りできます。</p>
+      <p class="how-to">(リプライして誘ったほうが参加しやすいようです)</p>
     </div>
     <ul class="impression feature">
       <li>アプリのインストール不要</li>
@@ -22,23 +17,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import roomMapper from '@/store/room'
-
-import TwitterPublish from '@/components/TwitterPublish.vue'
 
 export default Vue.extend({
-  components: {
-    TwitterPublish,
-  },
-  computed: {
-    ...roomMapper.mapGetters(['room']),
-    twitterText(): String {
-      return (
-        '「' +
-        this.room.name +
-        '」で音声トークに参加なう。GoGoHouseは無料でTwitterフォロワーと音声トークできるサービスです。'
-      )
-    },
+  props: {
+    text: { default: '', type: String },
   },
 })
 </script>
@@ -55,7 +37,7 @@ export default Vue.extend({
   text-align: left;
 }
 
-.impression p {
+.how-to {
   padding: 0px 10px 10px 10px;
 }
 
@@ -68,12 +50,5 @@ export default Vue.extend({
   color: black;
   content: '☑';
   margin-right: 5px;
-}
-
-.twitter {
-  padding-bottom: 0;
-}
-.twitter-button {
-  margin-top: 5px;
 }
 </style>
