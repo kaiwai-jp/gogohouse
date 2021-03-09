@@ -14,6 +14,7 @@
       />
       <div class="links">
         <MicWebrtc />
+        <SignalIcons />
         <div class="m-50">
           <OnlineUsers />
         </div>
@@ -41,6 +42,7 @@ import NamePlateMini from '@/components/NamePlateMini.vue'
 import ManageRoom from '@/components/ManageRoom.vue'
 import IamMemberDisplay from '@/components/IamMemberDisplay.vue'
 import TwitterPublish from '@/components/TwitterPublish.vue'
+import SignalIcons from '@/components/SignalIcons.vue'
 
 interface DataType {
   localStream: MediaStream | undefined
@@ -57,6 +59,7 @@ export default Vue.extend({
     ManageRoom,
     IamMemberDisplay,
     TwitterPublish,
+    SignalIcons,
   },
   data(): DataType {
     return {

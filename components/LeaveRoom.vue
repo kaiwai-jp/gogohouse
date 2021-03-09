@@ -29,7 +29,7 @@ export default Vue.extend({
         }
       }
       if (mutation.type === 'room/set_room') {
-        if (Object.keys(mutation.payload).length === 0) {
+        if (mutation.payload === undefined) {
           location.reload()
         }
       }

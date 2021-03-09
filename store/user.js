@@ -11,6 +11,7 @@ import {
   unregistDisconnect,
   offline,
   setMicStatus,
+  resetSignal,
 } from '@/service/userAPI'
 
 export default {
@@ -186,11 +187,13 @@ export default {
     },
     REGIST_CONNECT_AND_WHEN_DISCONNECT({ rootState }, roomId) {
       const { user } = rootState
+      resetSignal(user.me.uid)
       registConnectAndWhenDisconnect(roomId, user.me.uid)
       online(user.me.uid)
     },
     UNREGIST_DISCONNECT_AND_OFFLINE({ rootState }) {
       const { user } = rootState
+      resetSignal(user.me.uid)
       unregistDisconnect(user.me.uid)
       offline(user.me.uid)
     },

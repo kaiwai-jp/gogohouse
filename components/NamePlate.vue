@@ -21,6 +21,8 @@
         alt="接続中"
         v-show="isSpeaker && isDisconnect"
       />
+      <img v-if="ifRest" src="/tea_icon.png" class="signal-icon" />
+      <img v-if="ifRaise" src="/raise_hand_icon.png" class="signal-icon" />
     </client-only>
   </div>
 </template>
@@ -57,6 +59,30 @@ export default Vue.extend({
           this.roomOnlineUsers[i].uid === this.uid &&
           this.roomOnlineUsers[i].current_room &&
           this.roomOnlineUsers[i].mic_status === 'on'
+        ) {
+          return true
+        }
+      }
+      return false
+    },
+    ifRest(): Boolean {
+      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
+        if (
+          this.roomOnlineUsers[i].uid === this.uid &&
+          this.roomOnlineUsers[i].signal &&
+          this.roomOnlineUsers[i].signal.includes('rest')
+        ) {
+          return true
+        }
+      }
+      return false
+    },
+    ifRaise(): Boolean {
+      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
+        if (
+          this.roomOnlineUsers[i].uid === this.uid &&
+          this.roomOnlineUsers[i].signal &&
+          this.roomOnlineUsers[i].signal.includes('raise')
         ) {
           return true
         }
@@ -118,5 +144,10 @@ a {
   width: 32px;
   height: 32px;
   margin-bottom: 8px;
+}
+
+.signal-icon {
+  width: 36px;
+  height: 36px;
 }
 </style>

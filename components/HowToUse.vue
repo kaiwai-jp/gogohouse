@@ -3,7 +3,7 @@
     <div class="impression">
       <h2 class="subtitle">使い方</h2>
       <p class="how-to">ルームを作成してTwitterフォロワーに知らせよう！</p>
-      <p class="how-to">フォロワーとワイワイお喋りできます。</p>
+      <p class="how-to">フォロワーとワイワイおしゃべりできます。</p>
       <p class="how-to">(リプライして誘ったほうが参加しやすいようです)</p>
     </div>
     <ul class="impression feature">

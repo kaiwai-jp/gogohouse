@@ -2,7 +2,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   mode: 'spa',
   head: {
-    title: 'GoGoHouse | 音声トークをフォロワーと',
+    title: 'GoGoHouse | ゆるく音声トーク',
     htmlAttrs: {
       lang: 'ja',
     },
@@ -19,14 +19,14 @@ export default {
       {
         hid: 'og:site_name',
         property: 'og:site_name',
-        content: 'GoGoHouse | 音声トークをフォロワーと',
+        content: 'GoGoHouse | ゆるく音声トーク',
       },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:url', property: 'og:url', content: 'https://gogo.house' },
       {
         hid: 'og:title',
         property: 'og:title',
-        content: 'GoGoHouse | 音声トークをフォロワーと',
+        content: 'GoGoHouse | ゆるく音声トーク',
       },
       {
         hid: 'og:description',
@@ -52,7 +52,7 @@ export default {
       {
         hid: 'twitter:title',
         property: 'twitter:title',
-        content: 'GoGoHouse | 音声トークをフォロワーと',
+        content: 'GoGoHouse | ゆるく音声トーク',
       },
       {
         hid: 'twitter:description',

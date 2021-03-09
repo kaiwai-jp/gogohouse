@@ -2,7 +2,7 @@
   <div class="container">
     <div>
       <div class="gogo-area">
-        <h1 class="gogo-title">GoGoHouseで<br />音声トークしよう</h1>
+        <h1 class="gogo-title">GoGoHouseで<br />ゆるく音声トークしよう</h1>
       </div>
       <div class="m-50" v-if="!isSignin">
         <TwitterLogin jump="/home" />

@@ -202,3 +202,24 @@ export const getReservedUserData = async (screenName) => {
     return userDoc.data()
   }
 }
+
+export const addSignal = (myUid, signalString) => {
+  const userRef = db.collection('users').doc(myUid)
+  userRef.update({
+    signal: firebase.firestore.FieldValue.arrayUnion(signalString),
+  })
+}
+
+export const removeSignal = (myUid, signalString) => {
+  const userRef = db.collection('users').doc(myUid)
+  userRef.update({
+    signal: firebase.firestore.FieldValue.arrayRemove(signalString),
+  })
+}
+
+export const resetSignal = (myUid) => {
+  const userRef = db.collection('users').doc(myUid)
+  userRef.update({
+    signal: [],
+  })
+}

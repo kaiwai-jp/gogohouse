@@ -2,8 +2,8 @@
   <div>
     <div class="impression">
       <h2 class="subtitle">使い方</h2>
-      <p>Twitter連携してルームに入ると音声トーク空間に参加できます。</p>
-      <p>マイクを開くと発言できます。</p>
+      <p>Twitter連携してルームに入るとワイワイおしゃべり空間に参加できます。</p>
+      <p>マイクを開くとあなたもおしゃべりできます。</p>
     </div>
     <div class="impression twitter">
       <p>
