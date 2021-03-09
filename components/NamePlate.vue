@@ -21,8 +21,16 @@
         alt="接続中"
         v-show="isSpeaker && isDisconnect"
       />
-      <img v-if="ifRest" src="/tea_icon.png" class="signal-icon" />
-      <img v-if="ifRaise" src="/raise_hand_icon.png" class="signal-icon" />
+      <img
+        v-if="signalShow && ifRest"
+        src="/tea_icon.png"
+        class="signal-icon"
+      />
+      <img
+        v-if="signalShow && ifRaise"
+        src="/raise_hand_icon.png"
+        class="signal-icon"
+      />
     </client-only>
   </div>
 </template>
@@ -36,6 +44,7 @@ export default Vue.extend({
   props: {
     uid: { default: '', type: String },
     link: { default: false, type: Boolean },
+    signalShow: { default: false, type: Boolean },
   },
   computed: {
     ...userMapper.mapGetters(['me', 'getUserData', 'roomOnlineUsers']),

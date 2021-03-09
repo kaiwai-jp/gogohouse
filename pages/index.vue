@@ -2,8 +2,9 @@
   <div class="container">
     <div>
       <div class="gogo-area">
-        <h1 class="gogo-title">GoGoHouseで<br />ゆるく音声トークしよう</h1>
+        <h1 class="gogo-title">ゆるく音声トークしよう</h1>
       </div>
+      <div class="picture-copyright">(C)テラサワマスミ</div>
       <div class="m-50" v-if="!isSignin">
         <TwitterLogin jump="/home" />
       </div>
@@ -78,10 +79,15 @@ export default Vue.extend({
 }
 
 .gogo-title {
-  color: white;
-  padding-top: 20px;
-  padding-left: 20px;
+  font-size: 26px;
+  color: #5997da;
+  padding-top: 10px;
+  padding-left: 15px;
   text-align: left;
+}
+
+.picture-copyright {
+  text-align: right;
 }
 
 .home-area {

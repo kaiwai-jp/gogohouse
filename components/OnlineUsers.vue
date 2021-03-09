@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="user in roomOnlineUsers" :key="user.uid" class="list">
-      <NamePlate :uid="user.uid" :link="link" />
+      <NamePlate :uid="user.uid" :link="link" signalShow="true" />
     </div>
   </div>
 </template>
