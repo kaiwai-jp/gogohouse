@@ -3,6 +3,9 @@
     <footer>
       <ul>
         <li><a href="/term.html" target="_blank">利用規約</a></li>
+        <li>
+          <a href="/privacy.html" target="_blank">プライバシーポリシー</a>
+        </li>
         <li><nuxt-link to="/help">ヘルプ</nuxt-link></li>
       </ul>
       <span class="copyright">Copyright 国崎犀考@saikou_kunisaki</span>
@@ -31,10 +34,11 @@ ul {
 
 li {
   display: inline-block;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-right: 7px;
+  padding-left: 7px;
+  border-left: solid 1px $color6;
   &:first-child {
-    border-right: solid 1px $color6;
+    border-left: none;
   }
 }
 

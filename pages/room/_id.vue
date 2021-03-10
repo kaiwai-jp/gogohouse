@@ -2,7 +2,8 @@
   <div class="container">
     <div>
       <h1 class="title">{{ room.name }}</h1>
-      オーナー：<NamePlateMini :uid="room.owner_id" class="owner-identity" />
+      モデレーター：
+      <NamePlateMini :uid="room.owner_id" class="owner-identity" />
       <IamMemberDisplay class="inline-block" />
       <button @click="manageModal = true" v-if="ifOwner" class="button--mini">
         ルーム管理

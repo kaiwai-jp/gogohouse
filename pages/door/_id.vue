@@ -4,7 +4,7 @@
       <h1 class="title">{{ room.name }}</h1>
       <p class="description">{{ roomDescription }}</p>
       <h2 class="subtitle owner" v-show="roomDescription != 'loading...'">
-        オーナー
+        モデレーター
       </h2>
       <NamePlate :uid="room.owner_id" :link="true" class="mb-50" />
       <div v-if="!isSignin">
@@ -98,7 +98,7 @@ export default Vue.extend({
       if (this.room.room_type === 'open') {
         return 'オープンルームです。誰でも入れます。'
       } else if (this.room.room_type === 'social') {
-        return 'ソーシャルルームです。オーナーとTwitterで相互フォローの人だけが入れます。'
+        return 'ソーシャルルームです。モデレーターとTwitterで相互フォローの人だけが入れます。'
       } else if (this.room.room_type === 'closed') {
         return 'クローズドルームです。メンバーだけが入れます。'
       } else if (this.room.room_type) {
@@ -108,11 +108,11 @@ export default Vue.extend({
     },
     micDescription(): String {
       if (this.room.mic_enable === 'owner' || !this.room.mic_enable) {
-        return 'オーナーがルームにいるとき'
+        return 'モデレーターがルームにいるとき'
       } else if (this.room.mic_enable === 'any') {
         return 'ルーム内のいつでも誰でも'
       } else if (this.room.mic_enable === 'assign') {
-        return 'オーナーが指名したとき'
+        return 'モデレーターが指名したとき'
       }
       return '不明なタイプのマイク権です。'
     },

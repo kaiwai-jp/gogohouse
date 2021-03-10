@@ -183,9 +183,9 @@ export default Vue.extend({
       this.CONNECTION_END_FROM_ME()
     },
     cantMicOpen() {
-      let message = 'このルームはオーナーが在室でないときはマイクは開けません'
+      let message = 'このルームはモデレーターが在室でないときはマイクは開けません'
       if (this.room.mic_enable === 'assign') {
-        message = 'このルームはオーナーがマイク権を割り当てた人だけ発言できます'
+        message = 'このルームはモデレーターがマイク権を割り当てた人だけ発言できます'
       }
       this.OPEN_ALERT_DIALOG(message)
     },

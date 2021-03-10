@@ -7,9 +7,9 @@
         @change="clickUpdateMicEnable"
         class="mic-enable-select"
       >
-        <option value="owner">オーナーがルームにいるとき</option>
+        <option value="owner">モデレーターがルームにいるとき</option>
         <option value="any">ルーム内のいつでも誰でも</option>
-        <option value="assign">オーナーが指名したとき</option>
+        <option value="assign">モデレーターが指名したとき</option>
       </select>
     </div>
 

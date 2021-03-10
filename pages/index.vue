@@ -88,6 +88,7 @@ export default Vue.extend({
 
 .picture-copyright {
   text-align: right;
+  color: $color2;
 }
 
 .home-area {
