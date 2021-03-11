@@ -4,10 +4,13 @@ let userDataCached = {}
 
 export const twitterSignIn = () => {
   const provider = new firebase.auth.TwitterAuthProvider()
+  auth.signInWithRedirect(provider)
+}
 
+export const getRedirectResult = () => {
   return new Promise((resolve, reject) => {
     auth
-      .signInWithPopup(provider)
+      .getRedirectResult()
       .then(async (userCredential) => {
         if (userCredential.user) {
           const uid = userCredential.user.uid

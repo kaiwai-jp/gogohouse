@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { createNamespacedHelpers } from 'vuex'
 import {
   twitterSignIn,
+  getRedirectResult,
   onAuthChanged,
   signOut,
   getUserData,
@@ -107,14 +108,9 @@ export default {
   },
 
   actions: {
-    SIGN_IN_TWITTER({ commit, state }) {
-      const { me } = state
-      if (me && me.uid) {
-        offline(me.uid)
-      }
-
+    GET_REDIRECT_RESULT({ commit }) {
       return new Promise((resolve, reject) => {
-        twitterSignIn()
+        getRedirectResult()
           .then((myData) => {
             commit('set_user_data_cache', { uid: myData.uid, data: myData })
             commit('set_user', myData)
@@ -122,6 +118,13 @@ export default {
           })
           .catch((err) => reject(err))
       })
+    },
+    SIGN_IN_TWITTER({ state }) {
+      const { me } = state
+      if (me && me.uid) {
+        offline(me.uid)
+      }
+      twitterSignIn()
     },
     GET_USER({ commit, state }, force) {
       if (!force && Object.keys(state.me).length > 0) return

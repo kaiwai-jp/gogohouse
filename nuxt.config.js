@@ -14,7 +14,7 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'アプリ不要でフォロワーとお喋りしよう。Twitter連携だけですぐに参加できる音声トークサービスです。',
+          'アプリ不要でフォロワーとおしゃべりしよう。Twitter連携だけですぐに参加できる音声トークサービスです。',
       },
       {
         hid: 'og:site_name',
@@ -32,7 +32,7 @@ export default {
         hid: 'og:description',
         property: 'og:description',
         content:
-          'アプリ不要でフォロワーとお喋りしよう。Twitter連携だけですぐに参加できる音声トークサービスです。',
+          'アプリ不要でフォロワーとおしゃべりしよう。Twitter連携だけですぐに参加できる音声トークサービスです。',
       },
       {
         hid: 'og:image',
@@ -58,7 +58,7 @@ export default {
         hid: 'twitter:description',
         property: 'twitter:description',
         content:
-          'アプリ不要でフォロワーとお喋りしよう。Twitter連携だけですぐに参加できる音声トークサービスです。',
+          'アプリ不要でフォロワーとおしゃべりしよう。Twitter連携だけですぐに参加できる音声トークサービスです。',
       },
       {
         hid: 'twitter:image',

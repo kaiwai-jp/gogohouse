@@ -87,6 +87,7 @@ export default Vue.extend({
       return this.$route.params.id
     },
     isOwner(): Boolean {
+      if (!this.me) return false
       return this.me.uid === this.room.owner_id
     },
     roomLoaded(): Boolean {
@@ -139,8 +140,10 @@ export default Vue.extend({
   async created() {
     this.ROOM_LISTENER(this.roomId)
     await this.GET_USER()
-    this.CLEAR_OFFERED_DB()
-    this.GET_TURN_SERVER()
+    if (this.me) {
+      this.CLEAR_OFFERED_DB()
+      this.GET_TURN_SERVER()
+    }
   },
   beforeDestroy() {
     this.END_ROOM_LISTENER()

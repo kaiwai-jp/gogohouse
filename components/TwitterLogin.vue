@@ -18,7 +18,6 @@
       </a>
       <div class="notice">※勝手にツイートすることはありません</div>
     </div>
-    <div class="ios-notice">※iPhone/iPadの人はブラウザからどうぞ</div>
   </div>
 </template>
 
@@ -38,8 +37,21 @@ export default Vue.extend({
       agree: false,
     }
   },
+  created() {
+    this.GET_REDIRECT_RESULT()
+      .then(() => {
+        if (this.jump) {
+          this.$router.push(this.jump)
+        }
+      })
+      .catch((err) => this.OPEN_ALERT_DIALOG(err))
+  },
   methods: {
-    ...userMapper.mapActions(['SIGN_IN_TWITTER', 'SIGN_OUT']),
+    ...userMapper.mapActions([
+      'GET_REDIRECT_RESULT',
+      'SIGN_IN_TWITTER',
+      'SIGN_OUT',
+    ]),
     ...warpMapper.mapActions(['OPEN_ALERT_DIALOG']),
     twitterSignin() {
       if (!this.agree) {
@@ -49,12 +61,6 @@ export default Vue.extend({
         return
       }
       this.SIGN_IN_TWITTER()
-        .then(() => {
-          if (this.jump) {
-            this.$router.push(this.jump)
-          }
-        })
-        .catch((err) => this.OPEN_ALERT_DIALOG(err))
     },
   },
 })
@@ -133,12 +139,5 @@ a {
   padding: 10px 20px;
   font-weight: 600;
   cursor: pointer;
-}
-
-.ios-notice {
-  display: inline-block;
-  margin-top: 20px;
-  font-weight: 600;
-  border-bottom: solid 2px red;
 }
 </style>
