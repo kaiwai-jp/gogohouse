@@ -150,7 +150,7 @@ export default Vue.extend({
       try {
         this.permissionDialog = true
         this.localStream = await navigator.mediaDevices.getUserMedia({
-          audio: { echoCancellation: true, noiseSuppression: true },
+          audio: true,
         })
         this.SET_MIC_ON()
         /* カメラを開いて即ページ遷移した場合にマイクアクセスが残るのを防ぐ */
@@ -183,9 +183,11 @@ export default Vue.extend({
       this.CONNECTION_END_FROM_ME()
     },
     cantMicOpen() {
-      let message = 'このルームはモデレーターが在室でないときはマイクは開けません'
+      let message =
+        'このルームはモデレーターが在室でないときはマイクは開けません'
       if (this.room.mic_enable === 'assign') {
-        message = 'このルームはモデレーターがマイク権を割り当てた人だけ発言できます'
+        message =
+          'このルームはモデレーターがマイク権を割り当てた人だけ発言できます'
       }
       this.OPEN_ALERT_DIALOG(message)
     },
