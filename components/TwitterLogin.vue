@@ -55,9 +55,7 @@ export default Vue.extend({
     ...warpMapper.mapActions(['OPEN_ALERT_DIALOG']),
     twitterSignin() {
       if (!this.agree) {
-        this.OPEN_ALERT_DIALOG(
-          '利用規約を読んで同意するにチェックをしてください'
-        )
+        this.OPEN_ALERT_DIALOG('利用規約に同意するにチェックをしてください')
         return
       }
       this.SIGN_IN_TWITTER()

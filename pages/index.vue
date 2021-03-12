@@ -102,6 +102,8 @@ export default Vue.extend({
 }
 
 .to-home {
+  font-size: 20px;
+  font-weight: 600;
   text-decoration: none;
 }
 </style>

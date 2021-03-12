@@ -37,7 +37,9 @@
     </div>
     <div v-if="!roomLoaded">
       <div v-show="room" class="subtitle">Loading...</div>
-      <div v-show="!room" class="subtitle">ルームが見つかりません</div>
+      <div v-show="!room" class="subtitle">
+        <img src="/gogo.jpg" class="gogo-image" />ルームが見つかりません
+      </div>
       <HomeButton />
     </div>
     <ManageRoom @close="modal = false" :roomId="room.id" v-if="modal" />
@@ -187,5 +189,13 @@ export default Vue.extend({
 
 .twitter-publish {
   display: block;
+}
+
+.gogo-image {
+  display: block;
+  width: 100vw;
+  max-width: 380px;
+  height: 240px;
+  margin-bottom: 50px;
 }
 </style>

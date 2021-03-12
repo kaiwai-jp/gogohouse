@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <div class="error-message">
+    <div class="subtitle">
+      <img src="/gogo.jpg" class="gogo-image" />
       ページが見つかりません
       <div><HomeButton /></div>
     </div>
@@ -18,9 +19,11 @@ export default Vue.extend({ components: { HomeButton } })
   background-color: #f2efe4;
 }
 
-.error-message {
+.gogo-image {
   display: block;
-  font-size: 40px;
-  color: $color1;
+  width: 100vw;
+  max-width: 380px;
+  height: 240px;
+  margin-bottom: 50px;
 }
 </style>

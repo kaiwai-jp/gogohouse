@@ -75,7 +75,9 @@ export const offer = async (
       const answer = new RTCSessionDescription(data.answer)
       /* AnswerをpeerConnectionにセット */
       try {
-        await peerConnection.setRemoteDescription(answer)
+        if (peerConnection.signalingState !== 'closed') {
+          await peerConnection.setRemoteDescription(answer)
+        }
       } catch (err) {
         commit('set_err_report', err)
       }

@@ -28,6 +28,7 @@ export default {
   },
   actions: {
     PLAY_SILENT_MUSIC({ commit, state }) {},
+    PLAY_WEBRTC_SOUND({ commit, state }) {},
     OPEN_ALERT_DIALOG({ commit, state }, message) {
       if (Object.keys(state.alertDialogObject).length > 0) return
       new Promise((resolve) => {
