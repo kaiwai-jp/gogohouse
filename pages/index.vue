@@ -21,7 +21,7 @@
 
       <TwitterPublish
         class="mt-20 mb-50"
-        text="GoGoHouseはTwitter連携だけで参加できる無料の音声トークサービスです。聴くだけも可。"
+        text="GoGoHouseはTwitter連携だけで参加できる無料の音声トークサービスです。ゆるくおしゃべりしよう♪"
       />
       <HowToUse />
     </div>

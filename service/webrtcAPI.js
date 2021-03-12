@@ -302,8 +302,7 @@ export const clearConnectionsDB = () => {
 }
 
 export const getTurnServer = (commit) => {
-  let docId = '0'
-  const serverRef = db.collection('server').doc(docId)
+  const serverRef = db.collection('server').doc('0')
   serverRef.get().then((doc) => {
     if (doc.exists) {
       commit('set_turn_server', doc.data())

@@ -12,7 +12,7 @@
       <a class="button--twitter" @click="twitterSignin">
         <img
           alt="Twitterアイコン"
-          src="/twitter_logo.png"
+          src="/twitter_bird.png"
           class="twitter-logo"
         />Twitter連携でログイン
       </a>
