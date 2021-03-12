@@ -5,7 +5,7 @@
         <img src="/peace.png" alt="GoGoHouseアイコン" class="gogo-icon" />
         <nuxt-link to="/" class="top-link">GoGoHouse</nuxt-link>
       </div>
-      <div class="right-area">
+      <div class="right-area" v-if="me">
         <nuxt-link to="/home" class="home_area">
           <NamePlateMini
             :uid="me.uid"

@@ -75,7 +75,9 @@ export const offer = async (
       const answer = new RTCSessionDescription(data.answer)
       /* AnswerをpeerConnectionにセット */
       try {
-        await peerConnection.setRemoteDescription(answer)
+        if (peerConnection.signalingState !== 'closed') {
+          await peerConnection.setRemoteDescription(answer)
+        }
       } catch (err) {
         commit('set_err_report', err)
       }
@@ -300,7 +302,8 @@ export const clearConnectionsDB = () => {
 }
 
 export const getTurnServer = (commit) => {
-  const serverRef = db.collection('server').doc('0')
+  let docId = '0'
+  const serverRef = db.collection('server').doc(docId)
   serverRef.get().then((doc) => {
     if (doc.exists) {
       commit('set_turn_server', doc.data())

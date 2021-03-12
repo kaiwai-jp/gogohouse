@@ -22,9 +22,10 @@ export default Vue.extend({
     this.$store.subscribeAction(async (action, state) => {
       if (action.type == 'warp/PLAY_SILENT_MUSIC') {
         // @ts-ignore
-        this.$refs.audioEl.currentTime = 0
-        // @ts-ignore
         this.$refs.audioEl.play()
+      } else if (action.type == 'warp/PLAY_WEBRTC_SOUND') {
+        const audioElements = this.$el.querySelectorAll('audio')
+        audioElements.forEach((audio) => audio.play())
       }
     })
   },
