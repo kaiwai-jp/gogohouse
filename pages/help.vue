@@ -195,9 +195,9 @@
         <li>
           Twitterブラウザ内でのログインユーザーを切り替えたいときは
           <strong>
-            <a href="https://twitter.com/login">Twitterログイン画面</a>
+            <a href="https://twitter.com/account/switch">Twitterアカウント</a>
           </strong>
-          からログインしなおしてください。
+          からログインしなおしてください。（アプリのアカウントには影響を与えません）
         </li>
       </ul>
       <h2 class="subtitle mt-50">既知の問題</h2>
