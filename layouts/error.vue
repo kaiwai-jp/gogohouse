@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <div class="subtitle">
-      <img src="/gogo.jpg" class="gogo-image" />
-      ページが見つかりません
+    <div>
+      <img src="/gogo.jpg" class="gogo-image" alt="猫" />
+      <h2 class="subtitle">ページが見つかりません</h2>
       <div><HomeButton /></div>
     </div>
   </div>
@@ -23,7 +23,6 @@ export default Vue.extend({ components: { HomeButton } })
   display: block;
   width: 100vw;
   max-width: 380px;
-  height: 240px;
   margin-bottom: 50px;
 }
 </style>

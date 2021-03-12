@@ -36,9 +36,12 @@
       <DoorGuide class="m-50" />
     </div>
     <div v-if="!roomLoaded">
-      <div v-show="room" class="subtitle">Loading...</div>
-      <div v-show="!room" class="subtitle">
-        <img src="/gogo.jpg" class="gogo-image" />ルームが見つかりません
+      <div v-show="room">
+        <h2 class="subtitle">Loading...</h2>
+      </div>
+      <div v-show="!room">
+        <img src="/gogo.jpg" class="gogo-image" alt="猫" />
+        <h2 class="subtitle">ルームが見つかりません</h2>
       </div>
       <HomeButton />
     </div>
@@ -195,7 +198,6 @@ export default Vue.extend({
   display: block;
   width: 100vw;
   max-width: 380px;
-  height: 240px;
   margin-bottom: 50px;
 }
 </style>
