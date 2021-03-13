@@ -14,6 +14,7 @@
         src="/speaker_icon.png"
         alt="接続確立"
         v-show="isSpeaker && !isDisconnect"
+        @click="PLAY_WEBRTC_SOUND"
       />
       <img
         class="speaker-icon"
@@ -39,6 +40,7 @@
 import Vue from 'vue'
 import userMapper from '@/store/user'
 import webrtcMapper from '@/store/webrtc'
+import warpMapper from '@/store/warp'
 
 export default Vue.extend({
   props: {
@@ -112,6 +114,7 @@ export default Vue.extend({
   },
   methods: {
     ...userMapper.mapActions(['REF_USER_DATA']),
+    ...warpMapper.mapActions(['PLAY_WEBRTC_SOUND']),
   },
 })
 </script>

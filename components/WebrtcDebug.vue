@@ -21,7 +21,9 @@
         <div v-for="report in errReport" :key="random(report)">
           {{ report }}
         </div>
-        <button @click="playWebrtcSound" class="button--mini">再生</button>
+        <button @click="PLAY_SILENT_MUSIC" class="button--mini">
+          無音再生
+        </button>
         <button @click="modal = false" class="button--mini">閉じる</button>
       </div>
     </div>
@@ -82,10 +84,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    ...warpMapper.mapActions(['PLAY_WEBRTC_SOUND']),
-    playWebrtcSound() {
-      this.PLAY_WEBRTC_SOUND()
-    },
+    ...warpMapper.mapActions(['PLAY_SILENT_MUSIC']),
   },
 })
 </script>

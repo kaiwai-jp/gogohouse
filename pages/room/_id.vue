@@ -21,10 +21,7 @@
         </div>
         <LeaveRoom />
       </div>
-      <div class="m-50" v-if="room.name">
-        Twitterに貼ってフォロワーに知らせよう
-        <TwitterPublish :text="twitterText" class="inline-block mt-10" />
-      </div>
+      <HowToUseInRoom />
       <WebrtcDebug class="mb-50 inline-block" />
     </div>
   </div>
@@ -44,6 +41,7 @@ import ManageRoom from '@/components/ManageRoom.vue'
 import IamMemberDisplay from '@/components/IamMemberDisplay.vue'
 import TwitterPublish from '@/components/TwitterPublish.vue'
 import SignalIcons from '@/components/SignalIcons.vue'
+import HowToUseInRoom from '@/components/HowToUseInRoom.vue'
 
 interface DataType {
   localStream: MediaStream | undefined
@@ -61,6 +59,7 @@ export default Vue.extend({
     IamMemberDisplay,
     TwitterPublish,
     SignalIcons,
+    HowToUseInRoom,
   },
   data(): DataType {
     return {
@@ -79,13 +78,6 @@ export default Vue.extend({
         return true
       }
       return false
-    },
-    twitterText(): string {
-      return (
-        '「' +
-        this.room.name +
-        '」でおしゃべりなう。GoGoHouseは無料でTwitterフォロワーと音声トークできるサービスです。'
-      )
     },
   },
   beforeRouteLeave(to, from, next) {
