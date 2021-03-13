@@ -135,7 +135,6 @@ export default {
         })
       })
     },
-
     async SIGN_OUT({ commit, state }) {
       const { me } = state
       if (me.uid) {

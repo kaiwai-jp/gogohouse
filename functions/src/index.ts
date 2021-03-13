@@ -417,3 +417,38 @@ exports.userCreatedTrigger = functions
       .delete()
       .catch()
   })
+
+/**
+ * ユーザーに関連するデータを削除します
+ * @params
+ */
+
+exports.withdrawal = functions
+  .region('asia-northeast1')
+  .https.onCall(async (data, context) => {
+    const uid = context.auth!.uid
+    const batch = firestore.batch()
+
+    await roomArrayRemove('members')
+    await roomArrayRemove('mic_assign')
+    deleteCollection('users')
+    deleteCollection('user_privates')
+    batch.commit().catch()
+
+    async function roomArrayRemove(key: string) {
+      const querySnapshot = await firestore
+        .collection('rooms')
+        .where(key, 'array-contains', uid)
+        .get()
+
+      querySnapshot.forEach((doc) => {
+        batch.update(firestore.collection('rooms').doc(doc.id), {
+          [key]: admin.firestore.FieldValue.arrayRemove(uid),
+        })
+      })
+    }
+
+    function deleteCollection(key: string) {
+      batch.delete(firestore.collection(key).doc(uid))
+    }
+  })

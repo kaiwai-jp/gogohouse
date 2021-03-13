@@ -226,3 +226,9 @@ export const resetSignal = (myUid) => {
     signal: [],
   })
 }
+
+export const withdrawal = async () => {
+  const functions = firebase.app().functions('asia-northeast1')
+  const func = functions.httpsCallable('withdrawal')
+  return func()
+}

@@ -65,6 +65,7 @@
       <a
         href="https://twitter.com/joinGoGoHouse"
         target="_blank"
+        rel="noreferrer"
         class="official-twitter"
       >
         @joinGoGoHouse
@@ -76,7 +77,7 @@
         <li>
           <strong>ルーム</strong>
           ・・・音声トークができる場所です。数人がトークしてほかの人は聴くだけのような使い方もできます。<br />
-          <img class="annotation" src="/help/room.png" />
+          <img class="annotation" src="/help/room.png" alt="ルーム" />
         </li>
         <li>
           <strong>ドア</strong>
@@ -105,7 +106,11 @@
         <li>
           <strong>ルーム管理</strong>
           ・・・モデレーターがルームの管理をする画面です<br />
-          <img class="annotation" src="/help/manage_room.png" />
+          <img
+            class="annotation"
+            src="/help/manage_room.png"
+            alt="ルーム管理"
+          />
         </li>
         <li><strong>[KICK]</strong>・・・ルームから一度だけ追い出します</li>
         <li><strong>[BAN]</strong>・・・ルームに出入り禁止にします</li>
@@ -119,7 +124,11 @@
         <li>
           <strong>マイク権</strong>
           ・・・「いつでも誰でも」「モデレーターがルームにいるとき」「モデレーターが指名した時」から選べ細かく管理できます。
-          <img class="annotation" src="/help/mic_permission.png" />
+          <img
+            class="annotation"
+            src="/help/mic_permission.png"
+            alt="マイク権"
+          />
         </li>
         <li>
           <strong>マイルーム一覧</strong>
@@ -225,6 +234,12 @@
           ソーシャルルームの入場判定をするのに時間あたり回数制限があります
         </li>
       </ul>
+      <h2 class="subtitle mt-50">退会</h2>
+      <p class="words">
+        退会はログインした状態で
+        <nuxt-link to="/withdrawal">こちらのリンク</nuxt-link>
+        で退会ボタンを押すとできます
+      </p>
       <p class="reload m-50">
         オープンβテスト中です<br /><br />動作がおかしくなったらトップページのリロードをクリックしてください
       </p>
@@ -285,6 +300,8 @@ li {
 }
 
 img {
-  max-width: 310px;
+  width: 90vw;
+  max-width: 380px;
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
 }
 </style>
