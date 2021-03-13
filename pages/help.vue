@@ -3,14 +3,13 @@
     <div>
       <h1 class="title">ヘルプ</h1>
       <h2 class="subtitle mt-50">使い方</h2>
-      <ul class="words">
-        <li>
-          自分のルームを作り、Twitterのフォロワーを誘ってルームに入ると、音声トークをすることができます。（聴くだけも可）<br /><br />
-          ルームに入れる人をTwitterの相互フォロー限定にしたり、指定した人だけが発言できるようにするなど細かく管理できるのが特徴です。
-        </li>
-      </ul>
+      <p>
+        自分のルームを作り、Twitterのフォロワーを誘ってルームに入ると、音声トークをすることができます。
+        (リプライして誘ったほうが参加しやすいようです)<br /><br />
+        ルームに入れる人をTwitterの相互フォロー限定にしたり、指定した人だけが発言できるようにするなど細かく管理できるのが特徴です。
+      </p>
       <h2 class="subtitle mt-50">動作状況</h2>
-      <p class="words">
+      <p>
         いずれも最新版にて確認。<br />
         ※iPhone/iPadではユーザーの操作がないと音声が聞こえないことがあります。
         スピーカーアイコンをタップしてみてください。
@@ -62,27 +61,24 @@
         </tbody>
       </table>
       <h2 class="subtitle mt-50">公式アカウント</h2>
-      <a
-        href="https://twitter.com/joinGoGoHouse"
-        target="_blank"
-        rel="noreferrer"
-        class="official-twitter"
-      >
-        @joinGoGoHouse
-      </a>
-      <p>更新情報などをツイートします。問い合わせはこちらへ。</p>
+      <p>
+        <a
+          href="https://twitter.com/joinGoGoHouse"
+          target="_blank"
+          rel="noreferrer"
+          class="official-twitter"
+          >@joinGoGoHouse</a
+        ><br />
+        更新情報などをツイートします。問い合わせはこちらへ。
+      </p>
       <h2 class="subtitle mt-50">用語解説</h2>
       <ul class="words">
         <li>※画面は開発中のものです</li>
         <li>
           <strong>ルーム</strong>
           ・・・音声トークができる場所です。数人がトークしてほかの人は聴くだけのような使い方もできます。<br />
-          <img class="annotation" src="/help/room.png" alt="ルーム" />
         </li>
-        <li>
-          <strong>ドア</strong>
-          ・・・ルームの入り口です。ここで入室権の判定などが行われます。
-        </li>
+        <img class="annotation" src="/help/room.png" alt="ルーム" />
         <li>
           <strong>モデレーター</strong
           >・・・ルームを作成して管理する人です。会話の進行も任されます。
@@ -106,12 +102,8 @@
         <li>
           <strong>ルーム管理</strong>
           ・・・モデレーターがルームの管理をする画面です<br />
-          <img
-            class="annotation"
-            src="/help/manage_room.png"
-            alt="ルーム管理"
-          />
         </li>
+        <img class="annotation" src="/help/manage_room.png" alt="ルーム管理" />
         <li><strong>[KICK]</strong>・・・ルームから一度だけ追い出します</li>
         <li><strong>[BAN]</strong>・・・ルームに出入り禁止にします</li>
         <li><strong>[MIC]</strong>・・・ユーザーにマイク権を与えます</li>
@@ -124,12 +116,8 @@
         <li>
           <strong>マイク権</strong>
           ・・・「いつでも誰でも」「モデレーターがルームにいるとき」「モデレーターが指名した時」から選べ細かく管理できます。
-          <img
-            class="annotation"
-            src="/help/mic_permission.png"
-            alt="マイク権"
-          />
         </li>
+        <img class="annotation" src="/help/mic_permission.png" alt="マイク権" />
         <li>
           <strong>マイルーム一覧</strong>
           ・・・ユーザーが作って管理しているルーム一覧です
@@ -224,9 +212,6 @@
         <li>Firefoxでは通信が確立してもスピーカーの色が黒色になりません</li>
         <li>短時間で連続入場しようとするとルームを追い出されます</li>
         <li>
-          すでにどこかのルームにいるときにルームに入ろうとするとすぐ追い出されます
-        </li>
-        <li>
           長時間放置するとルームのページが表示されているのに自分がルームに入ってないときがあります
         </li>
         <li>
@@ -235,7 +220,7 @@
         </li>
       </ul>
       <h2 class="subtitle mt-50">退会</h2>
-      <p class="words">
+      <p>
         退会はログインした状態で
         <nuxt-link to="/withdrawal">こちらのリンク</nuxt-link>
         で退会ボタンを押すとできます
@@ -266,6 +251,7 @@ strong {
 
 .connect-info td {
   border: solid 1px $color1;
+  background-color: white;
 }
 
 .official-twitter {
@@ -277,13 +263,25 @@ strong {
   font-size: 16px;
   list-style-type: none;
   padding-left: 0;
-  font-weight: 300;
 }
 
 li {
   margin-bottom: 50px;
   padding-top: 5px;
   border-top: solid 1px $color6;
+  border-left: solid 10px $color6;
+  background-color: white;
+  padding: 10px;
+}
+
+p {
+  text-align: left;
+  margin-bottom: 50px;
+  padding-top: 5px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  border: solid 1px $color6;
 }
 
 .reload {
