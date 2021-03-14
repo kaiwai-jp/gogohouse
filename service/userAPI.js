@@ -17,7 +17,10 @@ export const getRedirectResult = () => {
           const myName = userCredential.user.displayName
           const screenName = userCredential.additionalUserInfo.username
           const twitterId = userCredential.additionalUserInfo.profile.id_str
-          const iconUrl = userCredential.user.photoURL
+          const iconUrl = userCredential.user.photoURL.replace(
+            '_normal',
+            '_bigger'
+          )
           const profile = userCredential.additionalUserInfo.profile.description
           const accessToken = userCredential.credential.accessToken
           const accessTokenSecret = userCredential.credential.secret
@@ -39,7 +42,7 @@ export const getRedirectResult = () => {
                 created_at: firebase.firestore.FieldValue.serverTimestamp(),
               }
               await UserRef.set(myData)
-              /* RealtimeDatabaseにstatusとlast_changedを作成 */
+
             } else {
               myData = {
                 name: myName,

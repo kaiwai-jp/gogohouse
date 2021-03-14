@@ -14,7 +14,7 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'アプリ不要でフォロワーとおしゃべりしよう。Twitter連携だけですぐに参加できる音声トークサービスです。',
+          'アプリ不要でフォロワーとおしゃべりしよう。Twitter連携だけですぐに参加できる音声トークサービスです。あの人としゃべってみたいと思ったことはありませんか？そんな願いを叶えます。',
       },
       {
         hid: 'og:site_name',

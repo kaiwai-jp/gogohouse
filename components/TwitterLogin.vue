@@ -1,9 +1,7 @@
 <template>
   <div class="main">
     <div class="agree-area">
-      <p class="service">
-        無料でTwitterフォロワーと音声トークができるサービスです
-      </p>
+      <p class="service">無料でTwitterフォロワーと音声トークができます</p>
       <div class="agree-checkbox">
         <a href="/term.html" target="_blank">利用規約</a>に
         <input type="checkbox" v-model="agree" id="checkbox" />
@@ -14,7 +12,7 @@
           alt="Twitterアイコン"
           src="/twitter_bird.png"
           class="twitter-logo"
-        />Twitter連携でログイン
+        />Twitterに連携
       </a>
       <div class="notice">※勝手にツイートすることはありません</div>
     </div>
@@ -135,6 +133,7 @@ a {
   color: #ffffff;
   text-decoration: none;
   padding: 10px 20px;
+  font-size: 20px;
   font-weight: 600;
   cursor: pointer;
 }

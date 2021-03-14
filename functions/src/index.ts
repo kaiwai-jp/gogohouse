@@ -429,11 +429,23 @@ exports.withdrawal = functions
     const uid = context.auth!.uid
     const batch = firestore.batch()
 
+    await deleteRoom()
     await roomArrayRemove('members')
     await roomArrayRemove('mic_assign')
     deleteCollection('users')
     deleteCollection('user_privates')
     batch.commit().catch()
+
+    async function deleteRoom() {
+      const querySnapshot = await firestore
+        .collection('rooms')
+        .where('creater_id', '==', uid)
+        .get()
+
+      querySnapshot.forEach((doc) => {
+        batch.delete(firestore.collection('rooms').doc(doc.id))
+      })
+    }
 
     async function roomArrayRemove(key: string) {
       const querySnapshot = await firestore

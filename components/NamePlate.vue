@@ -2,7 +2,7 @@
   <div class="plate">
     <client-only>
       <a :href="toLink" :disabled="isDisabled">
-        <img class="icon" :src="userData.icon" />
+        <img class="icon" :src="userData.icon" alt="アイコン" />
         <div class="name-area">
           <span class="name">{{ userData.name }}</span>
           <br />
@@ -25,11 +25,13 @@
       <img
         v-if="signalShow && ifRest"
         src="/tea_icon.png"
+        alt="お茶"
         class="signal-icon"
       />
       <img
         v-if="signalShow && ifRaise"
         src="/raise_hand_icon.png"
+        alt="挙手"
         class="signal-icon"
       />
     </client-only>
@@ -129,6 +131,7 @@ export default Vue.extend({
   border-radius: 50%;
   width: 42px;
   height: 42px;
+  background-color: #aab8c2;
 }
 
 .name-area {

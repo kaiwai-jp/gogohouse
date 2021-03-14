@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="impression">
-      <h2 class="subtitle">音が聞こえないとき</h2>
+      <h2 class="subtitle">iPhoneで音が聞こえない時</h2>
       <p>スピーカーアイコンをタップしてみてください。</p>
     </div>
     <div class="impression twitter" v-if="room.name">

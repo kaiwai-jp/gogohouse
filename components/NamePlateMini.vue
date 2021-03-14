@@ -61,6 +61,7 @@ export default Vue.extend({
   border-radius: 50%;
   width: 18px;
   height: 18px;
+  background-color: #aab8c2;
 }
 
 .display-name {

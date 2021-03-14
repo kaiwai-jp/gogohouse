@@ -4,9 +4,9 @@
       <h1 class="title">ヘルプ</h1>
       <h2 class="subtitle mt-50">使い方</h2>
       <p>
-        自分のルームを作り、Twitterのフォロワーを誘ってルームに入ると、音声トークをすることができます。
-        (リプライして誘ったほうが参加しやすいようです)<br /><br />
-        ルームに入れる人をTwitterの相互フォロー限定にしたり、指定した人だけが発言できるようにするなど細かく管理できるのが特徴です。
+        自分のルームを作りTwitterのフォロワーを誘って、音声トークをすることができます。(聴くだけも可)
+        <br /><br />
+        なんとTwitterアプリ内でそのまま動作します。
       </p>
       <h2 class="subtitle mt-50">動作状況</h2>
       <p>
@@ -78,11 +78,15 @@
           <strong>ルーム</strong>
           ・・・音声トークができる場所です。数人がトークしてほかの人は聴くだけのような使い方もできます。<br />
         </li>
-        <img class="annotation" src="/help/room.png" alt="ルーム" />
         <li>
           <strong>モデレーター</strong
           >・・・ルームを作成して管理する人です。会話の進行も任されます。
         </li>
+        <li>
+          <strong>スタンプ</strong>
+          ・・・さりげなく休憩中や挙手の意思を表示できます
+        </li>
+        <img class="annotation" src="/help/room.png" alt="ルーム" />
         <li>
           <strong>メンバー</strong>
           ・・・ルームに属する人。ルーム内のピンクの☆を押して★にするとなれます<br />
@@ -99,15 +103,16 @@
         <li>
           <strong>クローズドルーム</strong>・・・ルームのメンバーだけ入れます
         </li>
+        <img class="annotation" src="/help/create_room.png" alt="ルーム作成" />
         <li>
           <strong>ルーム管理</strong>
           ・・・モデレーターがルームの管理をする画面です<br />
         </li>
-        <img class="annotation" src="/help/manage_room.png" alt="ルーム管理" />
         <li><strong>[KICK]</strong>・・・ルームから一度だけ追い出します</li>
         <li><strong>[BAN]</strong>・・・ルームに出入り禁止にします</li>
         <li><strong>[MIC]</strong>・・・ユーザーにマイク権を与えます</li>
         <li><strong>[MEM]</strong>・・・ルームのメンバーに追加します</li>
+        <img class="annotation" src="/help/manage_room.png" alt="ルーム管理" />
         <li>
           <strong>予約メンバー</strong>
           ・・・TwitterユーザーがまだGoGoHouseにログインしていない場合は、
@@ -153,6 +158,13 @@
           二重に音声が聞こえるのとハウリング防止のため、ヘッドホンを使って音声を聴くのを推奨します。
         </li>
         <li>
+          TwitterでURLをシェアしたあと、ルームの中で待機していればフォロワーさんが入りやすくなります。
+          初対面の人はあいさつから始めましょう。
+        </li>
+        <li>
+          1対1では気が引けるが、3人以上ならおしゃべりに参加しやすいという人も多いようです。
+        </li>
+        <li>
           マイクを開くボタンを押すとブラウザでマイクの使用許可を求められるので許可してください。
         </li>
         <li>
@@ -168,22 +180,13 @@
           スマートフォンの画面が暗くなるとマイクの録音が止まることがあるようです。その時は画面を触り続けてください。
         </li>
         <li>
-          相手に聞こえてなさそうなときはマイクを閉じてから開きなおすか、それでも直らないならリロードしてみてください。
-        </li>
-        <li>
           debugボタンから音声の接続状況とエラーログを見ることができます（英語）
         </li>
         <li>
-          GoGoHouse内にプロフィール、アイコン、フォロー、チャット、お気に入り、DMなどの機能はありません。Twitterで行ってください。
+          GoGoHouseはシンプルな作りになっているためプロフィール、アイコン、フォロー、チャット、お気に入り、DMなどの機能はありません。申し訳ありませんがTwitterで行ってください。
         </li>
         <li>
-          一度ログアウトしてログインしなおすとTwitterのプロフィールが反映されます。
-        </li>
-        <li>
-          TwitterでURLをシェアしたあと、ルームの中で待機していればフォロワーさんが入りやすくなります。
-        </li>
-        <li>
-          今のところ、GoGoHouse内に検索と通知機能はないのでTwitterでのシェアだけが頼りです。
+          一度ログアウトしてログインしなおすとTwitterのプロフィールとアイコンが反映されます。
         </li>
         <li>
           デフォルトではモデレーター不在時にはマイクは開けません。ルーム管理から変更できます。
@@ -194,7 +197,8 @@
           <strong>
             <a href="https://twitter.com/account/switch">Twitterアカウント</a>
           </strong>
-          からログインしなおしてください。（アプリのアカウントには影響を与えません）
+          からログインしなおしてください。
+          （Twitterアプリのアカウントには影響を与えません）
         </li>
       </ul>
       <h2 class="subtitle mt-50">既知の問題</h2>
@@ -219,14 +223,25 @@
           ソーシャルルームの入場判定をするのに時間あたり回数制限があります
         </li>
       </ul>
+      <h2 class="subtitle mt-50">名前の由来</h2>
+      <p>
+        Clubhouse、Discohouseときて次は何だ？ゴーゴーだ！知らない人はお父さんやお母さんに聞いてみよう。
+        <a
+          href="https://ja.wikipedia.org/wiki/%E3%82%B4%E3%83%BC%E3%82%B4%E3%83%BC%E5%96%AB%E8%8C%B6"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Wikipedia - ゴーゴー喫茶
+        </a>
+      </p>
       <h2 class="subtitle mt-50">退会</h2>
       <p>
         退会はログインした状態で
         <nuxt-link to="/withdrawal">こちらのリンク</nuxt-link>
-        で退会ボタンを押すとできます
+        から退会ボタンを押すとできます。退会後、お手数ですが認証したTwitterアプリ連携の解除をお願いいたします。
       </p>
       <p class="reload m-50">
-        オープンβテスト中です<br /><br />動作がおかしくなったらトップページのリロードをクリックしてください
+        動作がおかしくなったらトップページのリロードをクリックしてください
       </p>
     </div>
   </div>
@@ -234,8 +249,16 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import userMapper from '@/store/user'
 
-export default Vue.extend({})
+export default Vue.extend({
+  created() {
+    this.GET_USER()
+  },
+  methods: {
+    ...userMapper.mapActions(['GET_USER']),
+  },
+})
 </script>
 
 <style lang="scss" scoped>

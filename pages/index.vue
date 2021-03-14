@@ -73,6 +73,7 @@ export default Vue.extend({
 .gogo-area {
   background-image: url('/gogo.jpg');
   background-size: cover;
+  background-color: white;
   width: 100vw;
   max-width: 380px;
   height: 240px;
