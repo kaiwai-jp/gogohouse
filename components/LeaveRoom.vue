@@ -13,7 +13,7 @@ export default Vue.extend({
   async created() {
     await this.GET_USER(true)
     if (this.me.current_room !== this.roomId) {
-      this.$router.push(`/home`)
+      this.$router.push('/door/' + this.$route.params.id)
     }
     this.REGIST_CONNECT_AND_WHEN_DISCONNECT(this.roomId)
 

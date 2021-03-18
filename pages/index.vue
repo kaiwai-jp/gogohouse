@@ -24,6 +24,7 @@
         text="GoGoHouseはTwitter連携だけで参加できる無料の音声トークサービスです。ゆるくおしゃべりしよう♪"
       />
       <HowToUse />
+      <img src="/logo_twitter.png" class="logo-twitter" v-if="!isSignin" />
     </div>
   </div>
 </template>
@@ -106,5 +107,11 @@ export default Vue.extend({
   font-size: 20px;
   font-weight: 600;
   text-decoration: none;
+}
+
+.logo-twitter {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100px;
 }
 </style>

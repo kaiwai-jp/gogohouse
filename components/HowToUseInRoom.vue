@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="impression">
+    <div class="impression" v-if="ifMac">
       <h2 class="subtitle">iPhoneで音が聞こえない時</h2>
       <p>スピーカーアイコンをタップしてみてください。</p>
     </div>
@@ -23,6 +23,10 @@ export default Vue.extend({
   },
   computed: {
     ...roomMapper.mapGetters(['room']),
+    ifMac(): boolean {
+      if (window.navigator.userAgent.indexOf('Mac') > 0) return true
+      return false
+    },
     twitterText(): string {
       return (
         '「' +
