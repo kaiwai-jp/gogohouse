@@ -23,6 +23,12 @@
         v-show="isSpeaker && isDisconnect"
       />
       <img
+        v-if="signalShow && ifHeart"
+        src="/heart_icon.png"
+        alt="ハート"
+        class="signal-icon"
+      />
+      <img
         v-if="signalShow && ifRest"
         src="/tea_icon.png"
         alt="お茶"
@@ -72,6 +78,18 @@ export default Vue.extend({
           this.roomOnlineUsers[i].uid === this.uid &&
           this.roomOnlineUsers[i].current_room &&
           this.roomOnlineUsers[i].mic_status === 'on'
+        ) {
+          return true
+        }
+      }
+      return false
+    },
+    ifHeart(): Boolean {
+      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
+        if (
+          this.roomOnlineUsers[i].uid === this.uid &&
+          this.roomOnlineUsers[i].signal &&
+          this.roomOnlineUsers[i].signal.includes('heart')
         ) {
           return true
         }

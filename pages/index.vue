@@ -24,7 +24,12 @@
         text="GoGoHouseはTwitter連携だけで参加できる無料の音声トークサービスです。ゆるくおしゃべりしよう♪"
       />
       <HowToUse />
-      <img src="/logo_twitter.png" class="logo-twitter" v-if="!isSignin" />
+      <img
+        src="/logo_twitter.png"
+        alt="GoGoHouse"
+        class="logo-twitter"
+        v-if="!isSignin"
+      />
     </div>
   </div>
 </template>

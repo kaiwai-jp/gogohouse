@@ -1,6 +1,19 @@
 <template>
   <div>
     <img
+      v-if="!ifHeart"
+      src="/heart_icon.png"
+      @click="addHeart"
+      class="signal-icon"
+    />
+    <img
+      v-if="ifHeart"
+      src="/heart_icon.png"
+      @click="removeHeart"
+      class="signal-icon__clicked"
+    />
+
+    <img
       v-if="!ifRest"
       src="/tea_icon.png"
       @click="addRest"
@@ -37,6 +50,17 @@ import { addSignal, removeSignal } from '@/service/userAPI'
 export default Vue.extend({
   computed: {
     ...userMapper.mapGetters(['me', 'roomOnlineUsers']),
+    ifHeart(): Boolean {
+      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
+        if (
+          this.roomOnlineUsers[i].uid === this.me.uid &&
+          this.roomOnlineUsers[i].signal &&
+          this.roomOnlineUsers[i].signal.includes('heart')
+        )
+          return true
+      }
+      return false
+    },
     ifRest(): Boolean {
       for (let i = 0; i < this.roomOnlineUsers.length; i++) {
         if (
@@ -61,6 +85,12 @@ export default Vue.extend({
     },
   },
   methods: {
+    addHeart() {
+      addSignal(this.me.uid, 'heart')
+    },
+    removeHeart() {
+      removeSignal(this.me.uid, 'heart')
+    },
     addRest() {
       addSignal(this.me.uid, 'rest')
     },
