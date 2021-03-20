@@ -101,24 +101,30 @@ export default Vue.extend({
         this.$emit('close')
       }
     },
-    clickKick(uid: String, move: String) {
+    clickKick(uid: String) {
       let user
-      let moveString = move || 'KICK'
-
       for (let i = 0; i < this.roomOnlineUsers.length; i++) {
-        user = this.roomOnlineUsers[i]
+        if (this.roomOnlineUsers[i].uid === uid) {
+          user = this.roomOnlineUsers[i]
+        }
       }
       if (!user) return
-      //@ts-ignore
-      if (
-        window.confirm('本当に' + user.name + 'を' + moveString + 'しますか？')
-      ) {
+      if (window.confirm('本当に' + user.name + 'を部屋からキックしますか？')) {
         kickUser({ roomId: this.roomId, userId: uid })
       }
     },
     clickBan(uid: String) {
-      this.clickKick(uid, 'BAN')
-      ban(this.roomId, uid)
+      let user
+      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
+        if (this.roomOnlineUsers[i].uid === uid) {
+          user = this.roomOnlineUsers[i]
+        }
+      }
+      if (!user) return
+      if (window.confirm('本当に' + user.name + 'をBANしますか？')) {
+        kickUser({ roomId: this.roomId, userId: uid })
+        ban(this.roomId, uid)
+      }
     },
     clickReleaseBan(uid: String) {
       releaseBan(this.roomId, uid)

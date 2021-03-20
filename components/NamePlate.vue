@@ -23,19 +23,19 @@
         v-show="isSpeaker && isDisconnect"
       />
       <img
-        v-if="signalShow && ifHeart"
+        v-if="signalShow && ifSignal('heart')"
         src="/heart_icon.png"
         alt="ハート"
         class="signal-icon"
       />
       <img
-        v-if="signalShow && ifRest"
+        v-if="signalShow && ifSignal('rest')"
         src="/tea_icon.png"
         alt="お茶"
         class="signal-icon"
       />
       <img
-        v-if="signalShow && ifRaise"
+        v-if="signalShow && ifSignal('raise')"
         src="/raise_hand_icon.png"
         alt="挙手"
         class="signal-icon"
@@ -84,41 +84,20 @@ export default Vue.extend({
       }
       return false
     },
-    ifHeart(): Boolean {
-      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
-        if (
-          this.roomOnlineUsers[i].uid === this.uid &&
-          this.roomOnlineUsers[i].signal &&
-          this.roomOnlineUsers[i].signal.includes('heart')
-        ) {
-          return true
+    ifSignal(): (arg0: string) => Boolean {
+      const _this = this
+      return function (signalString: string) {
+        for (let i = 0; i < _this.roomOnlineUsers.length; i++) {
+          if (
+            _this.roomOnlineUsers[i].uid === _this.uid &&
+            _this.roomOnlineUsers[i].signal &&
+            _this.roomOnlineUsers[i].signal.includes(signalString)
+          ) {
+            return true
+          }
         }
+        return false
       }
-      return false
-    },
-    ifRest(): Boolean {
-      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
-        if (
-          this.roomOnlineUsers[i].uid === this.uid &&
-          this.roomOnlineUsers[i].signal &&
-          this.roomOnlineUsers[i].signal.includes('rest')
-        ) {
-          return true
-        }
-      }
-      return false
-    },
-    ifRaise(): Boolean {
-      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
-        if (
-          this.roomOnlineUsers[i].uid === this.uid &&
-          this.roomOnlineUsers[i].signal &&
-          this.roomOnlineUsers[i].signal.includes('raise')
-        ) {
-          return true
-        }
-      }
-      return false
     },
     isDisconnect(): Boolean {
       if (this.me && this.me.uid === this.uid) return false

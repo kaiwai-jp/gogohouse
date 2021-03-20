@@ -15,7 +15,7 @@
       />
       <div class="links">
         <MicWebrtc />
-        <SignalIcons />
+        <SignalIcons class="signal-icons" />
         <div class="m-50">
           <OnlineUsers />
         </div>
@@ -120,5 +120,15 @@ export default Vue.extend({
 
 .mt-10 {
   margin-top: 10px;
+}
+
+.signal-icons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: $color5;
+  border-top: solid 1px $color6;
 }
 </style>

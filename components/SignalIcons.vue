@@ -1,41 +1,41 @@
 <template>
   <div>
     <img
-      v-if="!ifHeart"
+      v-if="!ifSignal('heart')"
       src="/heart_icon.png"
-      @click="addHeart"
+      @click="clickAddSignal('heart')"
       class="signal-icon"
     />
     <img
-      v-if="ifHeart"
+      v-if="ifSignal('heart')"
       src="/heart_icon.png"
-      @click="removeHeart"
+      @click="clickRemoveSignal('heart')"
       class="signal-icon__clicked"
     />
 
     <img
-      v-if="!ifRest"
+      v-if="!ifSignal('rest')"
       src="/tea_icon.png"
-      @click="addRest"
+      @click="clickAddSignal('rest')"
       class="signal-icon"
     />
     <img
-      v-if="ifRest"
+      v-if="ifSignal('rest')"
       src="/tea_icon.png"
-      @click="removeRest"
+      @click="clickRemoveSignal('rest')"
       class="signal-icon__clicked"
     />
 
     <img
-      v-if="!ifRaise"
+      v-if="!ifSignal('raise')"
       src="/raise_hand_icon.png"
-      @click="addRaise"
+      @click="clickAddSignal('raise')"
       class="signal-icon"
     />
     <img
-      v-if="ifRaise"
+      v-if="ifSignal('raise')"
       src="/raise_hand_icon.png"
-      @click="removeRaise"
+      @click="clickRemoveSignal('raise')"
       class="signal-icon__clicked"
     />
   </div>
@@ -49,59 +49,23 @@ import { addSignal, removeSignal } from '@/service/userAPI'
 
 export default Vue.extend({
   computed: {
-    ...userMapper.mapGetters(['me', 'roomOnlineUsers']),
-    ifHeart(): Boolean {
-      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
-        if (
-          this.roomOnlineUsers[i].uid === this.me.uid &&
-          this.roomOnlineUsers[i].signal &&
-          this.roomOnlineUsers[i].signal.includes('heart')
-        )
+    ...userMapper.mapGetters(['me', 'roomOnlineUsers', 'myData']),
+    ifSignal(): (arg0: string) => Boolean {
+      const _this = this
+      return function (signalString: string) {
+        if (_this.myData.signal && _this.myData.signal.includes(signalString)) {
           return true
+        }
+        return false
       }
-      return false
-    },
-    ifRest(): Boolean {
-      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
-        if (
-          this.roomOnlineUsers[i].uid === this.me.uid &&
-          this.roomOnlineUsers[i].signal &&
-          this.roomOnlineUsers[i].signal.includes('rest')
-        )
-          return true
-      }
-      return false
-    },
-    ifRaise(): Boolean {
-      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
-        if (
-          this.roomOnlineUsers[i].uid === this.me.uid &&
-          this.roomOnlineUsers[i].signal &&
-          this.roomOnlineUsers[i].signal.includes('raise')
-        )
-          return true
-      }
-      return false
     },
   },
   methods: {
-    addHeart() {
-      addSignal(this.me.uid, 'heart')
+    clickAddSignal(signalString: string) {
+      addSignal(this.me.uid, signalString)
     },
-    removeHeart() {
-      removeSignal(this.me.uid, 'heart')
-    },
-    addRest() {
-      addSignal(this.me.uid, 'rest')
-    },
-    removeRest() {
-      removeSignal(this.me.uid, 'rest')
-    },
-    addRaise() {
-      addSignal(this.me.uid, 'raise')
-    },
-    removeRaise() {
-      removeSignal(this.me.uid, 'raise')
+    clickRemoveSignal(signalString: string) {
+      removeSignal(this.me.uid, signalString)
     },
   },
 })
