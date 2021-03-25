@@ -17,12 +17,12 @@ import {
 
 export default {
   ...createNamespacedHelpers('user'),
-  unsubscribe: null,
   state() {
     return {
       me: {},
       userDataCache: {},
       roomOnlineUsers: [],
+      unsubscribe: null,
     }
   },
 
@@ -105,6 +105,9 @@ export default {
     reset_room_online_users(state) {
       state.roomOnlineUsers.splice(-state.roomOnlineUsers.length)
     },
+    set_unsubscribe(state, payload) {
+      state.unsubscribe = payload
+    },
   },
 
   actions: {
@@ -174,16 +177,17 @@ export default {
           )
       }
     },
-    ROOM_ONLINE_USERS_LISTENER({ commit }, roomId) {
-      if (!this.unsubscribe) {
+    ROOM_ONLINE_USERS_LISTENER({ commit, state }, roomId) {
+      if (!state.unsubscribe) {
         commit('reset_room_online_users')
-        this.unsubscribe = listenRoomOnlineUsers({ commit, roomId })
+        const unsubscribe = listenRoomOnlineUsers({ commit, roomId })
+        commit('set_unsubscribe', unsubscribe)
       }
     },
-    END_ROOM_ONLINE_USERS_LISTENER({ commit }) {
-      if (this.unsubscribe) {
-        this.unsubscribe()
-        this.unsubscribe = null
+    END_ROOM_ONLINE_USERS_LISTENER({ commit, state }) {
+      if (state.unsubscribe) {
+        state.unsubscribe()
+        commit('set_unsubscribe', null)
         commit('reset_room_online_users')
       }
     },

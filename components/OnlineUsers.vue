@@ -25,7 +25,7 @@ export default Vue.extend({
     this.END_ROOM_ONLINE_USERS_LISTENER()
   },
   computed: {
-    ...userMapper.mapGetters(['me', 'roomOnlineUsers', 'roomRemoteUsers']),
+    ...userMapper.mapGetters(['me', 'roomOnlineUsers']),
     roomId(): string {
       return this.$route.params.id
     },

@@ -13,6 +13,7 @@
         :roomId="room.id"
         v-if="manageModal"
       />
+      <RoomMessage />
       <div class="links">
         <MicWebrtc />
         <SignalIcons class="signal-icons" />
@@ -42,6 +43,7 @@ import IamMemberDisplay from '@/components/IamMemberDisplay.vue'
 import TwitterPublish from '@/components/TwitterPublish.vue'
 import SignalIcons from '@/components/SignalIcons.vue'
 import HowToUseInRoom from '@/components/HowToUseInRoom.vue'
+import RoomMessage from '@/components/RoomMessage.vue'
 
 interface DataType {
   localStream: MediaStream | undefined
@@ -60,6 +62,7 @@ export default Vue.extend({
     TwitterPublish,
     SignalIcons,
     HowToUseInRoom,
+    RoomMessage,
   },
   data(): DataType {
     return {
@@ -69,7 +72,7 @@ export default Vue.extend({
   },
   computed: {
     ...roomMapper.mapGetters(['room']),
-    ...userMapper.mapGetters(['me', 'roomOnlineUsers']),
+    ...userMapper.mapGetters(['me']),
     roomId(): string {
       return this.$route.params.id
     },

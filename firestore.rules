@@ -43,6 +43,13 @@ service cloud.firestore {
       allow update, delete: if request.auth.uid == resource.data.owner_id;
     }
     
+    // messagesコレクション
+    match /messages/{roomId} {
+      allow get: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.current_room == roomId;
+      allow create: if request.auth.uid == request.resource.data.uid && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.current_room == roomId;
+      allow update: if request.auth.uid == resource.data.uid && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.current_room == roomId;
+    }
+
     // connectionsコレクション
     match /connections/{connectionId} {
       allow get, write: if request.auth.uid != null;
