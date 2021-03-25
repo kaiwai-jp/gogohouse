@@ -11,6 +11,13 @@
         class="new-message"
       />
       <button class="button--mini" @click="postMessage">投稿</button>
+      <button
+        class="button--mini"
+        @click="clickDeleteMessage"
+        v-if="roomMessage.uid == me.uid || room.owner_id == me.uid"
+      >
+        削除
+      </button>
     </div>
   </div>
 </template>
@@ -18,7 +25,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import messageMapper from '@/store/message'
+import roomMapper from '@/store/room'
+import userMapper from '@/store/user'
 import warpMapper from '@/store/warp'
+import { deleteMessage } from '@/service/messageAPI'
 
 import UserIcon from '@/components/UserIcon.vue'
 
@@ -36,6 +46,8 @@ export default Vue.extend({
     }
   },
   computed: {
+    ...roomMapper.mapGetters(['room']),
+    ...userMapper.mapGetters(['me']),
     ...messageMapper.mapGetters(['roomMessage']),
     roomId(): string {
       return this.$route.params.id
@@ -58,6 +70,9 @@ export default Vue.extend({
       }).catch((err) => this.OPEN_ALERT_DIALOG(err))
 
       this.newMessage = ''
+    },
+    clickDeleteMessage() {
+      deleteMessage(this.roomId)
     },
   },
   beforeDestroy() {

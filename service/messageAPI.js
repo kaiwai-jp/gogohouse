@@ -21,6 +21,11 @@ export const postMessage = ({ message, uid, roomId }) => {
     created_at: firebase.firestore.FieldValue.serverTimestamp(),
   }
 
-  const userRef = db.collection('messages').doc(roomId)
-  userRef.set(postJson, { merge: true })
+  const messageRef = db.collection('messages').doc(roomId)
+  messageRef.set(postJson, { merge: true })
+}
+
+export const deleteMessage = (roomId) => {
+  const messageRef = db.collection('messages').doc(roomId)
+  messageRef.delete()
 }

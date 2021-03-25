@@ -9,7 +9,6 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'thumbnail', content: 'https://gogo.house/logo_twitter.png' },
       {
         hid: 'description',
         name: 'description',
@@ -94,7 +93,7 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/style-resources'],
+  modules: ['@nuxtjs/style-resources', '@nuxtjs/pwa'],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
@@ -105,5 +104,19 @@ export default {
     name: 'rectangle-bounce',
     color: '#3B8070',
     background: 'white',
+  },
+  manifest: {
+    name: 'GoGoHouse',
+    lang: 'ja',
+    short_name: 'GoGoHouse',
+    start_url: 'https://gogo.house/',
+    display: 'browser',
+    title: 'GoGoHouse',
+    'og:title': 'GoGoHouse',
+    description: 'Twitter連携だけですぐに参加できる音声トークサービスです。',
+    'og:description':
+      'Twitter連携だけですぐに参加できる音声トークサービスです。',
+    theme_color: '#f2efe4',
+    background_color: '#f2efe4',
   },
 }

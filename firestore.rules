@@ -48,6 +48,7 @@ service cloud.firestore {
       allow get: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.current_room == roomId;
       allow create: if request.auth.uid == request.resource.data.uid && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.current_room == roomId;
       allow update: if request.auth.uid == resource.data.uid && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.current_room == roomId;
+      allow delete: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.current_room == roomId;
     }
 
     // connectionsコレクション
