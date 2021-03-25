@@ -372,8 +372,9 @@ exports.addReservedMembers = functions
   })
 
 /**
- * usersドキュメントの作成を検知して、各ルームの予約メンバーからメンバーに昇格、reserved_usersを削除
- * @params roomId
+ * usersドキュメントの作成を検知して、reserved_usersを削除
+ * 各ルームの予約メンバーからメンバーに昇格、reserved_wishlistからwishlistに昇格
+ * @params twitterId
  */
 
 exports.userCreatedTrigger = functions
@@ -395,12 +396,12 @@ exports.userCreatedTrigger = functions
 
     if (!twitter) return
 
-    const querySnapshot2 = await firestore
+    const roomQuerySnapshot = await firestore
       .collection('rooms')
       .where('reserved_members', 'array-contains', twitter)
       .get()
 
-    querySnapshot2.forEach((doc) => {
+    roomQuerySnapshot.forEach((doc) => {
       const roomId = doc.data().id
       firestore
         .collection('rooms')
@@ -408,6 +409,23 @@ exports.userCreatedTrigger = functions
         .update({
           members: admin.firestore.FieldValue.arrayUnion(uid),
           reserved_members: admin.firestore.FieldValue.arrayRemove(twitter),
+        })
+        .catch()
+    })
+
+    const userPrivatesQuerySnapshot = await firestore
+      .collection('user_privates')
+      .where('reserved_wishlist', 'array-contains', twitter)
+      .get()
+
+    userPrivatesQuerySnapshot.forEach((doc) => {
+      const userId = doc.data().id
+      firestore
+        .collection('user_privates')
+        .doc(userId)
+        .update({
+          wishlist: admin.firestore.FieldValue.arrayUnion(uid),
+          reserved_wishlist: admin.firestore.FieldValue.arrayRemove(twitter),
         })
         .catch()
     })
@@ -496,4 +514,37 @@ exports.refreshUserData = functions
       const userRef = firestore.collection('users').doc(doc.id)
       userRef.update(twitterUserData).catch()
     })
+  })
+
+/**
+ * Twitterのスクリーンネームでuser_privatesのreserved_wishlist配列と、reservedコレクションに追加します
+ * @params roomId, screenName
+ */
+
+exports.addReservedWishlist = functions
+  .region('asia-northeast1')
+  .https.onCall(async (data, context) => {
+    const screenName = data.screenName
+    const uid = context.auth!.uid
+
+    const userPrivatesRef = firestore.collection('user_privates').doc(uid)
+    const userPrivateDoc = await userPrivatesRef.get()
+    const userPrivateData = userPrivateDoc.data()!
+
+    const twitterUserData = await getTwitterUserData(
+      userPrivateData.accessToken,
+      userPrivateData.accessTokenSecret,
+      screenName
+    )
+
+    userPrivatesRef
+      .update({
+        reserved_wishlist: admin.firestore.FieldValue.arrayUnion(screenName),
+      })
+      .catch()
+    const reservedUserRef = firestore
+      .collection('reserved_users')
+      .doc(screenName.substring(1))
+
+    return reservedUserRef.set(twitterUserData, { merge: true })
   })

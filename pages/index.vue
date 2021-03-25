@@ -36,9 +36,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import roomMapper from '@/store/room'
 import userMapper from '@/store/user'
-import warpMapper from '@/store/warp'
 
 import TwitterLogin from '@/components/TwitterLogin.vue'
 import TwitterPublish from '@/components/TwitterPublish.vue'
@@ -47,24 +45,13 @@ import HowToUse from '@/components/HowToUse.vue'
 export default Vue.extend({
   components: { TwitterLogin, TwitterPublish, HowToUse },
   computed: {
-    ...roomMapper.mapGetters(['room']),
     ...userMapper.mapGetters(['me', 'isSignin']),
-    roomId(): string {
-      return this.$route.params.room
-    },
   },
   created() {
     this.GET_USER()
   },
   methods: {
-    ...roomMapper.mapActions(['GET_ROOM']),
-    ...userMapper.mapActions(['GET_USER', 'SIGN_IN_TWITTER', 'SIGN_OUT']),
-    ...warpMapper.mapActions(['OPEN_ALERT_DIALOG']),
-    twitterSignin() {
-      this.SIGN_IN_TWITTER()
-        .then(() => this.$router.push(`/home`))
-        .catch((err) => this.OPEN_ALERT_DIALOG(err))
-    },
+    ...userMapper.mapActions(['GET_USER', 'SIGN_OUT']),
     signout() {
       this.SIGN_OUT()
     },
