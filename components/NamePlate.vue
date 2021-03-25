@@ -60,6 +60,12 @@ export default Vue.extend({
     ...userMapper.mapGetters(['me', 'getUserData', 'roomOnlineUsers']),
     ...webrtcMapper.mapGetters(['userPeerConnectionState']),
     userData(): Object {
+      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
+        if (this.roomOnlineUsers[i].uid === this.uid) {
+          return this.roomOnlineUsers[i]
+        }
+      }
+
       this.REF_USER_DATA({ uid: this.uid })
       return this.getUserData(this.uid)
     },

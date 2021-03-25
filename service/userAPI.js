@@ -1,4 +1,5 @@
 import firebase, { db, auth } from '@/plugins/firebase'
+import { doc } from 'prettier'
 
 let userDataCached = {}
 
@@ -42,17 +43,8 @@ export const getRedirectResult = () => {
                 created_at: firebase.firestore.FieldValue.serverTimestamp(),
               }
               await UserRef.set(myData)
-
             } else {
-              myData = {
-                name: myName,
-                twitter: '@' + screenName,
-                twitter_id: twitterId,
-                icon: iconUrl,
-                profile,
-              }
-              await UserRef.update(myData)
-              myData.uid = uid
+              myData = doc.data()
             }
             await db.collection('user_privates').doc(uid).set(
               {
@@ -90,6 +82,15 @@ export const signOut = () => {
       resolve()
     })
   })
+}
+
+export const getMydata = async (uid) => {
+  const userRef = db.collection('users').doc(uid)
+  const doc = await userRef.get()
+  if (doc.exists) {
+    return doc.data()
+  }
+  return {}
 }
 
 export const getUserData = ({ uid, force }) => {
@@ -234,4 +235,10 @@ export const withdrawal = async () => {
   const functions = firebase.app().functions('asia-northeast1')
   const func = functions.httpsCallable('withdrawal')
   return func()
+}
+
+export const refreshTwitterData = async (userId) => {
+  const functions = firebase.app().functions('asia-northeast1')
+  const func = functions.httpsCallable('refreshUserData')
+  return func({ userId })
 }

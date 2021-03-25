@@ -5,6 +5,7 @@ import {
   getRedirectResult,
   onAuthChanged,
   signOut,
+  getMydata,
   getUserData,
   listenRoomOnlineUsers,
   registConnectAndWhenDisconnect,
@@ -214,6 +215,11 @@ export default {
     SET_MIC_OFF({ rootState }) {
       const { user } = rootState
       setMicStatus(user.me.uid, 'off')
+    },
+    async SET_MY_DATA({ rootState, commit }) {
+      const { user } = rootState
+      const payload = await getMydata(user.me.uid)
+      commit('set_user', payload)
     },
   },
 }

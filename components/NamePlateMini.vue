@@ -1,12 +1,7 @@
 <template>
   <div class="plate">
     <a :href="toLink" :disabled="!link">
-      <img
-        :src="userData.icon"
-        alt="アイコン"
-        v-if="userData.icon"
-        class="icon"
-      />
+      <img :src="userData.icon" alt="" v-if="userData.icon" class="icon" />
       <span class="display-name" v-if="name">
         {{ name }}
       </span>
@@ -28,8 +23,14 @@ export default Vue.extend({
     shorten: { default: false, type: Boolean },
   },
   computed: {
-    ...userMapper.mapGetters(['getUserData']),
+    ...userMapper.mapGetters(['getUserData', 'roomOnlineUsers']),
     userData(): User {
+      for (let i = 0; i < this.roomOnlineUsers.length; i++) {
+        if (this.roomOnlineUsers[i].uid === this.uid) {
+          return this.roomOnlineUsers[i]
+        }
+      }
+
       this.REF_USER_DATA({ uid: this.uid })
       return this.getUserData(this.uid)
     },

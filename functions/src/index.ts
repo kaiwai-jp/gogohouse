@@ -5,6 +5,7 @@ admin.initializeApp()
 const firestore = admin.firestore()
 const checkFriendShip = require('./twitterFriendShip')
 const getTwitterUserData = require('./twitterUserData')
+const getTwitterUserDataById = require('./twitterUserDataById')
 
 /**
  * Realtime Databaseを監視して、オンラインステータスの変更を検知、更新します.
@@ -337,7 +338,7 @@ exports.removeMeMembers = functions
 
 /**
  * Twitterのスクリーンネームでルームのreserved_member配列と、reservedコレクションに追加します
- * @params roomId
+ * @params roomId, screenName
  */
 
 exports.addReservedMembers = functions
@@ -463,4 +464,36 @@ exports.withdrawal = functions
     function deleteCollection(key: string) {
       batch.delete(firestore.collection(key).doc(uid))
     }
+  })
+
+/**
+ * Twitter APIを使ってユーザーデータを更新します
+ * @params
+ */
+
+exports.refreshUserData = functions
+  .region('asia-northeast1')
+  .https.onCall(async (data, context) => {
+    const userId = data.userId
+    const uid = context.auth!.uid
+
+    const userPrivatesRef = firestore.collection('user_privates').doc(uid)
+    const userPrivateDoc = await userPrivatesRef.get()
+    const userPrivateData = userPrivateDoc.data()!
+
+    const twitterUserData = await getTwitterUserDataById(
+      userPrivateData.accessToken,
+      userPrivateData.accessTokenSecret,
+      userId
+    )
+
+    const querySnapshot = await firestore
+      .collection('users')
+      .where('twitter_id', '==', userId)
+      .get()
+
+    querySnapshot.forEach((doc) => {
+      const userRef = firestore.collection('users').doc(doc.id)
+      userRef.update(twitterUserData).catch()
+    })
   })
