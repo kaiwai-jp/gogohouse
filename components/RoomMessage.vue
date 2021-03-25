@@ -1,9 +1,7 @@
 <template>
   <div class="message">
-    <p>
-      <UserIcon :uid="roomMessage.uid" v-if="roomMessage.uid" />
-      {{ roomMessage.message }}
-    </p>
+    <UserIcon :uid="roomMessage.uid" v-if="roomMessage.uid" />
+    <p v-html="autoLinkText"></p>
     <div class="post-block">
       <input
         v-model="newMessage"
@@ -52,6 +50,14 @@ export default Vue.extend({
     roomId(): string {
       return this.$route.params.id
     },
+    autoLinkText(): string {
+      if (!this.roomMessage.message) return ''
+      const exp = /(https?:\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi
+      return this.roomMessage.message.replace(
+        exp,
+        '<a href="$1" target="_blank">$1</a>'
+      )
+    },
   },
   created() {
     this.ROOM_MESSAGE_LISTENER(this.roomId)
@@ -98,5 +104,9 @@ export default Vue.extend({
   border-radius: 10px;
   border: solid 1px $color6;
   text-align: left;
+}
+
+p {
+  display: inline;
 }
 </style>

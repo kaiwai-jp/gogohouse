@@ -23,8 +23,10 @@ export default Vue.extend({
     shorten: { default: false, type: Boolean },
   },
   computed: {
-    ...userMapper.mapGetters(['getUserData', 'roomOnlineUsers']),
+    ...userMapper.mapGetters(['me', 'getUserData', 'roomOnlineUsers']),
     userData(): User {
+      if (this.me.uid == this.uid && this.me.icon) return this.me
+
       for (let i = 0; i < this.roomOnlineUsers.length; i++) {
         if (this.roomOnlineUsers[i].uid === this.uid) {
           return this.roomOnlineUsers[i]
