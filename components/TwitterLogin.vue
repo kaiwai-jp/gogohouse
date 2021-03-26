@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="agree-area">
-      <p class="service">無料でTwitterフォロワーと音声トークができます</p>
+      <p class="service">{{ text }}</p>
       <div class="agree-checkbox">
         <a href="/term.html" target="_blank">利用規約</a>に
         <input type="checkbox" v-model="agree" id="checkbox" />
@@ -29,7 +29,13 @@ interface DataType {
 }
 
 export default Vue.extend({
-  props: { jump: { default: '', type: String } },
+  props: {
+    jump: { default: '', type: String },
+    text: {
+      default: '無料でTwitterフォロワーと音声トークができます',
+      type: String,
+    },
+  },
   data(): DataType {
     return {
       agree: false,
