@@ -1,7 +1,10 @@
 <template>
   <div>
-    <h2 class="subtitle mt-50">両想いの人</h2>
-    <p v-if="ifNoMatch">マッチングしたらここに表示されます</p>
+    <h2 class="subtitle bt-1">両想いの人</h2>
+    <p v-if="!ifMatch">マッチングしたらここに表示されます</p>
+    <p v-if="ifMatch" class="congratulations">
+      おめでとうございます。勇気を出してTwitterのリプライかDMで連絡してみよう！
+    </p>
     <div v-for="uid in userPrivates.matchlist" :key="uid">
       <NamePlate :uid="uid" :link="true" class="twitter_identity" />
       <button
@@ -28,20 +31,27 @@ export default Vue.extend({
   computed: {
     ...wishlistMapper.mapGetters(['userPrivates']),
     ...userMapper.mapGetters(['me']),
-    ifNoMatch() {
-      if (!this.userPrivates.matchlist) return true
-      if (Object.keys(this.userPrivates.matchlist).length === 0) return true
+    ifMatch() {
+      if (!this.userPrivates.matchlist) return false
+      if (Object.keys(this.userPrivates.matchlist).length === 0) return false
+      return true
     },
   },
   methods: {
     clickReleaseMatchlist(uid: String) {
-      releaseMatchlist(this.me.uid, uid)
+      if (window.confirm('本当に解除しますか？相手には通知されません。')) {
+        releaseMatchlist(this.me.uid, uid)
+      }
     },
   },
 })
 </script>
 
 <style lang="scss" scoped>
+.congratulations {
+  margin-bottom: 10px;
+}
+
 .twitter_identity {
   display: inline-block;
 }

@@ -1,13 +1,22 @@
 <template>
   <div class="container">
     <div>
-      <h1 class="title">話したい人リスト</h1>
+      <h1 class="title">話してみたいTwitterフォロワーをつなぐ</h1>
       <div class="m-50" v-if="!isSignin">
-        <TwitterLogin jump="/home" />
+        <TwitterLogin text="今すぐ話してみたい人リストを作る" />
+        <div class="m-50 disalbed">
+          <h2 class="subtitle bt-1">話してみたい人</h2>
+          <input
+            class="add-twitter"
+            placeholder="@Twitterアカウント"
+            disabled
+          />
+          <button class="button--mini" disabled>追加</button>
+        </div>
       </div>
-      <div v-if="isSignin" class="mb-50">
+      <div v-if="isSignin" class="m-50">
         <ViewWishList class="wishlist" />
-        <div class="mt-50">
+        <div class="m-50">
           <input
             class="add-twitter"
             v-model="addTwitter"
@@ -16,19 +25,24 @@
           <button @click="clickAddWishListByTwitter" class="button--mini">
             追加
           </button>
-          <ViewMatchList class="wishlist" />
         </div>
+        <ViewMatchList class="wishlist" />
       </div>
       <div class="impression">
-        <h2 class="subtitle">マッチング</h2>
+        <h2 class="subtitle">仕組み</h2>
         <p>
-          お互いに話したい人のリスト入りすると、両想いの人のリストに表示されます。それまでこのリストは完全非公開です。
+          お互いに、話してみたい人のリストに入ると、両想いであることが通知されます。このリストは完全非公開です。
         </p>
       </div>
-      <TwitterPublish
-        class="mt-20 mb-50"
-        text="会話したいフォロワーリストでマッチングしたらおしゃべりしましょう♪"
-      />
+      <div class="impression twitter">
+        <p>
+          このページのURLをTwitterにシェア！
+          <TwitterPublish
+            class="twitter-button"
+            text="話してみたいTwitterフォロワーをつなぎます。話してみたい人のリストを作り、両想いだとマッチング。"
+          />
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -89,6 +103,10 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.disalbed {
+  opacity: 0.8;
+}
+
 .wishlist {
   text-align: left;
 }
@@ -112,5 +130,13 @@ export default Vue.extend({
 
 .impression p {
   padding: 0px 10px 10px 10px;
+}
+
+.twitter {
+  padding-bottom: 0;
+}
+
+.twitter-button {
+  margin-top: 5px;
 }
 </style>
