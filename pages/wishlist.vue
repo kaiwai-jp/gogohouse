@@ -5,8 +5,9 @@
       <div class="m-50" v-if="!isSignin">
         <TwitterLogin jump="/home" />
       </div>
-      <div v-if="isSignin">
-        <div>
+      <div v-if="isSignin" class="mb-50">
+        <ViewWishList class="wishlist" />
+        <div class="mt-50">
           <input
             class="add-twitter"
             v-model="addTwitter"
@@ -15,7 +16,14 @@
           <button @click="clickAddWishListByTwitter" class="button--mini">
             追加
           </button>
+          <ViewMatchList class="wishlist" />
         </div>
+      </div>
+      <div class="impression">
+        <h2 class="subtitle">マッチング</h2>
+        <p>
+          お互いに話したい人のリスト入りすると、両想いの人のリストに表示されます。それまでこのリストは完全非公開です。
+        </p>
       </div>
       <TwitterPublish
         class="mt-20 mb-50"
@@ -31,6 +39,8 @@ import userMapper from '@/store/user'
 import warpMapper from '@/store/warp'
 import { addWishlistByTwitter } from '@/service/wishlistAPI'
 
+import ViewWishList from '@/components/ViewWishList.vue'
+import ViewMatchList from '@/components/ViewMatchList.vue'
 import TwitterLogin from '@/components/TwitterLogin.vue'
 import TwitterPublish from '@/components/TwitterPublish.vue'
 
@@ -39,7 +49,7 @@ interface DataType {
 }
 
 export default Vue.extend({
-  components: { TwitterLogin, TwitterPublish },
+  components: { ViewWishList, ViewMatchList, TwitterLogin, TwitterPublish },
   data(): DataType {
     return {
       addTwitter: '',
@@ -79,9 +89,28 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.wishlist {
+  text-align: left;
+}
+
 .add-twitter {
   color: $color3;
   height: 27px;
   margin-right: 10px;
+}
+
+.impression {
+  margin: 20px auto;
+  width: calc(100vw - 20px);
+  max-width: 380px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  border: solid 1px $color6;
+  text-align: left;
+}
+
+.impression p {
+  padding: 0px 10px 10px 10px;
 }
 </style>

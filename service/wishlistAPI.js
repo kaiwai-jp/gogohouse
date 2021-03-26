@@ -17,6 +17,41 @@ export const addWishlistByTwitter = async (myUid, screenName) => {
   if (alreadyExists) return
 
   const functions = firebase.app().functions('asia-northeast1')
-  const func = functions.httpsCallable('addReservedWishList')
+  const func = functions.httpsCallable('addReservedWishlist')
   return func({ screenName })
+}
+
+export const listenUserPrivates = ({ commit, myUid }) => {
+  const unsubscribe = db
+    .collection('user_privates')
+    .doc(myUid)
+    .onSnapshot((doc) => {
+      let data = {}
+      if (doc.exists) {
+        data = doc.data()
+      }
+      commit('set_user_privates', data)
+    })
+  return unsubscribe
+}
+
+export const releaseWishlist = (myUid, uid) => {
+  const userPrivatesRef = db.collection('user_privates').doc(myUid)
+  userPrivatesRef.update({
+    wishlist: firebase.firestore.FieldValue.arrayRemove(uid),
+  })
+}
+
+export const releaseReservedWishlist = (myUid, uid) => {
+  const userPrivatesRef = db.collection('user_privates').doc(myUid)
+  userPrivatesRef.update({
+    reserved_wishlist: firebase.firestore.FieldValue.arrayRemove(uid),
+  })
+}
+
+export const releaseMatchlist = (myUid, uid) => {
+  const userPrivatesRef = db.collection('user_privates').doc(myUid)
+  userPrivatesRef.update({
+    matchlist: firebase.firestore.FieldValue.arrayRemove(uid),
+  })
 }

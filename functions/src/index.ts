@@ -419,7 +419,7 @@ exports.userCreatedTrigger = functions
       .get()
 
     userPrivatesQuerySnapshot.forEach((doc) => {
-      const userId = doc.data().id
+      const userId = doc.id
       firestore
         .collection('user_privates')
         .doc(userId)
@@ -547,4 +547,49 @@ exports.addReservedWishlist = functions
       .doc(screenName.substring(1))
 
     return reservedUserRef.set(twitterUserData, { merge: true })
+  })
+
+/**
+ * user_privatesドキュメントの更新を検知して、wishlistがマッチングしたらmatchlistに
+ * @params twitterId
+ */
+
+exports.wishlistUpdateTrigger = functions
+  .region('asia-northeast1')
+  .firestore.document('user_privates/{userId}')
+  .onWrite(async (change, context) => {
+    const uid = context.params.userId
+
+    let wishlist0 = change.before.data()!.wishlist
+    const wishlist1 = change.after.data()!.wishlist
+    if (!wishlist0) wishlist0 = []
+    if (!wishlist1) return
+
+    for (let i = 0; i < wishlist1.length; i++) {
+      if (!wishlist0.includes(wishlist1[i])) {
+        const userPrivatesRef = firestore
+          .collection('user_privates')
+          .doc(wishlist1[i])
+        const userPrivatesDoc = await userPrivatesRef.get()
+        const userPrivatesData = userPrivatesDoc.data()!
+        // @ts-ignore
+        if (
+          userPrivatesData.wishlist &&
+          userPrivatesData.wishlist.includes(uid)
+        ) {
+          updateMatchlist(uid, wishlist1[i])
+          updateMatchlist(wishlist1[i], uid)
+        }
+      }
+    }
+
+    function updateMatchlist(uid1: string, uid2: string) {
+      firestore
+        .collection('user_privates')
+        .doc(uid1)
+        .update({
+          matchlist: admin.firestore.FieldValue.arrayUnion(uid2),
+        })
+        .catch()
+    }
   })
