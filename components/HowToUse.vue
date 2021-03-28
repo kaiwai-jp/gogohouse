@@ -4,8 +4,8 @@
       <h2 class="subtitle">使い方</h2>
       <p class="how-to">ルームを作成してTwitterフォロワーに知らせよう！</p>
       <p class="how-to">フォロワーとワイワイおしゃべりできます。</p>
-      <p class="how-to">(リプライして誘ったほうが参加しやすいようです)</p>
     </div>
+    <nuxt-link to="/wishlist">話してみたいフォロワーをつなぎます</nuxt-link>
     <ul class="impression feature">
       <li>アプリのインストール不要</li>
       <li>すべての通信は暗号化されています</li>

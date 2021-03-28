@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <div>
-      <h1 class="title">話してみたいTwitterフォロワーをつなぐ</h1>
+      <h1 class="title">話してみたいフォロワーをつなぎます</h1>
       <div class="m-50" v-if="!isSignin">
-        <TwitterLogin text="今すぐ話してみたい人リストを作る" />
+        <TwitterLogin text="今すぐ話してみたい人リストを作る（無料）" />
         <div class="m-50 disalbed">
           <h2 class="subtitle bt-1">話してみたい人</h2>
           <input
@@ -31,15 +31,15 @@
       <div class="impression">
         <h2 class="subtitle">仕組み</h2>
         <p>
-          お互いに、話してみたい人のリストに入ると、両想いであることが通知されます。このリストは完全非公開です。
+          お互いに、話してみたい人のリストに入ると、両思いであることが通知されます。このリストは完全非公開です。
         </p>
       </div>
       <div class="impression twitter">
         <p>
-          このページのURLをTwitterにシェア！
+          このページのURLをTwitterにシェアして、それとなくフォロワーに知らせよう！
           <TwitterPublish
             class="twitter-button"
-            text="話してみたいTwitterフォロワーをつなぎます。話してみたい人のリストを作り、両想いだとマッチング。"
+            text="声で話してみたいTwitterフォロワーをつなぎます！お互いに、話してみたい人のリストに入ると、両思いであることが通知されます。もちろん無料。"
           />
         </p>
       </div>

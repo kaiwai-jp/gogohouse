@@ -31,7 +31,7 @@ export default Vue.extend({
       return (
         '「' +
         this.room.name +
-        '」でおしゃべりなう。GoGoHouseは無料でTwitterフォロワーと音声トークできるサービスです。'
+        '」でおしゃべりなう。GoGoHouseは無料でTwitterフォロワーと音声トークできるサービスです。 @joinGoGoHouse'
       )
     },
   },

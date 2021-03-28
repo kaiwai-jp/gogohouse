@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h2 class="subtitle bt-1">両想いの人</h2>
+    <h2 class="subtitle bt-1">両思いの人</h2>
     <p v-if="!ifMatch">マッチングしたらここに表示されます</p>
     <p v-if="ifMatch" class="congratulations">
-      おめでとうございます。勇気を出してTwitterのリプライかDMで連絡してみよう！
+      おめでとうございます。勇気を出してTwitterのリプライかDMで連絡しよう！
     </p>
     <div v-for="uid in userPrivates.matchlist" :key="uid">
       <NamePlate :uid="uid" :link="true" class="twitter_identity" />
