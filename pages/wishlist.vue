@@ -25,6 +25,13 @@
           <button @click="clickAddWishListByTwitter" class="button--mini">
             追加
           </button>
+          <button
+            @click="clickGetFriendsData"
+            class="button--mini"
+            ref="loadButton"
+          >
+            load
+          </button>
         </div>
         <ViewMatchList class="wishlist" />
       </div>
@@ -51,7 +58,7 @@
 import Vue from 'vue'
 import userMapper from '@/store/user'
 import warpMapper from '@/store/warp'
-import { addWishlistByTwitter } from '@/service/wishlistAPI'
+import { addWishlistByTwitter, getFriendsData } from '@/service/wishlistAPI'
 
 import ViewWishList from '@/components/ViewWishList.vue'
 import ViewMatchList from '@/components/ViewMatchList.vue'
@@ -97,6 +104,9 @@ export default Vue.extend({
         .catch(() => {
           this.OPEN_ALERT_DIALOG('Twitterユーザーが見つかりませんでした')
         })
+    },
+    clickGetFriendsData() {
+      getFriendsData()
     },
   },
 })

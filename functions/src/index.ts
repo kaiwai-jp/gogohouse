@@ -6,6 +6,7 @@ const firestore = admin.firestore()
 const checkFriendShip = require('./twitterFriendShip')
 const getTwitterUserData = require('./twitterUserData')
 const getTwitterUserDataById = require('./twitterUserDataById')
+const getTwitterFriendsData = require('./twitterFriendsData')
 
 /**
  * Realtime Databaseを監視して、オンラインステータスの変更を検知、更新します.
@@ -592,4 +593,35 @@ exports.wishlistUpdateTrigger = functions
         })
         .catch()
     }
+  })
+
+/**
+ * Twitter APIを使ってfriendsデータを取得します
+ * @params
+ */
+
+exports.getFriendsData = functions
+  .region('asia-northeast1')
+  .https.onCall(async (data, context) => {
+    const uid = context.auth!.uid
+
+    const userRef = firestore.collection('user_privates').doc(uid)
+    const userDoc = await userRef.get()
+    const userData = userDoc.data()!
+    const userId = userData.twitter_id
+
+    const userPrivatesRef = firestore.collection('user_privates').doc(uid)
+    const userPrivateDoc = await userPrivatesRef.get()
+    const userPrivateData = userPrivateDoc.data()!
+
+    let cursor = -1
+    if (userPrivateData.cursor) cursor = userPrivateData.cursor
+
+    const twitterFriendsData = await getTwitterFriendsData(
+      userPrivateData.accessToken,
+      userPrivateData.accessTokenSecret,
+      userId,
+      cursor
+    )
+    userPrivatesRef.update(twitterFriendsData).catch()
   })

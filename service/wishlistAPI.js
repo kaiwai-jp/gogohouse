@@ -55,3 +55,9 @@ export const releaseMatchlist = (myUid, uid) => {
     matchlist: firebase.firestore.FieldValue.arrayRemove(uid),
   })
 }
+
+export const getFriendsData = async (userId) => {
+  const functions = firebase.app().functions('asia-northeast1')
+  const func = functions.httpsCallable('getFriendsData')
+  return func()
+}
