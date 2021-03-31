@@ -623,5 +623,5 @@ exports.getFriendsData = functions
       userId,
       cursor
     )
-    userPrivatesRef.update(twitterFriendsData).catch()
+    userPrivatesRef.set(twitterFriendsData, { merge: true }).catch()
   })

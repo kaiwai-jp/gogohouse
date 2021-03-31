@@ -21,16 +21,21 @@
             class="add-twitter"
             v-model="addTwitter"
             placeholder="@Twitterアカウント"
+            list="friends"
+            @input="changeInput"
           />
+          <datalist id="friends">
+            <option
+              v-for="data in userPrivates.friends"
+              :key="data.twitter"
+              :label="data.name + ' ' + data.twitter"
+            >
+              {{ data.twitter }}
+            </option>
+          </datalist>
+
           <button @click="clickAddWishListByTwitter" class="button--mini">
             追加
-          </button>
-          <button
-            @click="clickGetFriendsData"
-            class="button--mini"
-            ref="loadButton"
-          >
-            load
           </button>
         </div>
         <ViewMatchList class="wishlist" />
@@ -58,6 +63,7 @@
 import Vue from 'vue'
 import userMapper from '@/store/user'
 import warpMapper from '@/store/warp'
+import wishlistMapper from '@/store/wishlist'
 import { addWishlistByTwitter, getFriendsData } from '@/service/wishlistAPI'
 
 import ViewWishList from '@/components/ViewWishList.vue'
@@ -67,6 +73,7 @@ import TwitterPublish from '@/components/TwitterPublish.vue'
 
 interface DataType {
   addTwitter: String
+  onceFlag: Boolean
 }
 
 export default Vue.extend({
@@ -74,10 +81,12 @@ export default Vue.extend({
   data(): DataType {
     return {
       addTwitter: '',
+      onceFlag: true,
     }
   },
   computed: {
     ...userMapper.mapGetters(['me', 'isSignin']),
+    ...wishlistMapper.mapGetters(['userPrivates']),
   },
   created() {
     this.GET_USER()
@@ -105,8 +114,11 @@ export default Vue.extend({
           this.OPEN_ALERT_DIALOG('Twitterユーザーが見つかりませんでした')
         })
     },
-    clickGetFriendsData() {
-      getFriendsData()
+    changeInput() {
+      if (this.onceFlag) {
+        this.onceFlag = false
+        getFriendsData()
+      }
     },
   },
 })

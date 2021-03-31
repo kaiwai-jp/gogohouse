@@ -15,8 +15,8 @@ module.exports = async (
   try {
     const client = new Twitter(twitter_credentials)
     let cursor = firstCursor
-    let json = { cursor: -1, friends: [{}] }
-    let friends = []
+    let json = { cursor: -1, friends: {} }
+    let friends = {}
 
     for (let count = 0; count <= 10; count++) {
       const response = await client.get('friends/list', {
@@ -28,10 +28,11 @@ module.exports = async (
 
       json['cursor'] = response.next_cursor
       for (let i = 0; i < response['users'].length; i++) {
-        friends.push({
+        //@ts-ignore
+        friends[response['users'][i].id] = {
           name: response['users'][i].name,
           twitter: '@' + response['users'][i].screen_name,
-        })
+        }
       }
       json['friends'] = friends
       cursor = response.next_cursor
