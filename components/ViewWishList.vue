@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2 class="subtitle bt-1">話してみたい人</h2>
     <div v-for="uid in userPrivates.wishlist" :key="uid">
       <NamePlate :uid="uid" :link="true" class="twitter_identity" />
       <button

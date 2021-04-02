@@ -15,29 +15,29 @@
         </div>
       </div>
       <div v-if="isSignin" class="m-50">
-        <ViewWishList class="wishlist" />
-        <div class="m-50">
-          <input
-            class="add-twitter"
-            v-model="addTwitter"
-            placeholder="@Twitterアカウント"
-            list="friends"
-            @input="changeInput"
-          />
-          <datalist id="friends">
-            <option
-              v-for="data in userPrivates.friends"
-              :key="data.twitter"
-              :label="data.name + ' ' + data.twitter"
-            >
-              {{ data.twitter }}
-            </option>
-          </datalist>
+        <h2 class="subtitle bt-1">話してみたい人{{ wishListCountString }}</h2>
+        <input
+          class="add-twitter"
+          v-model="addTwitter"
+          placeholder="@Twitterアカウント"
+          list="friends"
+          @input="changeInput"
+        />
+        <datalist id="friends">
+          <option
+            v-for="data in userPrivates.friends"
+            :key="data.twitter"
+            :label="data.name + ' ' + data.twitter"
+          >
+            {{ data.twitter }}
+          </option>
+        </datalist>
 
-          <button @click="clickAddWishListByTwitter" class="button--mini">
-            追加
-          </button>
-        </div>
+        <button @click="clickAddWishListByTwitter" class="button--mini">
+          追加
+        </button>
+        <ViewWishList class="wishlist m-50" />
+        <h2 class="subtitle bt-1">両思いの人{{ matchListCountString }}</h2>
         <ViewMatchList class="wishlist" />
       </div>
       <div class="impression">
@@ -87,6 +87,27 @@ export default Vue.extend({
   computed: {
     ...userMapper.mapGetters(['me', 'isSignin']),
     ...wishlistMapper.mapGetters(['userPrivates']),
+    wishListCountString(): String {
+      let wishListLength = 0
+      let reservedWishListLength = 0
+      if (this.userPrivates.wishlist) {
+        wishListLength = this.userPrivates.wishlist.length
+      }
+      if (this.userPrivates.reserved_wishlist) {
+        reservedWishListLength = this.userPrivates.reserved_wishlist.length
+      }
+      const total = wishListLength + reservedWishListLength
+      if (total === 0) return ''
+      return '(' + total + ')'
+    },
+    matchListCountString(): String {
+      let matchListLength = 0
+      if (this.userPrivates.matchlist) {
+        matchListLength = this.userPrivates.matchlist.length
+      }
+      if (matchListLength === 0) return ''
+      return '(' + matchListLength + ')'
+    },
   },
   created() {
     this.GET_USER()
