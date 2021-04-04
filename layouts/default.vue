@@ -28,7 +28,5 @@ export default Vue.extend({
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
-  padding-left: 20px;
-  padding-right: 20px;
 }
 </style>

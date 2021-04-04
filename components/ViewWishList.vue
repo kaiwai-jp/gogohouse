@@ -2,13 +2,9 @@
   <div>
     <div v-for="uid in userPrivates.wishlist" :key="uid">
       <NamePlate :uid="uid" :link="true" class="twitter_identity" />
-      <button
-        v-if="uid != me.uid"
-        @click="clickReleaseWishlist(uid)"
-        class="button--mini"
-      >
+      <v-btn v-if="uid != me.uid" @click="clickReleaseWishlist(uid)">
         解除
-      </button>
+      </v-btn>
     </div>
 
     <div v-for="screenName in userPrivates.reserved_wishlist" :key="screenName">
@@ -16,12 +12,7 @@
         :screenName="screenName"
         class="twitter_identity"
       />
-      <button
-        @click="clickReleaseReservedWishlist(screenName)"
-        class="button--mini"
-      >
-        解除
-      </button>
+      <v-btn @click="clickReleaseReservedWishlist(screenName)"> 解除 </v-btn>
     </div>
   </div>
 </template>
@@ -65,5 +56,6 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .twitter_identity {
   display: inline-block;
+  margin-top: 10px;
 }
 </style>

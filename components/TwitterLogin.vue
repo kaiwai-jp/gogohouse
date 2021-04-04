@@ -100,7 +100,7 @@ export default Vue.extend({
   height: 20px;
   display: inline-block;
   position: absolute;
-  right: 60px;
+  right: 3.5rem;
   background-color: #fff;
   box-shadow: inset 1px 1px 1px 0px #000;
   border-radius: 4px 4px 4px 4px;

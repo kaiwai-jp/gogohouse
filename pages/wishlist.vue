@@ -1,60 +1,59 @@
 <template>
-  <div class="container">
-    <div>
-      <h1 class="title">話してみたいフォロワーをつなぎます</h1>
-      <div class="m-50" v-if="!isSignin">
-        <TwitterLogin text="今すぐ話してみたい人リストを作る（無料）" />
-        <div class="m-50 disalbed">
-          <h2 class="subtitle bt-1">話してみたい人</h2>
-          <input
-            class="add-twitter"
-            placeholder="@Twitterアカウント"
-            disabled
-          />
-          <button class="button--mini" disabled>追加</button>
-        </div>
-      </div>
-      <div v-if="isSignin" class="m-50">
-        <h2 class="subtitle bt-1">話してみたい人{{ wishListCountString }}</h2>
-        <input
-          class="add-twitter"
-          v-model="addTwitter"
-          placeholder="@Twitterアカウント"
-          list="friends"
-          @input="changeInput"
+  <div class="vuetify-container">
+    <v-card elevation="1">
+      <v-card-text>
+        <h2 class="subtitle">話してみたいフォロワーをつなぎます</h2>
+        <p>このページのURLをTwitterにシェア！</p>
+        <TwitterPublish
+          class="twitter-button"
+          text="声で話してみたいTwitterフォロワーをつなぎます！お互いに、話してみたい人のリストに入ると、両思いであることが通知されます。"
         />
-        <datalist id="friends">
-          <option
-            v-for="data in userPrivates.friends"
-            :key="data.twitter"
-            :label="data.name + ' ' + data.twitter"
-          >
-            {{ data.twitter }}
-          </option>
-        </datalist>
-
-        <button @click="clickAddWishListByTwitter" class="button--mini">
-          追加
-        </button>
-        <ViewWishList class="wishlist m-50" />
-        <h2 class="subtitle bt-1">両思いの人{{ matchListCountString }}</h2>
-        <ViewMatchList class="wishlist" />
-      </div>
-      <div class="impression">
+      </v-card-text>
+    </v-card>
+    <v-card elevation="1" class="mt-20 mb-50">
+      <v-card-text>
         <h2 class="subtitle">仕組み</h2>
         <p>
           お互いに、話してみたい人のリストに入ると、両思いであることが通知されます。このリストは完全非公開です。
         </p>
-      </div>
-      <div class="impression twitter">
-        <p>
-          このページのURLをTwitterにシェアして、それとなくフォロワーに知らせよう！
-          <TwitterPublish
-            class="twitter-button"
-            text="声で話してみたいTwitterフォロワーをつなぎます！お互いに、話してみたい人のリストに入ると、両思いであることが通知されます。もちろん無料。"
-          />
-        </p>
-      </div>
+      </v-card-text>
+    </v-card>
+    <div class="center m-50" v-if="!isSignin">
+      <TwitterLogin text="今すぐ話してみたい人リストを作る（無料）" />
+    </div>
+    <div v-if="isSignin" class="m-50">
+      <v-tabs v-model="tab">
+        <v-tab>話してみたい人{{ wishListCountString }}</v-tab>
+        <v-tab>両思いの人{{ matchListCountString }}</v-tab>
+      </v-tabs>
+      <v-tabs-items v-model="tab" background-color="transparent">
+        <v-tab-item>
+          <v-text-field
+            v-model="addTwitter"
+            placeholder="@Twitterアカウント"
+            list="friends"
+            @input="changeInput"
+          >
+            <template v-slot:append-outer>
+              <v-btn @click="clickAddWishListByTwitter">追加</v-btn>
+            </template>
+          </v-text-field>
+          <datalist id="friends">
+            <option
+              v-for="data in userPrivates.friends"
+              :key="data.twitter"
+              :label="data.name + ' ' + data.twitter"
+            >
+              {{ data.twitter }}
+            </option>
+          </datalist>
+
+          <ViewWishList class="wishlist m-50" />
+        </v-tab-item>
+        <v-tab-item>
+          <ViewMatchList class="wishlist" />
+        </v-tab-item>
+      </v-tabs-items>
     </div>
   </div>
 </template>
@@ -72,6 +71,7 @@ import TwitterLogin from '@/components/TwitterLogin.vue'
 import TwitterPublish from '@/components/TwitterPublish.vue'
 
 interface DataType {
+  tab: String | null
   addTwitter: String
   onceFlag: Boolean
 }
@@ -80,6 +80,7 @@ export default Vue.extend({
   components: { ViewWishList, ViewMatchList, TwitterLogin, TwitterPublish },
   data(): DataType {
     return {
+      tab: null,
       addTwitter: '',
       onceFlag: true,
     }
@@ -146,12 +147,19 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.disalbed {
-  opacity: 0.8;
+.vuetify-container {
+  max-width: 767px;
+  margin: 0 auto;
+}
+
+.center {
+  text-align: center;
 }
 
 .wishlist {
   text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .add-twitter {

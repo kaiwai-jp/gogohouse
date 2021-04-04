@@ -6,13 +6,9 @@
     </p>
     <div v-for="uid in userPrivates.matchlist" :key="uid">
       <NamePlate :uid="uid" :link="true" class="twitter_identity" />
-      <button
-        v-if="uid != me.uid"
-        @click="clickReleaseMatchlist(uid)"
-        class="button--mini"
-      >
+      <v-btn v-if="uid != me.uid" @click="clickReleaseMatchlist(uid)">
         解除
-      </button>
+      </v-btn>
     </div>
   </div>
 </template>
@@ -48,10 +44,12 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .congratulations {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
 }
 
 .twitter_identity {
   display: inline-block;
+  margin-top: 10px;
 }
 </style>
